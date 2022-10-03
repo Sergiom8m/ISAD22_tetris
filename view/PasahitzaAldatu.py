@@ -13,7 +13,7 @@ class PasahiztaAldatu(object):
 
     espacio.pack()
 
-    azpiIzenb = ttk.Label(window, text='Zure pasahitza berria idatz ezazu:', font=("Calibri"))
+    azpiIzenb = ttk.Label(window, text='Zure pasahitza berria idatz ezazu: ', font=("Calibri"))
     azpiIzenb.pack()
 
     espacio.pack()

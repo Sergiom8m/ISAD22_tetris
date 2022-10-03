@@ -24,7 +24,7 @@ class Identifikazioa(object):
     erabiltzaile = ttk.Entry(window, justify=tk.LEFT, width=32 ,textvariable="Erabiltzailea")
     erabiltzaile.place(x=70,y=120)
 
-    passwd = ttk.Label(window, text='Pasahitza:', font=("Calibri"))
+    passwd = ttk.Label(window, text='Pasahitza: ', font=("Calibri"))
     passwd.place(x=70, y=160)
 
     pasahitza = ttk.Entry(window, justify=tk.LEFT, width=32, textvariable="Pasahitza")
