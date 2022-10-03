@@ -24,7 +24,7 @@ class Identifikazioa(object):
     erabiltzaile = ttk.Entry(window, justify=tk.LEFT, width=32 ,textvariable="Erabiltzailea")
     erabiltzaile.place(x=70,y=120)
 
-    passwd = ttk.Label(window, text='Pasahitza: ', font=("Calibri"))
+    passwd = ttk.Label(window, text='Pasahitza:', font=("Calibri"))
     passwd.place(x=70, y=160)
 
     pasahitza = ttk.Entry(window, justify=tk.LEFT, width=32, textvariable="Pasahitza")
@@ -37,6 +37,7 @@ class Identifikazioa(object):
     buttonirten.place(x=70, y=350)
     buttonerr = tk.Button(window, text="Erregistratu", width=8, font=("Calibri"))
     buttonerr.place(x=220, y=350)
+
 
     window.mainloop()
 

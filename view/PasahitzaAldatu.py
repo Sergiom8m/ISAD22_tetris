@@ -24,7 +24,7 @@ class PasahiztaAldatu(object):
     passwd = ttk.Entry(window, justify=tk.LEFT, width=32 ,textvariable="Pasahitza")
     passwd.place(x=70,y=120)
 
-    passwd2 = ttk.Label(window, text='Pasahitza errepikatu: ', font=("Calibri"))
+    passwd2 = ttk.Label(window, text='Pasahitza errepikatu:', font=("Calibri"))
     passwd2.place(x=70, y=160)
 
     pasahitza = ttk.Entry(window, justify=tk.LEFT, width=32, textvariable="Pasahitza2")
@@ -34,6 +34,7 @@ class PasahiztaAldatu(object):
     buttonirten.place(x=70, y=300)
     buttonados = tk.Button(window, text="Ados", width=8, font=("Calibri"))
     buttonados.place(x=220, y=300)
+
 
     window.mainloop()
 
