@@ -3,13 +3,13 @@ import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
 
-class JokatuLeioa(object):
+class JokatuLehioa(object):
 	"""docstring for JokatuLeioa"""
 	
 	def __init__(self):
-		super(JokatuLeioa, self).__init__()
+		super(JokatuLehioa, self).__init__()
 		self.window = tk.Tk()
-		self.window.geometry('220x460')
+		self.window.geometry('100x100')
 		self.window.title("Tetris jokoa")
 
 		
@@ -34,7 +34,7 @@ class JokatuLeioa(object):
 		self.window.mainloop()
 
 class TableroaPanela(tk.Frame):
-	def __init__(self, tamaina=(10,20), gelazka_tamaina=20,puntuazioalabel=None, master=None):
+	def __init__(self, tamaina=(10 ,20), gelazka_tamaina=20,puntuazioalabel=None, master=None):
 		tk.Frame.__init__(self, master)
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
