@@ -6,6 +6,7 @@ class HasierakoMenua(object):
     window = tk.Tk()
     window.geometry('400x400')
     window.title("Hasierako Menua")
+    window.resizable(False, False)
 
     separador = ttk.Label(window, text='       ', font=("Calibri", 25))
 

@@ -13,6 +13,7 @@ class Erregistroa(object):
         window = tk.Tk()
         window.geometry('400x400')
         window.title("ERREGISTROA")
+        window.resizable(False, False)
 
         # IZENBURUA
         izena = ttk.Label(window, text="ERREGISTROA", font=("Times New Roman", 25))

@@ -7,6 +7,7 @@ class Identifikazioa(object):
     window = tk.Tk()
     window.title("IDENTIFIKAZIOA")
     window.geometry('400x400')
+    window.resizable(False, False)
     espacio= ttk.Label(window, text="")
     izenburua = ttk.Label(window, text='IDENTIFIKAZIOA', font=("Times New Roman", 25))
     izenburua.pack()

@@ -10,6 +10,7 @@ class ErabiltzaileakEzabatu(object):
     window = tk.Tk()
     window.title("PASAHITZA BERRESKURATU")
     window.geometry('400x400')
+    window.resizable(False, False)
 
     # 1 create a main frame
     nagusia = Frame(window)

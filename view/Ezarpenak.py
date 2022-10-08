@@ -5,6 +5,7 @@ class Ezarpenak():
     ezarpenak = tk.Tk()
     ezarpenak.geometry('400x400')
     ezarpenak.title("Tetris jokoa")
+    window.resizable(False, False)
     #ezarpenak.iconbitmap('/home/aingeru/PycharmProjects/ISAD22_tetris/Irudiak')
     espacio = ttk.Label(ezarpenak, text="")
     titulo = tk.Label(ezarpenak, text="Partidaren ezarpenak", font=("Times New Roman",25))

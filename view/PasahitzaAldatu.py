@@ -7,6 +7,7 @@ class PasahitzaAldatu(object):
     window = tk.Tk()
     window.title("PASAHITZA ALDATU")
     window.geometry('400x400')
+    window.resizable(False, False)
     espacio= ttk.Label(window, text="")
     izenburua = ttk.Label(window, text='PASAHITZA ALDATU', font=("Times New Roman", 25))
     izenburua.pack()

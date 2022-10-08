@@ -6,6 +6,7 @@ class Profila(object):
     window = tk.Tk()
     window.geometry('400x400')
     window.title("Jokalariaren Profila")
+    window.resizable(False, False)
 
     separador = ttk.Label(window, text='       ', font=("Times New Roman", 25))
 
