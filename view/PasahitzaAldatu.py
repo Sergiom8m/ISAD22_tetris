@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-class PasahiztaAldatu(object):
+class PasahitzaAldatu(object):
 
     window = tk.Tk()
     window.title("PASAHITZA ALDATU")
@@ -18,17 +18,17 @@ class PasahiztaAldatu(object):
 
     espacio.pack()
 
-    erab = ttk.Label(window, text='Pasahitza: ', font=("Calibri"))
-    erab.place(x=70, y=100)
+    passwd = ttk.Label(window, text='Pasahitza: ', font=("Times New Roman", 16))
+    passwd.place(x=70, y=100)
 
-    passwd = ttk.Entry(window, justify=tk.LEFT, width=32 ,textvariable="Pasahitza")
-    passwd.place(x=70,y=120)
+    pasahitz = ttk.Entry(window, justify=tk.LEFT, width=23 ,textvariable="Pasahitza", font=("Times New Roman", 16))
+    pasahitz.place(x=70,y=130)
 
-    passwd2 = ttk.Label(window, text='Pasahitza errepikatu:', font=("Calibri"))
-    passwd2.place(x=70, y=160)
+    passwd2 = ttk.Label(window, text='Pasahitza errepikatu:', font=("Times New Roman", 16))
+    passwd2.place(x=70, y=170)
 
-    pasahitza = ttk.Entry(window, justify=tk.LEFT, width=32, textvariable="Pasahitza2")
-    pasahitza.place(x=70, y=180)
+    pasahitz2 = ttk.Entry(window, justify=tk.LEFT, width=23, textvariable="Pasahitza2", font=("Times New Roman", 16))
+    pasahitz2.place(x=70, y=200)
 
     buttonirten = tk.Button(window, text="Irten", width=8, font=("Calibri"))
     buttonirten.place(x=70, y=300)

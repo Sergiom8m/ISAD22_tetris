@@ -18,22 +18,22 @@ class Identifikazioa(object):
 
     espacio.pack()
 
-    erab = ttk.Label(window, text='Erabiltzailea: ', font=("Calibri"))
+    erab = ttk.Label(window, text='Erabiltzailea: ', font=("Times New Roman", 16))
     erab.place(x=70, y=100)
 
-    erabiltzaile = ttk.Entry(window, justify=tk.LEFT, width=32 ,textvariable="Erabiltzailea")
-    erabiltzaile.place(x=70,y=120)
+    erabiltzaile = ttk.Entry(window, justify=tk.LEFT, width=23 ,textvariable="Erabiltzailea", font=("Times New Roman", 16))
+    erabiltzaile.place(x=70,y=130)
 
-    passwd = ttk.Label(window, text='Pasahitza: ', font=("Calibri"))
-    passwd.place(x=70, y=160)
+    passwd = ttk.Label(window, text='Pasahitza: ', font=("Times New Roman", 16))
+    passwd.place(x=70, y=170)
 
-    pasahitza = ttk.Entry(window, justify=tk.LEFT, width=32, textvariable="Pasahitza")
-    pasahitza.place(x=70, y=180)
+    pasahitza = ttk.Entry(window, justify=tk.LEFT, width=23, textvariable="Pasahitza", font=("Times New Roman", 16))
+    pasahitza.place(x=70, y=200)
 
-    buttonb = tk.Button(window, text="Pasahitza berreskuratu", width=23, font=("Calibri"))
-    buttonb.place(x=70, y=230)
+    buttonb = tk.Button(window, text="Pasahitza berreskuratu", font=("Times New Roman", 16))
+    buttonb.place(x=90, y=250)
 
-    buttonirten = tk.Button(window, text="Irten", width=8, font=("Calibri"))
+    buttonirten = tk.Button(window, text="Irten", width=8,font=("Times New Roman", 16))
     buttonirten.place(x=70, y=350)
     buttonerr = tk.Button(window, text="Erregistratu", width=8, font=("Calibri"))
     buttonerr.place(x=220, y=350)
