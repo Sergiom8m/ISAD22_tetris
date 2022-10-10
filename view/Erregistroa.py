@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+from view.Identifikazioa import Identifikazioa
 
 # Koloreak
 botoi_kolor = "#fdb4bf"
@@ -77,7 +78,7 @@ class Erregistroa(object):
                                   command=self.erabiltzaileaGorde)
                 sartu.place(x=60, y=360)
 
-                irten = tk.Button(window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14))
+                irten = tk.Button(window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14), command= Identifikazioa)
                 irten.place(x=220, y=360)
 
                 window.mainloop()
