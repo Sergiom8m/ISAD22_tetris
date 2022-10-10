@@ -3,46 +3,49 @@ from tkinter import ttk
 
 class Profila(object):
 
-    window = tk.Tk()
-    window.geometry('400x400')
-    window.title("Jokalariaren Profila")
-    window.resizable(False, False)
+    def __init__(self):
+        super(Profila, self).__init__()
 
-    separador = ttk.Label(window, text='       ', font=("Times New Roman", 25))
+        window = tk.Tk()
+        window.geometry('400x400')
+        window.title("Jokalariaren Profila")
+        window.resizable(False, False)
 
-    separador.pack()
+        separador = ttk.Label(window, text='       ', font=("Times New Roman", 25))
 
-    izenburua = ttk.Label(window, text='ZURE PROFILA', font=("Calibri", 25))
+        separador.pack()
 
-    izenburua.pack()
+        izenburua = ttk.Label(window, text='ZURE PROFILA', font=("Calibri", 25))
 
-    separador = ttk.Label(window, text='       ', font=("Calibri", 25))
+        izenburua.pack()
 
-    separador.pack()
+        separador = ttk.Label(window, text='       ', font=("Calibri", 25))
 
-    button = tk.Button(window, text="Partida berria hasi", width=30)
-    button.pack(ipadx=10, ipady=10)
+        separador.pack()
 
-    separador = ttk.Label(window, text='       ', font=("Calibri", 2))
+        button = tk.Button(window, text="Partida berria hasi", width=30)
+        button.pack(ipadx=10, ipady=10)
 
-    separador.pack()
+        separador = ttk.Label(window, text='       ', font=("Calibri", 2))
 
-    button = tk.Button(window, text="Zure pasahitza aldatu", width=30)
-    button.pack(ipadx=10, ipady=10)
+        separador.pack()
 
-    separador = ttk.Label(window, text='       ', font=("Calibri", 2))
+        button = tk.Button(window, text="Zure pasahitza aldatu", width=30)
+        button.pack(ipadx=10, ipady=10)
 
-    separador.pack()
+        separador = ttk.Label(window, text='       ', font=("Calibri", 2))
 
-    button = tk.Button(window, text="Erabiltzaileak ezabatu", width=30)
-    button.pack(ipadx=10, ipady=10)
+        separador.pack()
 
-    separador = ttk.Label(window, text='       ', font=("Calibri", 25))
+        button = tk.Button(window, text="Erabiltzaileak ezabatu", width=30)
+        button.pack(ipadx=10, ipady=10)
 
-    separador.pack()
+        separador = ttk.Label(window, text='       ', font=("Calibri", 25))
 
-    button = tk.Button(window, text="Irten")
-    button.pack(ipadx=10, ipady=10)
+        separador.pack()
+
+        button = tk.Button(window, text="Irten")
+        button.pack(ipadx=10, ipady=10)
 
 
-    window.mainloop()
+        window.mainloop()
