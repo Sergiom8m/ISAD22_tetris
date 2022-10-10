@@ -6,6 +6,7 @@ class PasahitzaBerreskuratu(object):
 
     def __init__(self):
         super(PasahitzaBerreskuratu, self).__init__()
+
         window = tk.Tk()
         window.title("PASAHITZA BERRESKURATU")
         window.geometry('400x400')
