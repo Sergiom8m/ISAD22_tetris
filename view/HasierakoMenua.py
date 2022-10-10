@@ -7,6 +7,7 @@ from view.Ezarpenak import Ezarpenak
 
 class HasierakoMenua(object):
 
+
     def __init__(self):
         super(HasierakoMenua, self).__init__()
         self.window = tk.Tk()
