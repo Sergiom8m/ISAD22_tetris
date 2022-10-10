@@ -93,7 +93,6 @@ class Erregistroa(object):
                         res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
                         ezDago = res.fetchone() is None
                         if (ezDago):
-                                print("Erabiltzaile zuzena sartu da")
                                 if (p1 == p2):
                                         print("Erregistratu zaitugu: " + id)
                                         cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, email, p1, 0))
