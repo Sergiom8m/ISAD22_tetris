@@ -7,6 +7,10 @@ from view.Ezarpenak import Ezarpenak
 
 class HasierakoMenua(object):
 
+    def pantailaAldatu(self):
+
+        self.window.destroy()
+        Ezarpenak().__init__()
 
     def __init__(self):
         super(HasierakoMenua, self).__init__()
@@ -16,40 +20,41 @@ class HasierakoMenua(object):
         self.window.resizable(False, False)
 
 
-        separador = ttk.Label(window, text='       ', font=("Calibri", 25))
+        separador = ttk.Label(self.window, text='       ', font=("Calibri", 25))
 
         separador.pack()
 
-        izenburua = ttk.Label(window, text='TETRIS', font=("Calibri", 25))
+        izenburua = ttk.Label(self.window, text='TETRIS', font=("Calibri", 25))
 
         izenburua.pack()
 
-        separador = ttk.Label(window, text='       ', font=("Calibri", 25))
+        separador = ttk.Label(self.window, text='       ', font=("Calibri", 25))
 
         separador.pack()
 
-        buttonPartidaBerria = tk.Button(window, text="Partida berria hasi", width=30)
+        buttonPartidaBerria = tk.Button(self.window, text="Partida berria hasi", width=30, command=self.pantailaAldatu)
         buttonPartidaBerria.pack(ipadx=10, ipady=10)
 
-        separador = ttk.Label(window, text='       ', font=("Calibri", 2))
+
+        separador = ttk.Label(self.window, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
-        buttonIdentifikatu = tk.Button(window, text="Identifikatu", width=30)
+        buttonIdentifikatu = tk.Button(self.window, text="Identifikatu", width=30)
         buttonIdentifikatu.pack(ipadx=10, ipady=10)
 
-        separador = ttk.Label(window, text='       ', font=("Calibri", 2))
+        separador = ttk.Label(self.window, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
-        buttonErregistratu = tk.Button(window, text="Erregistratu", width=30)
+        buttonErregistratu = tk.Button(self.window, text="Erregistratu", width=30)
         buttonErregistratu.pack(ipadx=10, ipady=10)
 
-        separador = ttk.Label(window, text='       ', font=("Calibri", 25))
+        separador = ttk.Label(self.window, text='       ', font=("Calibri", 25))
 
         separador.pack()
 
-        buttonIrten = tk.Button(window, text="Irten")
+        buttonIrten = tk.Button(self.window, text="Irten")
         buttonIrten.pack(ipadx=10, ipady=10)
 
-        window.mainloop()
+        self.window.mainloop()
