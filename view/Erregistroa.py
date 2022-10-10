@@ -33,7 +33,7 @@ class Erregistroa(object):
 
 
                 # AZPIZENBURUA
-                testua = ttk.Label(window, text="Mesedez, zeure burua erregistratu", font = ("Times New Roman", 16))
+                testua = ttk.Label(window, text="Mesedez, zeure burua erregistratu", font = ("Times New Roman", 10))
                 testua.pack()
 
 
@@ -45,38 +45,40 @@ class Erregistroa(object):
 
                 # Identifikatzailearen sarrera
                 erab = ttk.Label(window, text='Identifikatzailea... ', font=("Times New Roman", 16))
-                erab.place(x=60, y=70)
+                erab.place(x=60, y=60)
 
                 self.erabil = tk.Entry(window, textvar=identifik, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.erabil.place(x=60, y=100)
+                self.erabil.place(x=60, y=90)
 
                 # Emailaren sarrera
-                email=ttk.Label(window, text='Emaila...', font=("Times New Roman", 16))
-                email.place(x=60, y=140)
+                b=ttk.Label(window, text='Berreskurapen galdera sartu', font=("Times New Roman", 16))
+                b.place(x=60, y=130)
+                b2 = ttk.Label(window, text='(pasahitza berreskuratzeko)', font=("Times New Roman", 16))
+                b2.place(x=60, y=155)
 
-                self.emaila = tk.Entry(window, textvar=e, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.emaila.place(x=60, y=170)
+                self.galdera = tk.Entry(window, textvar=e, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
+                self.galdera.place(x=60, y=185)
 
                 # Pasahitzaren sarrera
                 pas1 = ttk.Label(window, text='Pasahitza... ', font=("Times New Roman", 16))
-                pas1.place(x=60, y=210)
+                pas1.place(x=60, y=225)
 
                 self.pasahitz1 = tk.Entry(window, textvar=pasahitza1, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.pasahitz1.place(x=60, y=240)
+                self.pasahitz1.place(x=60, y=255)
 
                 pas2 = ttk.Label(window, text='Pasahitza errepikatu... ', font=("Times New Roman", 16))
-                pas2.place(x=60, y=280)
+                pas2.place(x=60, y=295)
 
                 self.pasahitz2 = tk.Entry(window, textvar=pasahitza2, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.pasahitz2.place(x=60, y=310)
+                self.pasahitz2.place(x=60, y=325)
 
                 # BOTOIAK
                 sartu = tk.Button(window, text="Sartu", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14),
                                   command=self.erabiltzaileaGorde)
-                sartu.place(x=60, y=350)
+                sartu.place(x=60, y=360)
 
                 irten = tk.Button(window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14))
-                irten.place(x=220, y=350)
+                irten.place(x=220, y=360)
 
                 window.mainloop()
 
@@ -84,18 +86,18 @@ class Erregistroa(object):
                 con = sqlite3.connect("datubase.db")  # konexioa ezarri
                 cur = con.cursor()
                 id=self.erabil.get()
-                email=self.emaila.get()
+                galdera=self.galdera.get()
                 p1=self.pasahitz1.get()
                 p2=self.pasahitz2.get()
 
-                if ((len(id) != 0) & (len(email) != 0) & (len(p1) != 0) & (len(p2) != 0)):
-                        cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, email, pasahitza, puntuazioa)")
+                if ((len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0)):
+                        cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa)")
                         res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
                         ezDago = res.fetchone() is None
                         if (ezDago):
                                 if (p1 == p2):
                                         print("Erregistratu zaitugu: " + id)
-                                        cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, email, p1, 0))
+                                        cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, galdera, p1, 0))
                                         con.commit()
                                 else:
                                         print("Pasahitza ez du koinziditzen")
