@@ -1,6 +1,6 @@
-from view.HasierakoMenua import HasierakoMenua
+
 from view.JokatuLehioa import JokatuLehioa
-from view.Erregistroa import Erregistroa
+from view.HasierakoMenua import HasierakoMenua
 
 
 

@@ -3,14 +3,27 @@ from _curses import window
 from tkinter import ttk
 
 from view.Ezarpenak import Ezarpenak
-
+from view.Erregistroa import Erregistroa
+from view.Identifikazioa import Identifikazioa
 
 class HasierakoMenua(object):
 
-    def pantailaAldatu(self):
+    def pantailaPartidaBerria(self):
 
         self.window.destroy()
         Ezarpenak().__init__()
+
+    def pantailaIdentifikatu(self):
+
+        self.window.destroy()
+        Identifikazioa().__init__()
+
+    def pantailaErregistratu(self):
+
+        self.window.destroy()
+        Erregistroa().__init__()
+
+
 
     def __init__(self):
         super(HasierakoMenua, self).__init__()
@@ -32,7 +45,7 @@ class HasierakoMenua(object):
 
         separador.pack()
 
-        buttonPartidaBerria = tk.Button(self.window, text="Partida berria hasi", width=30, command=self.pantailaAldatu)
+        buttonPartidaBerria = tk.Button(self.window, text="Partida berria hasi", width=30, command=self.pantailaPartidaBerria)
         buttonPartidaBerria.pack(ipadx=10, ipady=10)
 
 
@@ -40,14 +53,14 @@ class HasierakoMenua(object):
 
         separador.pack()
 
-        buttonIdentifikatu = tk.Button(self.window, text="Identifikatu", width=30)
+        buttonIdentifikatu = tk.Button(self.window, text="Identifikatu", width=30, command=self.pantailaIdentifikatu)
         buttonIdentifikatu.pack(ipadx=10, ipady=10)
 
         separador = ttk.Label(self.window, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
-        buttonErregistratu = tk.Button(self.window, text="Erregistratu", width=30)
+        buttonErregistratu = tk.Button(self.window, text="Erregistratu", width=30, command=self.pantailaErregistratu)
         buttonErregistratu.pack(ipadx=10, ipady=10)
 
         separador = ttk.Label(self.window, text='       ', font=("Calibri", 25))

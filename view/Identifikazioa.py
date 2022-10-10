@@ -1,18 +1,43 @@
 import tkinter as tk
 from tkinter import ttk
+import sqlite3
+from view.Profila import Profila
+from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
 
-from view.Erregistroa import Erregistroa
-from view.HasierakoMenua import HasierakoMenua
 
 
 class Identifikazioa(object):
 
     def identifik_erregis(self):
+        con = sqlite3.connect("datubase.db")  # konexioa ezarri
+        cur = con.cursor()
+        id = self.erabiltzaile.get()
+        p = self.pasahitza.get()
+
+        if ((len(id) != 0) &(len(p) != 0)):
+            res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
+            res = res.fetchone()[0]
+            ezDago= res is None
+            if (ezDago):
+                print("Ez dago erabiltzailea")
+            else:
+                print(res)
+                if (p!=res):
+                    print("Pasahitza ez du koinziditzen")
+                else:
+                    self.window.destroy()
+                    Profila(id).__init__()
+        else:
+            print("Sar itzazu datu guztiak")
+
+
+    def identifik_berresk(self):
         self.window.destroy()
-        Erregistroa().__init__()
-    def identifik_hasiera(self):
-        self.window.destroy()
-        HasierakoMenua().__init__()
+        PasahitzaBerreskuratu().__init__()
+
+    #def identifik_hasiera(self):
+        # self.window.destroy()
+    #   HasierakoMenua().__init__()
 
     def __init__(self):
         super(Identifikazioa, self).__init__()
@@ -36,25 +61,25 @@ class Identifikazioa(object):
         erab = ttk.Label(self.window, text='Erabiltzailea: ', font=("Times New Roman", 16))
         erab.place(x=70, y=100)
 
-        erabiltzaile = ttk.Entry(self.window, justify=tk.LEFT, width=23, textvariable="Erabiltzailea",
+        self.erabiltzaile = ttk.Entry(self.window, justify=tk.LEFT, width=23, textvariable="Erabiltzailea",
                                  font=("Times New Roman", 16))
-        erabiltzaile.place(x=70, y=130)
+        self.erabiltzaile.place(x=70, y=130)
 
         passwd = ttk.Label(self.window, text='Pasahitza: ', font=("Times New Roman", 16))
         passwd.place(x=70, y=170)
 
-        pasahitza = ttk.Entry(self.window, justify=tk.LEFT, width=23, textvariable="Pasahitza", font=("Times New Roman", 16))
-        pasahitza.place(x=70, y=200)
+        self.pasahitza = ttk.Entry(self.window, justify=tk.LEFT, width=23, textvariable="Pasahitza", font=("Times New Roman", 16))
+        self.pasahitza.place(x=70, y=200)
 
-        buttonb = tk.Button(self.window, text="Pasahitza berreskuratu", font=("Times New Roman", 16))
+        buttonb = tk.Button(self.window, text="Pasahitza berreskuratu", font=("Times New Roman", 16), command=self.identifik_berresk)
         buttonb.place(x=90, y=250)
         buttonb.bind("<Button-1>", )
 
-        buttonirten = tk.Button(self.window, text="Irten", width=8, font=("Times New Roman", 16), command=self.identifik_hasiera)
+        buttonirten = tk.Button(self.window, text="Irten", width=8, font=("Times New Roman", 16))
         buttonirten.place(x=70, y=350)
         #buttonirten.bind("<Button-1>", self.identifik_hasiera)
 
-        buttonerr = tk.Button(self.window, text="Erregistratu", width=8, font=("Calibri"), command=self.identifik_erregis)
+        buttonerr = tk.Button(self.window, text="Sartu", width=8, font=("Calibri"), command=self.identifik_erregis)
         buttonerr.place(x=220, y=350)
 
         self.window.mainloop()
