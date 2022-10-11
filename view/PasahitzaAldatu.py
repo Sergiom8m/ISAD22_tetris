@@ -5,31 +5,6 @@ import sqlite3
 
 class PasahitzaAldatu(object):
 
-    def aldatuta(self):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
-        id = self.erabiltzaile
-        p1 = self.pasahitz.get()
-        p2 = self.pasahitz2.get()
-        g = self.galdera.get()
-        if ((len(p1) != 0) & (len(p2) != 0)):
-            res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-            ezDago = res.fetchone() is None
-            if (ezDago):
-                print("ERROR EZ DAGO ERABILTZAILEA")
-            else:
-                if(p1==p2):
-                    cur.execute("UPDATE JOKALARIAK SET pasahitza=(?) WHERE erabiltzailea=(?)", (p1,id,))
-                    cur.execute("UPDATE JOKALARIAK SET galdera=(?) WHERE erabiltzailea=(?)", (g, id,))
-                    res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-                    print(res.fetchone())
-                    con.commit()
-
-                else:
-                    print("PASAHITZAK EZ DIRA BERDINAK")
-        else:
-            print("Sar ezazu pasahitz berria")
-
 
     def __init__(self, erabiltzaile):
         super(PasahitzaAldatu, self).__init__()
@@ -77,5 +52,30 @@ class PasahitzaAldatu(object):
         self.window.mainloop()
 
 
+    #DATU BASEAREKIN KONEKTATZEKO METODOA:
 
+    def aldatuta(self):
+        con = sqlite3.connect("datubase.db")  # konexioa ezarri
+        cur = con.cursor()
+        id = self.erabiltzaile
+        p1 = self.pasahitz.get()
+        p2 = self.pasahitz2.get()
+        g = self.galdera.get()
+        if ((len(p1) != 0) & (len(p2) != 0)):
+            res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
+            ezDago = res.fetchone() is None
+            if (ezDago):
+                print("ERROR EZ DAGO ERABILTZAILEA")
+            else:
+                if(p1==p2):
+                    cur.execute("UPDATE JOKALARIAK SET pasahitza=(?) WHERE erabiltzailea=(?)", (p1,id,))
+                    cur.execute("UPDATE JOKALARIAK SET galdera=(?) WHERE erabiltzailea=(?)", (g, id,))
+                    res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
+                    print(res.fetchone())
+                    con.commit()
+
+                else:
+                    print("PASAHITZAK EZ DIRA BERDINAK")
+        else:
+            print("Sar ezazu pasahitz berria")
 

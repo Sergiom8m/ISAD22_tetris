@@ -6,10 +6,6 @@ from view.JokatuLehioa import JokatuLehioa
 class Ezarpenak():
 
 
-    def jolastenHasi(self):
-        self.window.destroy()
-        JokatuLehioa().__init__()
-
     def __init__(self):
         super(Ezarpenak, self).__init__()
         self.window = tk.Tk()
@@ -65,6 +61,8 @@ class Ezarpenak():
 
         self.window.mainloop()
 
-
-
+    #JOKATU LEHIORA JOATEKO FUNTZIOA:
+    def jolastenHasi(self):
+        self.window.destroy()
+        JokatuLehioa().__init__()
 

@@ -10,13 +10,13 @@ class ErabiltzaileakEzabatu(object):
 
     def __init__(self):
         super(ErabiltzaileakEzabatu, self).__init__()
-        window = tk.Tk()
-        window.title("PASAHITZA BERRESKURATU")
-        window.geometry('400x400')
-        window.resizable(False, False)
+        self.window = tk.Tk()
+        self.window.title("PASAHITZA BERRESKURATU")
+        self.window.geometry('400x400')
+        self.window.resizable(False, False)
 
         # 1 create a main frame
-        nagusia = Frame(window)
+        nagusia = Frame(self.window)
         nagusia.pack(fill=BOTH, expand=1)
 
         # 2 create a canvas
@@ -40,4 +40,4 @@ class ErabiltzaileakEzabatu(object):
         for i in range(100):
             Button(marko, text=f'Erabiltzaile: {i} ').grid(row=i, column=0, pady=10, padx=10)
 
-        window.mainloop()
+        self.window.mainloop()

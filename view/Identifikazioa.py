@@ -8,36 +8,6 @@ from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
 
 class Identifikazioa(object):
 
-    def identifik_erregis(self):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
-        id = self.erabiltzaile.get()
-        p = self.pasahitza.get()
-
-        if ((len(id) != 0) &(len(p) != 0)):
-            res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-            res = res.fetchone()[0]
-            ezDago= res is None
-            if (ezDago):
-                print("Ez dago erabiltzailea")
-            else:
-                print(res)
-                if (p!=res):
-                    print("Pasahitza ez du koinziditzen")
-                else:
-                    self.window.destroy()
-                    Profila(id).__init__()
-        else:
-            print("Sar itzazu datu guztiak")
-
-
-    def identifik_berresk(self):
-        self.window.destroy()
-        PasahitzaBerreskuratu().__init__()
-
-    #def identifik_hasiera(self):
-        # self.window.destroy()
-    #   HasierakoMenua().__init__()
 
     def __init__(self):
         super(Identifikazioa, self).__init__()
@@ -83,3 +53,41 @@ class Identifikazioa(object):
         buttonerr.place(x=220, y=350)
 
         self.window.mainloop()
+
+    #DATU BASEAREKIN KONEKTATZEKO:
+    def identifik_erregis(self):
+        con = sqlite3.connect("datubase.db")  # konexioa ezarri
+        cur = con.cursor()
+        id = self.erabiltzaile.get()
+        p = self.pasahitza.get()
+
+        if ((len(id) != 0) & (len(p) != 0)):
+            res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
+            res = res.fetchone()[0]
+            ezDago = res is None
+            if (ezDago):
+                error = ttk.Label(self.window, text='Ez dago erabiltzaile hori                 : ', font=("Times New Roman", 16))
+                error.place(x=70, y=290)
+            else:
+                print(res)
+                if (p != res):
+                    error = ttk.Label(self.window, text='Pasahitza ez du koinziditzen                : ',
+                                      font=("Times New Roman", 16))
+                    error.place(x=70, y=290)
+                else:
+                    #PROFIL PANTAILARA JOTZEKO
+                    self.window.destroy()
+                    Profila(id).__init__()
+        else:
+            error = ttk.Label(self.window, text='Sar itzazu datu guztiak                 : ',
+                              font=("Times New Roman", 16))
+            error.place(x=70, y=290)
+
+    #BESTE PANTAILETARA JOTZEKO:
+    def identifik_berresk(self):
+        self.window.destroy()
+        PasahitzaBerreskuratu().__init__()
+
+    # def identifik_hasiera(self):
+    # self.window.destroy()
+    #   HasierakoMenua().__init__()

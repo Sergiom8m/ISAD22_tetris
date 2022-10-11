@@ -5,18 +5,6 @@ from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 class Profila(object):
 
-    def pasahitzaAldatu(self):
-        i=self.erabiltzaile
-        print(i)
-        self.window.destroy()
-        PasahitzaAldatu(i).__init__()
-
-    def erabiltzaileakEzabatu(self):
-        self.window.destroy()
-        Ezarpenak().__init__()
-    def partidaHasi(self):
-        self.window.destroy()
-        Ezarpenak().__init__()
 
     def __init__(self, erabiltzaile):
         super(Profila, self).__init__()
@@ -68,3 +56,17 @@ class Profila(object):
 
 
         self.window.mainloop()
+
+    #BESTE PANTAILETARA JOTZEKO METODOAK
+    def pasahitzaAldatu(self):
+        i=self.erabiltzaile
+        print(i)
+        self.window.destroy()
+        PasahitzaAldatu(i).__init__()
+
+    def erabiltzaileakEzabatu(self):
+        self.window.destroy()
+        Ezarpenak().__init__()
+    def partidaHasi(self):
+        self.window.destroy()
+        Ezarpenak().__init__()

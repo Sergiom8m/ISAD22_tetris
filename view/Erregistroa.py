@@ -14,12 +14,6 @@ sarrera_kolor = "#f99aaa"
 
 class Erregistroa(object):
 
-        #cur.execute("CREATE TABLE JOKALARIAK(erabiltzailea, email, pasahitza, puntuazioa)")
-        #cur.execute("INSERT INTO JOKALARIAK VALUES ('admin',12345, 0 )")
-        #for row in cur.execute("SELECT erabiltzailea, puntuazioa FROM JOKALARIAK"):
-        #       print(row)
-
-
         def __init__(self):
                 super(Erregistroa, self).__init__()
                 self.window = tk.Tk()
@@ -47,33 +41,33 @@ class Erregistroa(object):
                 pasahitza2 = tk.StringVar()
 
                 # Identifikatzailearen sarrera
-                erab = ttk.Label(self.window, text='Identifikatzailea... ', font=("Times New Roman", 16))
-                erab.place(x=60, y=60)
+                erab = ttk.Label(self.window, text='Identifikatzailea... ', font=("Times New Roman", 12))
+                erab.place(x=60, y=70)
 
-                self.erabil = tk.Entry(self.window, textvar=identifik, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
+                self.erabil = tk.Entry(self.window, textvar=identifik, width=32, bg=sarrera_kolor, font=("Times New Roman", 14))
                 self.erabil.place(x=60, y=90)
 
                 # Emailaren sarrera
-                b=ttk.Label(self.window, text='Berreskurapen galdera sartu', font=("Times New Roman", 16))
+                b=ttk.Label(self.window, text='Berreskurapen galdera sartu (pasahitzarako)', font=("Times New Roman", 12))
                 b.place(x=60, y=130)
-                b2 = ttk.Label(self.window, text='(pasahitza berreskuratzeko)', font=("Times New Roman", 16))
-                b2.place(x=60, y=155)
 
-                self.galdera = tk.Entry(self.window, textvar=e, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.galdera.place(x=60, y=185)
+
+                self.galdera = tk.Entry(self.window, textvar=e, width=32, bg=sarrera_kolor, font=("Times New Roman", 14))
+                self.galdera.place(x=60, y=150)
 
                 # Pasahitzaren sarrera
-                pas1 = ttk.Label(self.window, text='Pasahitza... ', font=("Times New Roman", 16))
-                pas1.place(x=60, y=225)
+                pas1 = ttk.Label(self.window, text='Pasahitza... ', font=("Times New Roman", 12))
+                pas1.place(x=60, y=190)
 
-                self.pasahitz1 = tk.Entry(self.window, textvar=pasahitza1, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.pasahitz1.place(x=60, y=255)
+                self.pasahitz1 = tk.Entry(self.window, textvar=pasahitza1, width=32, bg=sarrera_kolor, font=("Times New Roman", 14))
+                self.pasahitz1.place(x=60, y=210)
 
-                pas2 = ttk.Label(self.window, text='Pasahitza errepikatu... ', font=("Times New Roman", 16))
-                pas2.place(x=60, y=295)
+                pas2 = ttk.Label(self.window, text='Pasahitza errepikatu... ', font=("Times New Roman", 12))
+                pas2.place(x=60, y=250)
 
-                self.pasahitz2 = tk.Entry(self.window, textvar=pasahitza2, width=25, bg=sarrera_kolor, font=("Times New Roman", 16))
-                self.pasahitz2.place(x=60, y=325)
+                self.pasahitz2 = tk.Entry(self.window, textvar=pasahitza2, width=32, bg=sarrera_kolor, font=("Times New Roman", 14))
+                self.pasahitz2.place(x=60, y=270)
+
 
                 # BOTOIAK
                 sartu = tk.Button(self.window, text="Sartu", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14),
@@ -84,6 +78,8 @@ class Erregistroa(object):
                 irten.place(x=220, y=360)
 
                 self.window.mainloop()
+
+        #DATUBASEARI KONEKTATZEKO METODOA
 
         def erabiltzaileaGorde(self):
                 con = sqlite3.connect("datubase.db")  # konexioa ezarri
@@ -99,18 +95,25 @@ class Erregistroa(object):
                         ezDago = res.fetchone() is None
                         if (ezDago):
                                 if (p1 == p2):
-                                        print("Erregistratu zaitugu: " + id)
+
                                         cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, galdera, p1, 0))
                                         con.commit()
-                                        print("ESTAS REGISTRADO Y TE METEMOS A PERFIL")
+
+                                        #PROFIL PANTAILARA ALDATZEKO:
                                         self.window.destroy()
                                         Profila(id).__init__()
                                 else:
-                                        print("Pasahitza ez du koinziditzen")
+                                        error = ttk.Label(self.window, text='Pasahitza ez du koinziditzen               ',
+                                                          font=("Times New Roman", 12))
+                                        error.place(x=60, y=310)
                         else:
-                                print("Jada existitzen da erabiltzailea")
+                                error = ttk.Label(self.window, text='Erabiltzailea jada existitzen da                  ',
+                                                  font=("Times New Roman", 12))
+                                error.place(x=60, y=310)
                 else:
-                        print("Sar itzazu datu guztiak")
+                        error = ttk.Label(self.window, text='Sar itzazu datu guztiak                                   ',
+                                          font=("Times New Roman", 12))
+                        error.place(x=60, y=310)
 
 
 

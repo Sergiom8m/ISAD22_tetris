@@ -5,14 +5,6 @@ import sqlite3
 
 class PasahitzaBerreskuratu(object):
 
-    def berreskuratuta(self):
-        id = self.lehio.get()
-        if(len(id) != 0):
-            self.pasahitzaBerreskuratu()
-        else:
-            mezu = ttk.Label(self.window, text='Sartu erabiltzaile bat',font=("Calibri"))
-            mezu.place(x=60, y=210)
-
 
     def __init__(self):
         super(PasahitzaBerreskuratu, self).__init__()
@@ -48,6 +40,8 @@ class PasahitzaBerreskuratu(object):
 
         self.window.mainloop()
 
+    #DATU BASEAREKIN KONEKTATZEKO METODOA:
+
     def pasahitzaBerreskuratu(self):
         con = sqlite3.connect("datubase.db")  # konexioa ezarri
         cur = con.cursor()
@@ -64,3 +58,11 @@ class PasahitzaBerreskuratu(object):
             pista = ttk.Label(self.window, text=f'{g}', font=("Calibri"))
             pista.place(x=60, y=240)
 
+    #BESTE PANTAILETARA JOTZEKO METODAK:
+    def berreskuratuta(self):
+        id = self.lehio.get()
+        if(len(id) != 0):
+            self.pasahitzaBerreskuratu()
+        else:
+            mezu = ttk.Label(self.window, text='Sartu erabiltzaile bat',font=("Calibri"))
+            mezu.place(x=60, y=210)

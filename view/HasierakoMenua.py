@@ -8,22 +8,6 @@ from view.Identifikazioa import Identifikazioa
 
 class HasierakoMenua(object):
 
-    def pantailaPartidaBerria(self):
-
-        self.window.destroy()
-        Ezarpenak().__init__()
-
-    def pantailaIdentifikatu(self):
-
-        self.window.destroy()
-        Identifikazioa().__init__()
-
-    def pantailaErregistratu(self):
-
-        self.window.destroy()
-        Erregistroa().__init__()
-
-
 
     def __init__(self):
         super(HasierakoMenua, self).__init__()
@@ -71,3 +55,16 @@ class HasierakoMenua(object):
         buttonIrten.pack(ipadx=10, ipady=10)
 
         self.window.mainloop()
+
+    #PANTAILAZ ALDATZEKO  METODOAK:
+    def pantailaPartidaBerria(self):
+        self.window.destroy()
+        Ezarpenak().__init__()
+
+    def pantailaIdentifikatu(self):
+        self.window.destroy()
+        Identifikazioa().__init__()
+
+    def pantailaErregistratu(self):
+        self.window.destroy()
+        Erregistroa().__init__()
