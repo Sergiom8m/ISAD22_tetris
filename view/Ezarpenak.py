@@ -3,6 +3,10 @@ from tkinter import ttk
 
 from view.JokatuLehioa import JokatuLehioa
 
+#Koloreak
+botoi_kolor = "#ffffff"
+atzeko_kolor = "plum1"
+
 class Ezarpenak():
 
 
@@ -11,22 +15,23 @@ class Ezarpenak():
         self.window = tk.Tk()
         self.window.geometry('400x400')
         self.window.title("Tetris jokoa")
+        self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
 
-        espacio = ttk.Label(self.window, text="")
-        titulo = tk.Label(self.window, text="Partidaren ezarpenak", font=("Times New Roman",25))
+        espacio = tk.Label(self.window, bg=atzeko_kolor, text="")
+        titulo = tk.Label(self.window, bg=atzeko_kolor, text="Partidaren ezarpenak", font=("Times New Roman",25))
         titulo.pack()
         espacio.pack()
 
-        mensaje = tk.Label(self.window, text="Partidaren ezaugarriak aukera itzazu ", font=("Calibri"))
+        mensaje = tk.Label(self.window, bg=atzeko_kolor, text="Partidaren ezaugarriak aukera itzazu ", font=("Calibri"))
         mensaje.pack()
 
-        mensaje2 = tk.Label(self.window, text="(bana aukeratu arte ezingo da partida hasi) ", font=("Calibri"))
+        mensaje2 = tk.Label(self.window, bg=atzeko_kolor, text="(bana aukeratu arte ezingo da partida hasi) ", font=("Calibri"))
         mensaje2.pack()
 
         espacio.pack()
 
-        titulo_abiadura = tk.Label(self.window, text="Abiadura:", font=("Calibri", 14))
+        titulo_abiadura = tk.Label(self.window, bg=atzeko_kolor, text="Abiadura:", font=("Calibri", 14))
         titulo_abiadura.place(x=60, y= 110)
 
         self.opcion = tk.IntVar()
@@ -34,28 +39,28 @@ class Ezarpenak():
 
 
 
-        self.a1 = tk.Radiobutton(self.window, text="Erraza", variable=self.opcion,value=1).place(x=50, y=150)
-        self.a2 = tk.Radiobutton(self.window, text="Ertaina", variable=self.opcion,value=2).place(x=130, y=150)
-        self.a3 = tk.Radiobutton(self.window, text="Zaila", variable=self.opcion,value=3).place(x=210, y=150)
-        self.a4 = tk.Radiobutton(self.window, text="Oso zaila", variable=self.opcion,value=4).place(x=280, y=150)
+        self.a1 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion,value=1).place(x=50, y=150)
+        self.a2 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion,value=2).place(x=130, y=150)
+        self.a3 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Zaila", variable=self.opcion,value=3).place(x=210, y=150)
+        self.a4 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion,value=4).place(x=280, y=150)
 
 
 
-        titulo_tamaina = tk.Label(self.window, text="Tamaina:", font=("Calibri", 14))
+        titulo_tamaina = tk.Label(self.window, bg=atzeko_kolor, text="Tamaina:", font=("Calibri", 14))
         titulo_tamaina.place(x=60, y=190)
 
         self.opcion2 = tk.IntVar()
         self.opcion2.set(value=1)
 
 
-        self.t1 = tk.Radiobutton(self.window, text="Erraza", variable=self.opcion2, value=1).place(x=50, y=230)
-        self.t2 = tk.Radiobutton(self.window, text="Ertaina", variable=self.opcion2, value=2).place(x=130, y=230)
-        self.t3 = tk.Radiobutton(self.window, text="Zaila", variable=self.opcion2, value=3).place(x=210, y=230)
-        self.t4 = tk.Radiobutton(self.window, text="Oso zaila", variable=self.opcion2, value=4).place(x=280, y=230)
+        self.t1 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion2, value=1).place(x=50, y=230)
+        self.t2 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion2, value=2).place(x=130, y=230)
+        self.t3 = tk.Radiobutton(self.window,  bg=atzeko_kolor,text="Zaila", variable=self.opcion2, value=3).place(x=210, y=230)
+        self.t4 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion2, value=4).place(x=280, y=230)
 
-        buttonirten = tk.Button(self.window, text="Irten", width=8, font=("Calibri"))
+        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"))
         buttonirten.place(x=60, y=300)
-        buttonj = tk.Button(self.window, text="Jolastu", width=8, font=("Calibri"), command=self.jolastenHasi)
+        buttonj = tk.Button(self.window, bg=botoi_kolor, text="Jolastu", width=8, font=("Calibri"), command=self.jolastenHasi)
         buttonj.place(x=220, y=300)
 
 

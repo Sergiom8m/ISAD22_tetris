@@ -19,7 +19,7 @@ class HasierakoMenua(object):
         self.window = tk.Tk()
         self.window.geometry('400x400')
         self.window.title("Hasierako Menua")
-        self.window['bg']="SkyBlue2"
+        self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
 
 

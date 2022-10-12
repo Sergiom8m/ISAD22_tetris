@@ -19,7 +19,7 @@ class Erregistroa(object):
                 self.window = tk.Tk()
                 self.window.geometry('400x400')
                 self.window.title("ERREGISTROA")
-                self.window['bg']="PaleGreen"
+                self.window['bg']=atzeko_kolor
                 self.window.resizable(False, False)
 
 
@@ -104,15 +104,15 @@ class Erregistroa(object):
                                         self.window.destroy()
                                         Profila(id).__init__()
                                 else:
-                                        error = ttk.Label(self.window, text='Pasahitza ez du koinziditzen               ',
+                                        error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
                                                           font=("Times New Roman", 12))
                                         error.place(x=60, y=310)
                         else:
-                                error = ttk.Label(self.window, text='Erabiltzailea jada existitzen da                  ',
+                                error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
                                                   font=("Times New Roman", 12))
                                 error.place(x=60, y=310)
                 else:
-                        error = ttk.Label(self.window, text='Sar itzazu datu guztiak                                   ',
+                        error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
                                           font=("Times New Roman", 12))
                         error.place(x=60, y=310)
 
