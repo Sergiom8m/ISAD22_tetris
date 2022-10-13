@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 
+import view
+
 #Koloreak
 botoi_kolor = "#ffffff"
 atzeko_kolor = "PaleTurquoise2"
@@ -47,7 +49,7 @@ class PasahitzaAldatu(object):
                                    font=("Times New Roman", 16))
         self.galdera.place(x=70, y=270)
 
-        buttonirten = tk.Button(self.window,bg=botoi_kolor, text="Irten", width=8, font=("Calibri"))
+        buttonirten = tk.Button(self.window,bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=70, y=310)
         buttonados = tk.Button(self.window, bg=botoi_kolor, text="Ados", width=8, font=("Calibri"), command=self.aldatuta)
         buttonados.place(x=220, y=310)
@@ -55,7 +57,10 @@ class PasahitzaAldatu(object):
 
         self.window.mainloop()
 
-
+    #PANTAILETAN MUGITZEKO
+    def irten(self):
+        self.window.destroy()
+        view.Profila.Profila().__init__()
     #DATU BASEAREKIN KONEKTATZEKO METODOA:
 
     def aldatuta(self):

@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+
+import view.HasierakoMenua
 from view.Profila import Profila
 from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
 
@@ -48,7 +50,7 @@ class Identifikazioa(object):
         buttonb.place(x=90, y=250)
         buttonb.bind("<Button-1>", )
 
-        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16))
+        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16), command=self.irten)
         buttonirten.place(x=70, y=350)
         #buttonirten.bind("<Button-1>", self.identifik_hasiera)
 
@@ -93,6 +95,6 @@ class Identifikazioa(object):
         self.window.destroy()
         PasahitzaBerreskuratu().__init__()
 
-    # def identifik_hasiera(self):
-    # self.window.destroy()
-    #   HasierakoMenua().__init__()
+    def irten(self):
+       self.window.destroy()
+       view.HasierakoMenua.HasierakoMenua().__init__()

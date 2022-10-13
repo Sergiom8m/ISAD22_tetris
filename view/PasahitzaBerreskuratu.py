@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 
+import view
+
 botoi_kolor = "#ffffff"
 atzeko_kolor = "khaki"
 
@@ -64,6 +66,9 @@ class PasahitzaBerreskuratu(object):
             pista.place(x=60, y=240)
 
     #BESTE PANTAILETARA JOTZEKO METODAK:
+    def irten(self):
+        self.window.destroy()
+        view.Identifikazioa.Identifikazioa().__init__()
     def berreskuratuta(self):
         id = self.lehio.get()
         if(len(id) != 0):

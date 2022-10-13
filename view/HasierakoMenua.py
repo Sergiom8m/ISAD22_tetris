@@ -16,6 +16,7 @@ class HasierakoMenua(object):
 
     def __init__(self):
         super(HasierakoMenua, self).__init__()
+        self.erabiltzaile = None
         self.window = tk.Tk()
         self.window.geometry('400x400')
         self.window.title("Hasierako Menua")
@@ -64,7 +65,7 @@ class HasierakoMenua(object):
     #PANTAILAZ ALDATZEKO  METODOAK:
     def pantailaPartidaBerria(self):
         self.window.destroy()
-        Ezarpenak().__init__()
+        Ezarpenak(self.erabiltzaile).__init__()
 
     def pantailaIdentifikatu(self):
         self.window.destroy()

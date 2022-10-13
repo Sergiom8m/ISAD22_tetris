@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+
+import view
 from view.PasahitzaAldatu import PasahitzaAldatu
 from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
@@ -57,7 +59,7 @@ class Profila(object):
 
         separador.pack()
 
-        button = tk.Button(self.window,bg=botoi_kolor, text="Irten")
+        button = tk.Button(self.window,bg=botoi_kolor, text="Irten", command=self.irten)
         button.pack(ipadx=10, ipady=10)
 
 
@@ -72,7 +74,11 @@ class Profila(object):
 
     def erabiltzaileakEzabatu(self):
         self.window.destroy()
-        Ezarpenak().__init__()
+        ErabiltzaileakEzabatu().__init__()
     def partidaHasi(self):
         self.window.destroy()
-        Ezarpenak().__init__()
+        Ezarpenak(self.erabiltzaile).__init__()
+
+    def irten(self):
+        self.window.destroy()
+        view.HasierakoMenua.HasierakoMenua().__init__()

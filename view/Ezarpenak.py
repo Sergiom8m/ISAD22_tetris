@@ -1,17 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
 
+import view
 from view.JokatuLehioa import JokatuLehioa
 
 #Koloreak
 botoi_kolor = "#ffffff"
 atzeko_kolor = "plum1"
 
-class Ezarpenak():
+class Ezarpenak(object):
 
 
-    def __init__(self):
+    def __init__(self, erabiltzaile):
         super(Ezarpenak, self).__init__()
+        self.erabiltzaile=erabiltzaile
         self.window = tk.Tk()
         self.window.geometry('400x400')
         self.window.title("Tetris jokoa")
@@ -58,7 +60,7 @@ class Ezarpenak():
         self.t3 = tk.Radiobutton(self.window,  bg=atzeko_kolor,text="Zaila", variable=self.opcion2, value=3).place(x=210, y=230)
         self.t4 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion2, value=4).place(x=280, y=230)
 
-        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"))
+        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=60, y=300)
         buttonj = tk.Button(self.window, bg=botoi_kolor, text="Jolastu", width=8, font=("Calibri"), command=self.jolastenHasi)
         buttonj.place(x=220, y=300)
@@ -66,7 +68,15 @@ class Ezarpenak():
 
         self.window.mainloop()
 
-    #JOKATU LEHIORA JOATEKO FUNTZIOA:
+    # PANTAILETAN MUGITZEKO
+    def irten(self):
+        self.window.destroy()
+        if(self.erabiltzaile is None):
+            view.HasierakoMenua.HasierakoMenua().__init__()
+        else:
+            view.Profila.Profila(self.erabiltzaile).__init__()
+
+
     def jolastenHasi(self):
         self.window.destroy()
         JokatuLehioa().__init__()

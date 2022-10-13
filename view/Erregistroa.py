@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+
+import view
 from view.Profila import Profila
 
 
@@ -75,10 +77,15 @@ class Erregistroa(object):
                                   command=self.erabiltzaileaGorde)
                 sartu.place(x=60, y=350)
 
-                irten = tk.Button(self.window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14))
+                irten = tk.Button(self.window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14), command=self.irten)
                 irten.place(x=240, y=350)
 
                 self.window.mainloop()
+        #PANTAILA ALDATZEKO
+        def irten(self):
+                self.window.destroy()
+                view.HasierakoMenua.HasierakoMenua().__init__()
+
 
         #DATUBASEARI KONEKTATZEKO METODOA
 
