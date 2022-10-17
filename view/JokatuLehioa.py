@@ -10,10 +10,13 @@ class JokatuLehioa(object):
 
 	def __init__(self, abiadura_param):
 		super(JokatuLehioa, self).__init__()
+		self.abiadura = abiadura_param
 		self.window = tk.Tk()
 		self.window.geometry('500x500')
 		self.window.title("Tetris Jokoa")
-		abiadura = abiadura_param
+		global abiadura
+		abiadura = self.abiadura
+		print(abiadura)
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
@@ -24,7 +27,7 @@ class JokatuLehioa(object):
 		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa)
 		puntuazioalabel.pack()
 
-		canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa)
+		canvas = TableroaPanela(master=self.window, puntuazioalabel=puntuazioa)
 		button.configure(command=canvas.jolastu)
 		canvas.pack()
 		self.window.bind("<Up>", canvas.joku_kontrola)
@@ -40,6 +43,7 @@ class TableroaPanela(tk.Frame):
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
 		self.gelazka_tamaina = gelazka_tamaina
+		global abiadura
 
 		self.canvas = tk.Canvas(
 			width=self.tamaina[0]  * self.gelazka_tamaina+1,
