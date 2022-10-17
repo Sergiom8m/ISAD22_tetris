@@ -15,7 +15,7 @@ class PasahitzaAldatu(object):
         super(PasahitzaAldatu, self).__init__()
         self.erabiltzaile=erabiltzaile
         self.window = tk.Tk()
-        self.window.title("PASAHITZA ALDATU")
+        self.window.title("Pasahitza Aldatu")
         self.window.geometry('400x400')
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)

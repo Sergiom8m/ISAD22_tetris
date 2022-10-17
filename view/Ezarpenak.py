@@ -16,7 +16,7 @@ class Ezarpenak(object):
         self.erabiltzaile=erabiltzaile
         self.window = tk.Tk()
         self.window.geometry('400x400')
-        self.window.title("Tetris jokoa")
+        self.window.title("Tetris Jokoa")
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
 

@@ -11,7 +11,7 @@ class ErabiltzaileakEzabatu(object):
     def __init__(self):
         super(ErabiltzaileakEzabatu, self).__init__()
         self.window = tk.Tk()
-        self.window.title("PASAHITZA BERRESKURATU")
+        self.window.title("Erabiltzaileak ezabatu")
         self.window.geometry('400x400')
         self.window.resizable(False, False)
 

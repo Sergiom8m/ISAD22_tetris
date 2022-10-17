@@ -16,7 +16,7 @@ class Identifikazioa(object):
     def __init__(self):
         super(Identifikazioa, self).__init__()
         self.window = tk.Tk()
-        self.window.title("IDENTIFIKAZIOA")
+        self.window.title("Identifikazioa")
         self.window.geometry('400x400')
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
