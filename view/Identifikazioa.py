@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 import sqlite3
 
 import view.HasierakoMenua
@@ -84,7 +83,7 @@ class Identifikazioa(object):
                 else:
                     #PROFIL PANTAILARA JOTZEKO
                     self.window.destroy()
-                    Profila(id).__init__()
+                    Profila(id).__init__(id)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                  ',
                               font=("Times New Roman", 16))

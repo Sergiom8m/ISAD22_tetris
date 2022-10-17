@@ -92,4 +92,3 @@ class PasahitzaAldatu(object):
             mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar ezazu pasahitz berria                 ',
                             font=("Calibri"))
             mezu.place(x=60, y=350)
-
