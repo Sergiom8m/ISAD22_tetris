@@ -3,16 +3,17 @@ import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
 
+abiadura = 1
+
 class JokatuLehioa(object):
 	"""docstring for JokatuLeioa"""
-	
-	def __init__(self):
+
+	def __init__(self, abiadura_param):
 		super(JokatuLehioa, self).__init__()
 		self.window = tk.Tk()
 		self.window.geometry('500x500')
 		self.window.title("Tetris Jokoa")
-
-		
+		abiadura = abiadura_param
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
@@ -88,14 +89,14 @@ class TableroaPanela(tk.Frame):
 				self.tab.hasieratu_tableroa()
 				return
 
-		self.jokatzen = self.after(400, self.pausu_bat)
+		self.jokatzen = self.after(abiadura, self.pausu_bat)
 		self.marraztu_tableroa()
 
 	def puntuazioa_eguneratu(self):
 		if self.puntuazio_panela:
 			self.puntuazio_panela.set(f"Puntuazioa: {self.tab.puntuazioa}")
 
-		
+
 
 	def joku_kontrola(self, event):
 		try:
@@ -119,4 +120,4 @@ class TableroaPanela(tk.Frame):
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
-		self.jokatzen = self.after(400, self.pausu_bat)
+		self.jokatzen = self.after(abiadura, self.pausu_bat)
