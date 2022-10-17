@@ -37,7 +37,7 @@ class PasahitzaBerreskuratu(object):
 
 
 
-        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"))
+        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=70, y=300)
         buttonados = tk.Button(self.window, bg=botoi_kolor, text="Ados", width=8, font=("Calibri"), command=self.berreskuratuta)
         buttonados.place(x=220, y=300)
