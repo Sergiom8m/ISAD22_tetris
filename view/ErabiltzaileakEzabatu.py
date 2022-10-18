@@ -13,48 +13,33 @@ class ErabiltzaileakEzabatu(object):
     def __init__(self):
         super(ErabiltzaileakEzabatu, self).__init__()
         self.window = tk.Tk()
-        self.window.title("Erabiltzaileak ezabatu")
+        self.window.title("ERABILTZAILEAK EZABATU")
         self.window.geometry('400x400')
         self.window.resizable(False, False)
 
-        #Crear el scroll y el texto
-        self.scroll = tk.Scrollbar(self.window)
-        self.texto= tk.Text(self.window, height=10, width=50)
+        # 1 create a main frame
+        nagusia = Frame(self.window)
+        nagusia.pack(fill=BOTH, expand=1)
 
-        #Colocar el scroll y el texto
-        self.scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.texto.pack(side=tk.LEFT, fill=tk.Y)
+        # 2 create a canvas
+        nire_canvas = Canvas(nagusia)
+        nire_canvas.pack(side=LEFT, fill=BOTH, expand=1)
 
-        #Configurar el widget
-        #indicamos que modificara a texto en su scroll Y invocando el metodo yview
-        #yview, xview
-        self.scroll.config(command=self.texto.yview)
+        # 3 add a scrollbar to the canvas
+        scrollbar = ttk.Scrollbar(nagusia, orient=VERTICAL, command=nire_canvas.yview)
+        scrollbar.pack(side=RIGHT, fill=Y)
 
-        #Asociar con el scroll para poder colocarlo en la posicion invocando metodo set
-        self.texto.config(yscrollcommand=self.scroll.set)
+        # 4 configure the canvas
+        nire_canvas.configure(yscrollcommand=scrollbar.set)
+        nire_canvas.bind('<Configure>', lambda e: nire_canvas.configure(scrollregion=nire_canvas.bbox("all")))
 
-        mensaje="USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS " \
-                "USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS USUARIOS "
+        # 5 create another frame inside canvas
+        marko = Frame(nire_canvas)
 
+        # 6 add that new frame to a window in the canvas
+        nire_canvas.create_window((0, 0), window=marko, anchor="nw")
 
-        #insertar mensaje al final
-
-        self.texto.insert(tk.END, mensaje)
+        for i in range(100):
+            Button(marko, text=f'Erabiltzaile: {i} ').grid(row=i, column=0, pady=10, padx=10)
 
         self.window.mainloop()
