@@ -11,6 +11,4 @@ if __name__ == '__main__':
 
 
 	#TODO No se cierran las pestañas cuando les das a la X
-	# TODO DIFICULTAD
-	# TODO SCROLLBAR
 	#TODO BORRAR USUARIOS
