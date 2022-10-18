@@ -3,6 +3,7 @@ from tkinter import ttk
 
 import view
 from view.JokatuLehioa import JokatuLehioa, TableroaPanela
+from decimal import *
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -88,4 +89,10 @@ class Ezarpenak(object):
         elif(self.opcion.get() == 3): abiadura = 200
         elif(self.opcion.get() == 4): abiadura = 100
 
-        JokatuLehioa(abiadura).__init__()
+        tamaina = 1
+        if (self.opcion.get() == 1): tamaina = 20
+        elif (self.opcion.get() == 2): tamaina = 30
+        elif (self.opcion.get() == 3): tamaina = 40
+        elif (self.opcion.get() == 4): tamaina = 45
+
+        JokatuLehioa(abiadura, tamaina).__init__()

@@ -2,21 +2,27 @@ import random
 import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
+from decimal import *
 
 abiadura = 1
+tamaina2 = 2
 
 class JokatuLehioa(object):
 	"""docstring for JokatuLeioa"""
 
-	def __init__(self, abiadura_param):
+	def __init__(self, abiadura_param, tamaina_param):
 		super(JokatuLehioa, self).__init__()
 		self.abiadura = abiadura_param
+		self.tamaina = tamaina_param
 		self.window = tk.Tk()
-		self.window.geometry('500x500')
+		self.window.geometry('1000x1000')
 		self.window.title("Tetris Jokoa")
 		global abiadura
+		global tamaina2
 		abiadura = self.abiadura
+		tamaina2 = self.tamaina
 		print(abiadura)
+		print(tamaina2)
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
@@ -27,7 +33,7 @@ class JokatuLehioa(object):
 		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa)
 		puntuazioalabel.pack()
 
-		canvas = TableroaPanela(master=self.window, puntuazioalabel=puntuazioa)
+		canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa)
 		button.configure(command=canvas.jolastu)
 		canvas.pack()
 		self.window.bind("<Up>", canvas.joku_kontrola)
@@ -38,7 +44,7 @@ class JokatuLehioa(object):
 		self.window.mainloop()
 
 class TableroaPanela(tk.Frame):
-	def __init__(self, tamaina=(10 ,20), gelazka_tamaina=20,puntuazioalabel=None, master=None):
+	def __init__(self, tamaina, gelazka_tamaina=20,puntuazioalabel=None, master=None):
 		tk.Frame.__init__(self, master)
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
@@ -52,7 +58,7 @@ class TableroaPanela(tk.Frame):
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
 
-		self.tab = Tableroa()
+		self.tab = Tableroa(tamaina)
 		self.jokatzen = None
 		self.tableroa_ezabatu()
 
