@@ -84,15 +84,18 @@ class Ezarpenak(object):
     def jolastenHasi(self):
         self.window.destroy()
         abiadura = 1
+        print(self.opcion.get())
+        print(self.opcion2.get())
+
         if(self.opcion.get() == 1): abiadura = 800
         elif(self.opcion.get() == 2): abiadura = 400
         elif(self.opcion.get() == 3): abiadura = 200
         elif(self.opcion.get() == 4): abiadura = 100
 
         tamaina = 1
-        if (self.opcion.get() == 1): tamaina = 20
-        elif (self.opcion.get() == 2): tamaina = 30
-        elif (self.opcion.get() == 3): tamaina = 40
-        elif (self.opcion.get() == 4): tamaina = 45
+        if (self.opcion2.get() == 1): tamaina = 20
+        elif (self.opcion2.get() == 2): tamaina = 30
+        elif (self.opcion2.get() == 3): tamaina = 40
+        elif (self.opcion2.get() == 4): tamaina = 50
 
         JokatuLehioa(abiadura, tamaina).__init__()

@@ -15,7 +15,8 @@ class JokatuLehioa(object):
 		self.abiadura = abiadura_param
 		self.tamaina = tamaina_param
 		self.window = tk.Tk()
-		self.window.geometry('1000x1000')
+		leihoTamaina = (str(self.tamaina * 27) + "x" + str(self.tamaina * 45))
+		self.window.geometry(leihoTamaina)
 		self.window.title("Tetris Jokoa")
 		global abiadura
 		global tamaina2
