@@ -14,7 +14,7 @@ class PasahitzaBerreskuratu(object):
         super(PasahitzaBerreskuratu, self).__init__()
 
         self.window = tk.Tk()
-        self.window.title("PASAHITZA BERRESKURATU")
+        self.window.title("Pasahitza Berreskuratu")
         self.window.geometry('400x400')
         self.window['bg']= atzeko_kolor
         self.window.resizable(False, False)

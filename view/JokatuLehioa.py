@@ -3,16 +3,20 @@ import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
 
+abiadura = 1
+
 class JokatuLehioa(object):
 	"""docstring for JokatuLeioa"""
-	
-	def __init__(self):
+
+	def __init__(self, abiadura_param):
 		super(JokatuLehioa, self).__init__()
+		self.abiadura = abiadura_param
 		self.window = tk.Tk()
 		self.window.geometry('500x500')
-		self.window.title("Tetris jokoa")
-
-		
+		self.window.title("Tetris Jokoa")
+		global abiadura
+		abiadura = self.abiadura
+		print(abiadura)
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
@@ -23,7 +27,7 @@ class JokatuLehioa(object):
 		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa)
 		puntuazioalabel.pack()
 
-		canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa)
+		canvas = TableroaPanela(master=self.window, puntuazioalabel=puntuazioa)
 		button.configure(command=canvas.jolastu)
 		canvas.pack()
 		self.window.bind("<Up>", canvas.joku_kontrola)
@@ -39,6 +43,7 @@ class TableroaPanela(tk.Frame):
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
 		self.gelazka_tamaina = gelazka_tamaina
+		global abiadura
 
 		self.canvas = tk.Canvas(
 			width=self.tamaina[0]  * self.gelazka_tamaina+1,
@@ -88,14 +93,14 @@ class TableroaPanela(tk.Frame):
 				self.tab.hasieratu_tableroa()
 				return
 
-		self.jokatzen = self.after(400, self.pausu_bat)
+		self.jokatzen = self.after(abiadura, self.pausu_bat)
 		self.marraztu_tableroa()
 
 	def puntuazioa_eguneratu(self):
 		if self.puntuazio_panela:
 			self.puntuazio_panela.set(f"Puntuazioa: {self.tab.puntuazioa}")
 
-		
+
 
 	def joku_kontrola(self, event):
 		try:
@@ -119,5 +124,4 @@ class TableroaPanela(tk.Frame):
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
-		self.jokatzen = self.after(400, self.pausu_bat)
-		
+		self.jokatzen = self.after(abiadura, self.pausu_bat)

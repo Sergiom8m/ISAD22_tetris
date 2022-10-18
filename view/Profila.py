@@ -49,7 +49,7 @@ class Profila(object):
         separador.pack()
 
         if(self.erabiltzaile=="admin"):
-            buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", width=30)
+            buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
         else:
             buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", width=30, state="disabled")

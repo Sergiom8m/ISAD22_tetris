@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 import sqlite3
 
 import view.HasierakoMenua
@@ -16,7 +15,7 @@ class Identifikazioa(object):
     def __init__(self):
         super(Identifikazioa, self).__init__()
         self.window = tk.Tk()
-        self.window.title("IDENTIFIKAZIOA")
+        self.window.title("Identifikazioa")
         self.window.geometry('400x400')
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
@@ -84,7 +83,7 @@ class Identifikazioa(object):
                 else:
                     #PROFIL PANTAILARA JOTZEKO
                     self.window.destroy()
-                    Profila(id).__init__()
+                    Profila(id).__init__(id)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                  ',
                               font=("Times New Roman", 16))
