@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import sqlite3
 import sys
 
 # https://www.youtube.com/watch?v=0WafQCaok6g ESTA ES LA QUE ESTA PUESTA, PERO NO FUNCIONA... CREO Q ES POR LAMBDA
@@ -36,12 +37,34 @@ class ErabiltzaileakEzabatu(object):
         nire_canvas.bind('<Configure>', lambda e: nire_canvas.configure(scrollregion=nire_canvas.bbox("all")))
 
         # 5 create another frame inside canvas
-        marko = Frame(nire_canvas)
+        self.marko = Frame(nire_canvas)
 
         # 6 add that new frame to a window in the canvas
-        nire_canvas.create_window((0, 0), window=marko, anchor="nw")
+        nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
-        for i in range(100):
-            Button(marko, text=f'Erabiltzaile: {i} ').grid(row=i, column=0, pady=10, padx=10)
+        self.erabiltzaileak_inprimatu()
 
         self.window.mainloop()
+
+    def erabiltzaileak_inprimatu(self):
+        emaitza = self.erabiltzailea_guztiak_lortu()
+        for i in range(len(emaitza)):
+            Label(self.marko, text=emaitza[i][0]).grid(row=i, column=0, pady=10, padx=10)
+            botoia = ttk.Button(self.marko, text="Ezabatu", command=lambda: self.erabiltzailea_ezabatu(i,emaitza))
+            botoia.grid(row=i, column=1, pady=10, padx=10)
+
+    def erabiltzailea_guztiak_lortu(self):
+        con = sqlite3.connect("datubase.db")  # konexioa ezarri
+        cur = con.cursor()
+        emaitza = cur.execute("SELECT erabiltzailea FROM jokalariak").fetchall()
+        print(emaitza)
+        con.close()
+        return emaitza
+
+    def erabiltzailea_ezabatu(self,row_numb,kontsulta):
+        con = sqlite3.connect("datubase.db")  # konexioa ezarri
+        cur = con.cursor()
+        cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (kontsulta[row_numb][0],))
+        con.commit()
+        con.close()
+        self.erabiltzaileak_inprimatu()

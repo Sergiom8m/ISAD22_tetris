@@ -81,9 +81,10 @@ class Identifikazioa(object):
                     # PROFIL PANTAILARA JOTZEKO
                     self.window.destroy()
                     Profila(id).__init__(id)
-                error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
-                                 text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
-                error.place(x=70, y=300)
+                else:
+                    error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
+                                     text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
+                    error.place(x=70, y=300)
             else:
                 res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
                 res = res.fetchone()[0]
