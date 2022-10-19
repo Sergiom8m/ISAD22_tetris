@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
-
+import sys
 import view
 
 botoi_kolor = "#ffffff"
@@ -14,6 +14,7 @@ class PasahitzaBerreskuratu(object):
         super(PasahitzaBerreskuratu, self).__init__()
 
         self.window = tk.Tk()
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.title("Pasahitza Berreskuratu")
         self.window.geometry('400x400')
         self.window['bg']= atzeko_kolor

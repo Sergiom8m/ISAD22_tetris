@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+import sys
 
 import view
 from view.PasahitzaAldatu import PasahitzaAldatu
@@ -17,6 +17,7 @@ class Profila(object):
         super(Profila, self).__init__()
         self.erabiltzaile=erabiltzaile
         self.window = tk.Tk()
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')
         self.window['bg']=atzeko_kolor
         self.window.title("Jokalariaren Profila")

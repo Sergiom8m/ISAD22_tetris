@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import sys
 
 # https://www.youtube.com/watch?v=0WafQCaok6g ESTA ES LA QUE ESTA PUESTA, PERO NO FUNCIONA... CREO Q ES POR LAMBDA
 # https://www.youtube.com/watch?v=VmlgrrXAqb4 ESTE ES PARECIDO PERO EL LAMBDA CAMBIA....PERO TAMPOCO VA
@@ -13,6 +14,7 @@ class ErabiltzaileakEzabatu(object):
     def __init__(self):
         super(ErabiltzaileakEzabatu, self).__init__()
         self.window = tk.Tk()
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.title("ERABILTZAILEAK EZABATU")
         self.window.geometry('400x400')
         self.window.resizable(False, False)

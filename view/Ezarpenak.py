@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 
 import view
 from view.JokatuLehioa import JokatuLehioa, TableroaPanela
@@ -15,6 +16,7 @@ class Ezarpenak(object):
         super(Ezarpenak, self).__init__()
         self.erabiltzaile=erabiltzaile
         self.window = tk.Tk()
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')
         self.window.title("Tetris Jokoa")
         self.window['bg']=atzeko_kolor

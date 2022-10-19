@@ -2,7 +2,7 @@ import random
 import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
-from decimal import *
+import sys
 
 abiadura = 1
 tamaina2 = 2
@@ -15,6 +15,7 @@ class JokatuLehioa(object):
 		self.abiadura = abiadura_param
 		self.tamaina = tamaina_param
 		self.window = tk.Tk()
+		self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
 		leihoTamaina = (str(self.tamaina * 27) + "x" + str(self.tamaina * 45))
 		self.window.geometry(leihoTamaina)
 		self.window.title("Tetris Jokoa")
@@ -22,8 +23,6 @@ class JokatuLehioa(object):
 		global tamaina2
 		abiadura = self.abiadura
 		tamaina2 = self.tamaina
-		print(abiadura)
-		print(tamaina2)
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()

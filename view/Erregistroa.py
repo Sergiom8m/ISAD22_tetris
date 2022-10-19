@@ -2,6 +2,7 @@
 
 import tkinter as tk
 import sqlite3
+import sys
 
 import view
 from view.Profila import Profila
@@ -18,6 +19,7 @@ class Erregistroa(object):
     def __init__(self):
         super(Erregistroa, self).__init__()
         self.window = tk.Tk()
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')
         self.window.title("Erregistroa")
         self.window['bg']=atzeko_kolor
@@ -81,7 +83,7 @@ class Erregistroa(object):
 
         self.window.mainloop()
 
-#PANTAILA ALDATZEKO
+    #PANTAILA ALDATZEKO
     def irten(self):
         self.window.destroy()
         view.HasierakoMenua.HasierakoMenua().__init__()
