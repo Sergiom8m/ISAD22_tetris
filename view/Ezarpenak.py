@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 
 import view
 from view.JokatuLehioa import JokatuLehioa, TableroaPanela

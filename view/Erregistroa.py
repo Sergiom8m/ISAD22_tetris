@@ -92,33 +92,40 @@ class Erregistroa(object):
     def erabiltzaileaGorde(self):
         con = sqlite3.connect("datubase.db")  # konexioa ezarri
         cur = con.cursor()
-        id=self.erabil.get()
-        galdera=self.galdera.get()
-        p1=self.pasahitz1.get()
-        p2=self.pasahitz2.get()
+        id = self.erabil.get()
+        galdera = self.galdera.get()
+        p1 = self.pasahitz1.get()
+        p2 = self.pasahitz2.get()
 
-        if ((len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0)):
-            cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa)")
-            res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-            ezDago = res.fetchone() is None
-            if (ezDago):
-                if (p1 == p2):
+        if id == "admin":
+            error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Ezin da identifikatzaile hori erabili               ',
+                             font=("Times New Roman", 12))
+            error.place(x=60, y=310)
+        else:
+            if (len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0):
+                cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa)")
+                res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
+                ezDago = res.fetchone() is None
+                if ezDago:
+                    if p1 == p2:
 
-                    cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, galdera, p1, 0))
-                    con.commit()
+                        cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, galdera, p1, 0))
+                        con.commit() # Datu basean insert-aren commit-a egiten da
 
-                    #PROFIL PANTAILARA ALDATZEKO:
-                    self.window.destroy()
-                    Profila(id).__init__()
+                        # PROFIL PANTAILARA ALDATZEKO:
+                        self.window.destroy()
+                        Profila(id).__init__()
+                    else:
+                        error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
+                                         font=("Times New Roman", 12))
+                        error.place(x=60, y=310)
                 else:
-                    error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
+                    error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
                                      font=("Times New Roman", 12))
                     error.place(x=60, y=310)
             else:
-                error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
+                error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
                                  font=("Times New Roman", 12))
                 error.place(x=60, y=310)
-        else:
-            error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
-                             font=("Times New Roman", 12))
-            error.place(x=60, y=310)
+
+
