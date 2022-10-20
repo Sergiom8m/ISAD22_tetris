@@ -42,16 +42,13 @@ class ErabiltzaileakEzabatu(object):
         # 6 add that new frame to a window in the canvas
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
-        self.erabiltzaileak_inprimatu()
-
-        self.window.mainloop()
-
-    def erabiltzaileak_inprimatu(self):
         emaitza = self.erabiltzailea_guztiak_lortu()
         for i in range(len(emaitza)):
             Label(self.marko, text=emaitza[i][0]).grid(row=i, column=0, pady=10, padx=10)
-            botoia = ttk.Button(self.marko, text="Ezabatu", command=lambda: self.erabiltzailea_ezabatu(i,emaitza))
-            botoia.grid(row=i, column=1, pady=10, padx=10)
+            Button(self.marko, text="Ezabatu", command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i, column=1, pady=10, padx=10)
+        Button(self.window, text = "Irten", width=8, font=("Times New Roman", 16), command=self.irten)
+
+        self.window.mainloop()
 
     def erabiltzailea_guztiak_lortu(self):
         con = sqlite3.connect("datubase.db")  # konexioa ezarri
@@ -67,4 +64,8 @@ class ErabiltzaileakEzabatu(object):
         cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (kontsulta[row_numb][0],))
         con.commit()
         con.close()
-        self.erabiltzaileak_inprimatu()
+        self.window.destroy()
+        ErabiltzaileakEzabatu().__init__()
+
+    def irten(self):
+        pass
