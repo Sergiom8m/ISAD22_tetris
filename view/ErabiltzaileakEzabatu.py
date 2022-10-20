@@ -3,6 +3,8 @@ from tkinter import *
 from tkinter import ttk
 import sqlite3
 import sys
+from view import Profila
+
 
 # https://www.youtube.com/watch?v=0WafQCaok6g ESTA ES LA QUE ESTA PUESTA, PERO NO FUNCIONA... CREO Q ES POR LAMBDA
 # https://www.youtube.com/watch?v=VmlgrrXAqb4 ESTE ES PARECIDO PERO EL LAMBDA CAMBIA....PERO TAMPOCO VA
@@ -43,10 +45,14 @@ class ErabiltzaileakEzabatu(object):
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
         emaitza = self.erabiltzailea_guztiak_lortu()
+        lerroKop = 0
+
+        Label(self.marko, text="Erabiltzaile izena", font="Helvetica 12 bold").grid(row=0, column=0, pady=10, padx=10)
         for i in range(len(emaitza)):
-            Label(self.marko, text=emaitza[i][0]).grid(row=i, column=0, pady=10, padx=10)
-            Button(self.marko, text="Ezabatu", command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i, column=1, pady=10, padx=10)
-        Button(self.window, text = "Irten", width=8, font=("Times New Roman", 16), command=self.irten)
+            Label(self.marko, text=emaitza[i][0]).grid(row=i+1, column=0, pady=10, padx=10)
+            Button(self.marko, text="Ezabatu", command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i+1, column=1, pady=10, padx=10)
+            lerroKop = i
+        Button(self.marko, text="Irten", width=8, font=("Times New Roman", 16), command=self.irten).grid(row=lerroKop+2, column=1, pady=10, padx=10)
 
         self.window.mainloop()
 
@@ -58,7 +64,7 @@ class ErabiltzaileakEzabatu(object):
         con.close()
         return emaitza
 
-    def erabiltzailea_ezabatu(self,row_numb,kontsulta):
+    def erabiltzailea_ezabatu(self, row_numb, kontsulta):
         con = sqlite3.connect("datubase.db")  # konexioa ezarri
         cur = con.cursor()
         cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (kontsulta[row_numb][0],))
@@ -68,4 +74,5 @@ class ErabiltzaileakEzabatu(object):
         ErabiltzaileakEzabatu().__init__()
 
     def irten(self):
-        pass
+        self.window.destroy()
+        Profila.Profila("admin").__init__("admin")
