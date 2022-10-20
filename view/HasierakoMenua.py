@@ -21,38 +21,35 @@ class HasierakoMenua(object):
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20))
-        separador.pack()
+        # Separador
+        tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20)).pack()
 
-        izenburua = tk.Label(self.window, bg=atzeko_kolor, text='TETRIS', font=("Times New Roman", 35))
-        izenburua.pack()
+        # Izenburua
+        tk.Label(self.window, bg=atzeko_kolor, text='TETRIS', font=("Times New Roman", 35)).pack()
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20))
-        separador.pack()
+        # Separador
+        tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20)).pack()
 
-        buttonPartidaBerria = tk.Button(self.window, bg=botoi_kolor, text="Partida berria hasi", width=30,
-                                        command=self.pantailaPartidaBerria)
-        buttonPartidaBerria.pack(ipadx=10, ipady=10)
+        # "Partida Berria" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Partida berria hasi", width=30, command=self.pantailaPartidaBerria).pack(ipadx=10, ipady=10)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
-        separador.pack()
+        # Seprador
+        tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2)).pack()
 
-        buttonIdentifikatu = tk.Button(self.window, bg=botoi_kolor, text="Identifikatu", width=30,
-                                       command=self.pantailaIdentifikatu)
-        buttonIdentifikatu.pack(ipadx=10, ipady=10)
+        # "Identifikatu" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Identifikatu", width=30, command=self.pantailaIdentifikatu).pack(ipadx=10, ipady=10)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
-        separador.pack()
+        # Separador
+        tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2)).pack()
 
-        buttonErregistratu = tk.Button(self.window, bg=botoi_kolor, text="Erregistratu", width=30,
-                                       command=self.pantailaErregistratu)
-        buttonErregistratu.pack(ipadx=10, ipady=10)
+        # "Erregistratu" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Erregistratu", width=30, command=self.pantailaErregistratu).pack(ipadx=10, ipady=10)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20))
-        separador.pack()
+        # Separador
+        tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20)).pack()
 
-        buttonIrten = tk.Button(self.window, bg=botoi_kolor, text="Irten", command=self.jokoaAmaitu)
-        buttonIrten.pack(ipadx=10, ipady=10)
+        # "Irten" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Irten", command=self.jokoaAmaitu).pack(ipadx=10, ipady=10)
 
         self.window.mainloop()
 
