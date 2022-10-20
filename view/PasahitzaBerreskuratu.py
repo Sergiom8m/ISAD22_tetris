@@ -5,7 +5,7 @@ import sys
 import view
 
 botoi_kolor = "#ffffff"
-atzeko_kolor = "khaki"
+atzeko_kolor = "#7ec0ee"
 
 class PasahitzaBerreskuratu(object):
 

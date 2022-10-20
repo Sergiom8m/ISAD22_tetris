@@ -8,7 +8,7 @@ from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
 
 # Koloreak
 botoi_kolor = "#ffffff"
-atzeko_kolor = "PaleGreen"
+atzeko_kolor = "#7ec0ee"
 
 
 class Identifikazioa(object):

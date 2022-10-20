@@ -7,7 +7,7 @@ from decimal import *
 
 #Koloreak
 botoi_kolor = "#ffffff"
-atzeko_kolor = "plum1"
+atzeko_kolor = "#7ec0ee"
 
 class Ezarpenak(object):
 
@@ -41,14 +41,10 @@ class Ezarpenak(object):
         self.opcion = tk.IntVar()
         self.opcion.set(value=1)
 
-        self.a1 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion, value=1)
-        self.a1.place(x=50, y=150)
-        self.a2 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion, value=2)
-        self.a2.place(x=130, y=150)
-        self.a3 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Zaila", variable=self.opcion, value=3)
-        self.a3.place(x=210, y=150)
-        self.a4 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion, value=4)
-        self.a4.place(x=280, y=150)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion, value=1).place(x=50, y=150)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion, value=2).place(x=130, y=150)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Zaila", variable=self.opcion, value=3).place(x=210, y=150)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion, value=4).place(x=280, y=150)
 
         titulo_tamaina = tk.Label(self.window, bg=atzeko_kolor, text="Tamaina:", font=("Calibri", 14))
         titulo_tamaina.place(x=60, y=190)
@@ -56,14 +52,10 @@ class Ezarpenak(object):
         self.opcion2 = tk.IntVar()
         self.opcion2.set(value=1)
 
-        self.t1 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion2, value=1)
-        self.t1.place(x=50, y=230)
-        self.t2 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion2, value=2)
-        self.t2.place(x=130, y=230)
-        self.t3 = tk.Radiobutton(self.window,  bg=atzeko_kolor,text="Zaila", variable=self.opcion2, value=3)
-        self.t3.place(x=210, y=230)
-        self.t4 = tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion2, value=4)
-        self.t4.place(x=280, y=230)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Erraza", variable=self.opcion2, value=1).place(x=50, y=230)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Ertaina", variable=self.opcion2, value=2).place(x=130, y=230)
+        tk.Radiobutton(self.window,  bg=atzeko_kolor,text="Zaila", variable=self.opcion2, value=3).place(x=210, y=230)
+        tk.Radiobutton(self.window, bg=atzeko_kolor, text="Oso zaila", variable=self.opcion2, value=4).place(x=280, y=230)
 
         buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=60, y=300)

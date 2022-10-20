@@ -18,7 +18,13 @@ class JokatuLehioa(object):
 		self.abiadura = abiadura_param
 		self.tamaina = tamaina_param
 		self.window = tk.Tk()
-		self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
+		# Irudia gehitu
+		bg = PhotoImage(file="Irudiak/fondo.png", width=3000, height=3000)
+		self.argazkia= Label(self.window, image=bg, padx=0, pady=0, width=3000, height=3000)
+
+
+		# "X" botoia erabiltzean programa gelditzea ahalbidetzen du
+		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
 		leihoTamaina = (str(self.tamaina * 27) + "x" + str(self.tamaina * 45))
 		self.window.geometry(leihoTamaina)
 		self.window.title("Tetris Jokoa")
@@ -27,18 +33,20 @@ class JokatuLehioa(object):
 		abiadura = self.abiadura
 		tamaina2 = self.tamaina
 
-		button = tk.Button(self.window, text="Partida hasi")
+		button = tk.Button(self.window, text="Partida hasi", bg="#ffffff")
 		button.pack()
 
 		puntuazioa = tk.StringVar()
 		puntuazioa.set("Puntuazioa: 0")
 
-		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa)
+		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
 		puntuazioalabel.pack()
 
 		canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa)
 		button.configure(command=canvas.jolastu)
 		canvas.pack()
+		self.argazkia.lower(belowThis=None)
+		self.argazkia.place(x=0, y=0)
 		self.window.bind("<Up>", canvas.joku_kontrola)
 		self.window.bind("<Down>", canvas.joku_kontrola)
 		self.window.bind("<Right>", canvas.joku_kontrola)
@@ -55,8 +63,8 @@ class TableroaPanela(tk.Frame):
 		global abiadura
 
 		# Irudia gehitu
-		# bg = PhotoImage(file="Irudiak/fonfo.png")
-		# self.bg = bg
+		bg = PhotoImage(file="Irudiak/fondo.png")
+
 
 		# Canvas sortu eta bere ezaugarriak gehitu
 		self.canvas = tk.Canvas(
@@ -65,9 +73,6 @@ class TableroaPanela(tk.Frame):
 			bg='#eee', borderwidth=0, highlightthickness=0
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
-
-		#Irudia jarri
-		# self.canvas.create_image((0, 0), image=self.bg, anchor="nw")
 
 		self.tab = Tableroa(tamaina)
 		self.jokatzen = None

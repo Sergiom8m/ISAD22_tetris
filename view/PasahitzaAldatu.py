@@ -6,7 +6,7 @@ import view
 
 #Koloreak
 botoi_kolor = "#ffffff"
-atzeko_kolor = "PaleTurquoise2"
+atzeko_kolor = "#7ec0ee"
 
 class PasahitzaAldatu(object):
 
@@ -61,7 +61,7 @@ class PasahitzaAldatu(object):
     #PANTAILETAN MUGITZEKO
     def irten(self):
         self.window.destroy()
-        view.Profila.Profila().__init__()
+        view.Profila.Profila(self.erabiltzaile).__init__()
     #DATU BASEAREKIN KONEKTATZEKO METODOA:
 
     def aldatuta(self):

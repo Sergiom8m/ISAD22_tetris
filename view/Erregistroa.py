@@ -10,7 +10,7 @@ from view.Profila import Profila
 
 # Koloreak
 botoi_kolor = "#ffffff"
-atzeko_kolor = "PaleGreen"
+atzeko_kolor = "#7ec0ee"
 
 
 

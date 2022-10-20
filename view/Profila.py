@@ -9,7 +9,7 @@ from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 
 #Koloreak
 botoi_kolor = "#ffffff"
-atzeko_kolor = "khaki"
+atzeko_kolor = "#7ec0ee"
 
 class Profila(object):
 
@@ -69,7 +69,6 @@ class Profila(object):
     #BESTE PANTAILETARA JOTZEKO METODOAK
     def pasahitzaAldatu(self):
         i=self.erabiltzaile
-        print(i)
         self.window.destroy()
         PasahitzaAldatu(i).__init__()
 
