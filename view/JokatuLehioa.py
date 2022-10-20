@@ -33,7 +33,7 @@ class JokatuLehioa(object):
 		abiadura = self.abiadura
 		tamaina2 = self.tamaina
 
-		button = tk.Button(self.window, text="Partida hasi", bg="#ffffff")
+		button = tk.Button(self.window, cursor="hand2", text="Partida hasi", bg="#ffffff")
 		button.pack()
 
 		puntuazioa = tk.StringVar()

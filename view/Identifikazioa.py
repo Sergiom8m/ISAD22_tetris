@@ -50,14 +50,14 @@ class Identifikazioa(object):
         self.pasahitza.place(x=70, y=200)
 
         # "Pasahitza berreskuratu" botoia
-        tk.Button(self.window, bg=botoi_kolor, text="Pasahitza berreskuratu", font=("Times New Roman", 16),
+        tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Pasahitza berreskuratu", font=("Times New Roman", 16),
                             command=self.identifik_berresk).place(x=90, y=250)
 
         # "Irten" botoia
-        tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16),
+        tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16),
                                 command=self.irten).place(x=70, y=350)
 
-        buttonerr = tk.Button(self.window, bg=botoi_kolor, text="Sartu", width=8, font=("Times New Roman", 16),
+        buttonerr = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Sartu", width=8, font=("Times New Roman", 16),
                               command=self.identifik_erregis)
         buttonerr.place(x=220, y=350)
 
