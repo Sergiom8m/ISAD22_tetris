@@ -18,7 +18,7 @@ class ErabiltzaileakEzabatu(object):
         super(ErabiltzaileakEzabatu, self).__init__()
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
-        self.window.title("ERABILTZAILEAK EZABATU")
+        self.window.title("Erabiltzaileak Ezabatu")
         self.window.geometry('400x400')
         self.window.resizable(False, False)
 

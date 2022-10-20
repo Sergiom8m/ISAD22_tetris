@@ -1,5 +1,7 @@
 import random
 import tkinter as tk
+
+import view
 from model.Tableroa import Tableroa
 from model.Piezak import *
 import sys
@@ -13,21 +15,23 @@ tamaina2 = 2
 class JokatuLehioa(object):
 	"""docstring for JokatuLeioa"""
 
-	def __init__(self, abiadura_param, tamaina_param):
+
+	def __init__(self, abiadura_param, tamaina_param, erab):
 		super(JokatuLehioa, self).__init__()
 		self.abiadura = abiadura_param
 		self.tamaina = tamaina_param
+		self.erabiltzaile=erab
 		self.window = tk.Tk()
 		# Irudia gehitu
-		bg = PhotoImage(file="Irudiak/fondo.png", width=3000, height=3000)
-		self.argazkia= Label(self.window, image=bg, padx=0, pady=0, width=3000, height=3000)
-
+		bg = PhotoImage(file="Irudiak/fondo.png", width=(self.tamaina * 27), height=(self.tamaina * 45))
+		self.argazkia= Label(self.window, image=bg, padx=0, pady=0, bd=1)
 
 		# "X" botoia erabiltzean programa gelditzea ahalbidetzen du
 		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
 		leihoTamaina = (str(self.tamaina * 27) + "x" + str(self.tamaina * 45))
 		self.window.geometry(leihoTamaina)
 		self.window.title("Tetris Jokoa")
+		#self.window.resizable(False,False)
 		global abiadura
 		global tamaina2
 		abiadura = self.abiadura
@@ -45,6 +49,8 @@ class JokatuLehioa(object):
 		canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa)
 		button.configure(command=canvas.jolastu)
 		canvas.pack()
+		Button(self.window, text="Irten", bg="#ffffff", command=self.irten).pack()
+		#self.argazkia.pack_configure(expand=YES, fill=BOTH)
 		self.argazkia.lower(belowThis=None)
 		self.argazkia.place(x=0, y=0)
 		self.window.bind("<Up>", canvas.joku_kontrola)
@@ -53,6 +59,11 @@ class JokatuLehioa(object):
 		self.window.bind("<Left>", canvas.joku_kontrola)
 
 		self.window.mainloop()
+
+	# Irtetzeko metodoa:
+	def irten(self):
+		self.window.destroy()
+		view.Ezarpenak.Ezarpenak(self.erabiltzaile).__init__()
 
 class TableroaPanela(tk.Frame):
 	def __init__(self, tamaina, gelazka_tamaina=20,puntuazioalabel=None, master=None):
@@ -147,3 +158,5 @@ class TableroaPanela(tk.Frame):
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
 		self.jokatzen = self.after(abiadura, self.pausu_bat)
+
+

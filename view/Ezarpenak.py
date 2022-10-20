@@ -92,4 +92,4 @@ class Ezarpenak(object):
         elif (self.opcion2.get() == 3): tamaina = 40
         elif (self.opcion2.get() == 4): tamaina = 50
 
-        JokatuLehioa(abiadura, tamaina).__init__()
+        JokatuLehioa(abiadura, tamaina, self.erabiltzaile).__init__()
