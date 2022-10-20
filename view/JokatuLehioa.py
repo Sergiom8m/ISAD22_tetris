@@ -3,6 +3,9 @@ import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
 import sys
+import Irudiak
+from tkinter import *
+from decimal import *
 
 abiadura = 1
 tamaina2 = 2
@@ -51,12 +54,20 @@ class TableroaPanela(tk.Frame):
 		self.gelazka_tamaina = gelazka_tamaina
 		global abiadura
 
+		# Irudia gehitu
+		# bg = PhotoImage(file="Irudiak/fonfo.png")
+		# self.bg = bg
+
+		# Canvas sortu eta bere ezaugarriak gehitu
 		self.canvas = tk.Canvas(
 			width=self.tamaina[0]  * self.gelazka_tamaina+1,
 			height=self.tamaina[1] * self.gelazka_tamaina+1,
 			bg='#eee', borderwidth=0, highlightthickness=0
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
+
+		#Irudia jarri
+		# self.canvas.create_image((0, 0), image=self.bg, anchor="nw")
 
 		self.tab = Tableroa(tamaina)
 		self.jokatzen = None
