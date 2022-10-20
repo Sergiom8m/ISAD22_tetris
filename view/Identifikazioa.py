@@ -23,40 +23,39 @@ class Identifikazioa(object):
         self.window.resizable(False, False)
 
         espacio = tk.Label(self.window, bg=atzeko_kolor, text="")
-        izenburua = tk.Label(self.window, bg=atzeko_kolor, text='IDENTIFIKAZIOA', font=("Times New Roman", 25))
-        izenburua.pack()
+
+        # Izenburua
+        tk.Label(self.window, bg=atzeko_kolor, text='IDENTIFIKAZIOA', font=("Times New Roman", 25)).pack()
 
         espacio.pack()
 
-        azpiIzenb = tk.Label(self.window, bg=atzeko_kolor, text='Mesedez, zure burua identifikatu', font=("Calibri"))
-        azpiIzenb.pack()
+        # Azpi-izenburua
+        tk.Label(self.window, bg=atzeko_kolor, text='Mesedez, zure burua identifikatu', font=("Calibri")).pack()
 
         espacio.pack()
 
-        erab = tk.Label(self.window, bg=atzeko_kolor, text='Erabiltzailea: ', font=("Times New Roman", 16))
-        erab.place(x=70, y=100)
+        # "Erabiltzaile" label
+        tk.Label(self.window, bg=atzeko_kolor, text='Erabiltzailea: ', font=("Times New Roman", 16)).place(x=70, y=100)
 
         self.erabiltzaile = tk.Entry(self.window, bg=botoi_kolor, justify=tk.LEFT, width=23,
                                      textvariable="Erabiltzailea",
                                      font=("Times New Roman", 16))
         self.erabiltzaile.place(x=70, y=130)
 
-        passwd = tk.Label(self.window, bg=atzeko_kolor, text='Pasahitza: ', font=("Times New Roman", 16))
-        passwd.place(x=70, y=170)
+        # "Password" label
+        tk.Label(self.window, bg=atzeko_kolor, text='Pasahitza: ', font=("Times New Roman", 16)).place(x=70, y=170)
 
         self.pasahitza = tk.Entry(self.window, bg=botoi_kolor, justify=tk.LEFT, width=23, textvariable="Pasahitza",
                                   font=("Times New Roman", 16))
         self.pasahitza.place(x=70, y=200)
 
-        buttonb = tk.Button(self.window, bg=botoi_kolor, text="Pasahitza berreskuratu", font=("Times New Roman", 16),
-                            command=self.identifik_berresk)
-        buttonb.place(x=90, y=250)
-        buttonb.bind("<Button-1>", )
+        # "Pasahitza berreskuratu" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Pasahitza berreskuratu", font=("Times New Roman", 16),
+                            command=self.identifik_berresk).place(x=90, y=250)
 
-        buttonirten = tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16),
-                                command=self.irten)
-        buttonirten.place(x=70, y=350)
-        # buttonirten.bind("<Button-1>", self.identifik_hasiera)
+        # "Irten" botoia
+        tk.Button(self.window, bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16),
+                                command=self.irten).place(x=70, y=350)
 
         buttonerr = tk.Button(self.window, bg=botoi_kolor, text="Sartu", width=8, font=("Times New Roman", 16),
                               command=self.identifik_erregis)
