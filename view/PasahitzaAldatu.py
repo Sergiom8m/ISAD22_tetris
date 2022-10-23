@@ -50,9 +50,9 @@ class PasahitzaAldatu(object):
                                    font=("Times New Roman", 16))
         self.galdera.place(x=70, y=270)
 
-        buttonirten = tk.Button(self.window,bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
+        buttonirten = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=70, y=310)
-        buttonados = tk.Button(self.window, bg=botoi_kolor, text="Ados", width=8, font=("Calibri"), command=self.aldatuta)
+        buttonados = tk.Button(self.window, bg=botoi_kolor, text="Ados", cursor="hand2", width=8, font=("Calibri"), command=self.aldatuta)
         buttonados.place(x=220, y=310)
 
 

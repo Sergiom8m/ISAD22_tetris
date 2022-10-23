@@ -50,11 +50,11 @@ class ErabiltzaileakEzabatu(object):
         Label(self.marko, text="Datu baseko erabiltzaileak:", font="Helvetica 12 bold", bg=atzeko_kolor).grid(row=0, column=0, pady=10, padx=10)
         for i in range(len(emaitza)):
             Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+1, column=0, pady=10, padx=10)
-            Button(self.marko, text="Ezabatu", bg=botoi_kolor, command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i+1, column=1, pady=10, padx=10)
+            Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i+1, column=1, pady=10, padx=10)
             lerroKop = i
         if len(emaitza) == 0:
             Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop+1,column=0,pady=10, padx=10)
-        Button(self.marko, text="Irten", width=8, font=("Times New Roman", 16), bg=botoi_kolor ,command=self.irten).grid(row=lerroKop+3, column=1, pady=10, padx=10)
+        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor ,command=self.irten).grid(row=lerroKop+3, column=1, pady=10, padx=10)
 
         self.window.mainloop()
 

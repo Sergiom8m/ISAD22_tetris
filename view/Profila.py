@@ -35,14 +35,14 @@ class Profila(object):
 
         separador.pack()
 
-        button = tk.Button(self.window,bg=botoi_kolor, text="Partida berria hasi", width=30, command=self.partidaHasi)
+        button = tk.Button(self.window,bg=botoi_kolor, text="Partida berria hasi", cursor="hand2", width=30, command=self.partidaHasi)
         button.pack(ipadx=10, ipady=10)
 
         separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
-        button = tk.Button(self.window,bg=botoi_kolor, text="Zure pasahitza aldatu", width=30, command=self.pasahitzaAldatu)
+        button = tk.Button(self.window,bg=botoi_kolor, text="Zure pasahitza aldatu", cursor="hand2", width=30, command=self.pasahitzaAldatu)
         button.pack(ipadx=10, ipady=10)
 
         separador = tk.Label(self.window,  bg=atzeko_kolor, text='       ', font=("Calibri", 2))
@@ -50,17 +50,17 @@ class Profila(object):
         separador.pack()
 
         if(self.erabiltzaile=="admin"):
-            buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", width=30, command=self.erabiltzaileakEzabatu)
+            buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
         else:
-            buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", width=30, state="disabled")
+            buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, state="disabled")
             buttonBerezi.pack(ipadx=10, ipady=10)
 
         separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 25))
 
         separador.pack()
 
-        button = tk.Button(self.window,bg=botoi_kolor, text="Irten", command=self.irten)
+        button = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", command=self.irten)
         button.pack(ipadx=10, ipady=10)
 
 
