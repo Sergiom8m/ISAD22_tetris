@@ -23,8 +23,8 @@ class JokatuLehioa(object):
 		self.erabiltzaile=erab
 		self.window = tk.Tk()
 		# Irudia gehitu
-		bg = PhotoImage(file="Irudiak/fondo.png", width=(self.tamaina * 27), height=(self.tamaina * 45))
-		self.argazkia= Label(self.window, image=bg, padx=0, pady=0, bd=1)
+		# bg = PhotoImage(file="Irudiak/fondo.png", width=(self.tamaina * 27), height=(self.tamaina * 45))
+		# self.argazkia= Label(self.window, image=bg, padx=0, pady=0, bd=1)
 
 		# "X" botoia erabiltzean programa gelditzea ahalbidetzen du
 		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
@@ -51,8 +51,8 @@ class JokatuLehioa(object):
 		canvas.pack()
 		Button(self.window, text="Irten", bg="#ffffff", command=self.irten).pack()
 		#self.argazkia.pack_configure(expand=YES, fill=BOTH)
-		self.argazkia.lower(belowThis=None)
-		self.argazkia.place(x=0, y=0)
+		# self.argazkia.lower(belowThis=None)
+		# self.argazkia.place(x=0, y=0)
 		self.window.bind("<Up>", canvas.joku_kontrola)
 		self.window.bind("<Down>", canvas.joku_kontrola)
 		self.window.bind("<Right>", canvas.joku_kontrola)
