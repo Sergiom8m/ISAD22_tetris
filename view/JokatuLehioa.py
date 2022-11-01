@@ -28,7 +28,7 @@ class JokatuLehioa(object):
 
 		# "X" botoia erabiltzean programa gelditzea ahalbidetzen du
 		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
-		leihoTamaina = (str(self.tamaina * 27) + "x" + str(self.tamaina * 45))
+		leihoTamaina = (str(self.tamaina * 27) + "x" + "895")
 		self.window.geometry(leihoTamaina)
 		self.window.title("Tetris Jokoa")
 		#self.window.resizable(False,False)
