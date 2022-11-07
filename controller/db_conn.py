@@ -13,8 +13,15 @@ class DbConn(object):
             "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa, partida)")
 
         # "admin" erabiltzailea sortu:
-        self.cur.execute("INSERT INTO JOKALARIAK VALUES (admin, XXX, 123, 0, #)")
-        self.con.commit()
+        erabiltzaile_izena = "admin"
+        query = self.cur.execute("SELECT * FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile_izena,))
+        if query.fetchone() is None:
+            galdera = "XXX"
+            pasahitza = "123"
+            puntuazioa = "0"
+            partida = "#"
+            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?)", (erabiltzaile_izena, galdera, pasahitza, puntuazioa, partida))
+            self.con.commit()
 
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))

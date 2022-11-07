@@ -93,28 +93,23 @@ class Erregistroa(object):
         p1 = self.pasahitz1.get()
         p2 = self.pasahitz2.get()
 
-        if id == "admin":
-            error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Ezin da identifikatzaile hori erabili               ',
-                             font=("Times New Roman", 12))
-            error.place(x=60, y=310)
-        else:
-            if (len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0):
-                erabiltzailea = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
-                if erabiltzailea is None:
-                    if p1 == p2:
-                        DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, p1, 0, "#")
-                        # PROFIL PANTAILARA ALDATZEKO:
-                        self.window.destroy()
-                        Profila(id).__init__()
-                    else:
-                        error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
-                                         font=("Times New Roman", 12))
-                        error.place(x=60, y=310)
+        if (len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0):
+            erabiltzailea = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
+            if erabiltzailea is None:
+                if p1 == p2:
+                    DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, p1, 0, "#")
+                    # PROFIL PANTAILARA ALDATZEKO:
+                    self.window.destroy()
+                    Profila(id).__init__()
                 else:
-                    error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
+                    error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
                                      font=("Times New Roman", 12))
                     error.place(x=60, y=310)
             else:
-                error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
+                error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
                                  font=("Times New Roman", 12))
                 error.place(x=60, y=310)
+        else:
+            error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
+                             font=("Times New Roman", 12))
+            error.place(x=60, y=310)

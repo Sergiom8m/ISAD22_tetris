@@ -69,27 +69,22 @@ class Identifikazioa(object):
         pasahitza = self.pasahitza.get()
 
         if (len(id) != 0) & (len(pasahitza) != 0):
-            if id == "admin" and pasahitza == "123":
-                # PROFIL PANTAILARA JOTZEKO
-                self.window.destroy()
-                Profila(id).__init__(id)
+            db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
+            if db_pasahitza is None:
+                error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
+                                 text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
+                error.place(x=70, y=300)
             else:
                 db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
-                if db_pasahitza is None:
+                if pasahitza != db_pasahitza:
                     error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
-                                     text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
+                                 text='Pasahitza ez du koinziditzen                ',
+                                 font=("Times New Roman", 16))
                     error.place(x=70, y=300)
                 else:
-                    db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
-                    if pasahitza != db_pasahitza:
-                        error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
-                                     text='Pasahitza ez du koinziditzen                ',
-                                     font=("Times New Roman", 16))
-                        error.place(x=70, y=300)
-                    else:
-                        # PROFIL PANTAILARA JOTZEKO
-                        self.window.destroy()
-                        Profila(id).__init__(id)
+                    # PROFIL PANTAILARA JOTZEKO
+                    self.window.destroy()
+                    Profila(id).__init__(id)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                  ',
                              font=("Times New Roman", 16))
