@@ -17,17 +17,13 @@ tamaina2 = 2
 class JokatuLehioa(object):
     """docstring for JokatuLeioa"""
 
-    def __init__(self, abiadura_param, tamaina_param, erab):
+    def __init__(self, abiadura_param, tamaina_param, erab, puntuazioa_param, partida):
         super(JokatuLehioa, self).__init__()
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
         self.erabiltzaile = erab
         self.window = tk.Tk()
-        # Irudia gehitu
-        # bg = PhotoImage(file="Irudiak/fondo.png", width=(self.tamaina * 27), height=(self.tamaina * 45))
-        # self.argazkia= Label(self.window, image=bg, padx=0, pady=0, bd=1)
 
-        # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         leihoTamaina = (str(self.tamaina * 27) + "x" + "895")
         self.window.geometry(leihoTamaina)
@@ -42,12 +38,12 @@ class JokatuLehioa(object):
         button.pack()
 
         puntuazioa = tk.StringVar()
-        puntuazioa.set("Puntuazioa: 0")
+        puntuazioa.set(f"Puntuazioa: {puntuazioa_param}")
 
         puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
         puntuazioalabel.pack()
 
-        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa)
+        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa, partida=partida)
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
         if self.erabiltzaile is not None:
@@ -85,11 +81,13 @@ class JokatuLehioa(object):
         self.window.destroy()
         view.Ezarpenak.Ezarpenak(self.erabiltzaile).__init__()
 
+
 class TableroaPanela(tk.Frame):
-    def __init__(self, tamaina, gelazka_tamaina=20, puntuazioalabel=None, master=None):
+    def __init__(self, tamaina, gelazka_tamaina=20, puntuazioalabel=None, master=None, partida=None):
         tk.Frame.__init__(self, master)
         self.puntuazio_panela = puntuazioalabel
         self.tamaina = tamaina
+        self.partida = partida
         self.gelazka_tamaina = gelazka_tamaina
         global abiadura
 

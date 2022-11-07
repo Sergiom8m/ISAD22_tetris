@@ -34,4 +34,11 @@ class DbConn(object):
         self.cur.execute("UPDATE JOKALARIAK SET partida=(?), puntuazioa=(?) WHERE erabiltzailea=(?)", (partida, puntuazioa, id_erabiltzaile))
         self.con.commit()
 
+    def partida_kargatuta(self, id_erabiltzaile):
+        res = self.cur.execute("SELECT partida FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
+        return res.fetchone()[0]
+
+    def puntuazioa_lortu(self, id_erabiltzaile):
+        res = self.cur.execute("SELECT puntuazioa FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
+        return res.fetchone()[0]
 

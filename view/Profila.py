@@ -2,9 +2,11 @@ import tkinter as tk
 import sys
 
 import view
+from view.JokatuLehioa import JokatuLehioa
 from view.PasahitzaAldatu import PasahitzaAldatu
 from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
+from controller.db_conn import DbConn
 
 
 #Koloreak
@@ -49,6 +51,16 @@ class Profila(object):
 
         separador.pack()
 
+        self.erantzuna =  DbConn.partida_kargatuta(DbConn(), self.erabiltzaile)
+
+        if  self.erantzuna == "#":
+            button = tk.Button(self.window,bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, state="disabled")
+            button.pack(ipadx=10, ipady=10)
+
+        else:
+            button = tk.Button(self.window, bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, command=self.partidaKargatu)
+            button.pack(ipadx=10, ipady=10)
+
         if(self.erabiltzaile=="admin"):
             buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
@@ -82,3 +94,11 @@ class Profila(object):
     def irten(self):
         self.window.destroy()
         view.HasierakoMenua.HasierakoMenua().__init__()
+
+    def partidaKargatu(self):
+
+        self.puntuazioa = DbConn.puntuazioa_lortu(DbConn(), self.erabiltzaile)
+        #JokatuLehioa(abiadura, tamaina, self.erabiltzaile, self.puntuazioa, self.erantzuna).__init__()
+        #FALTA GUARDAR EN LA DB LAS EZARPENAK DE LA PARTIDA ADEMAS DE LA PUNTUACION Y LA POSICION DE LAS PIEZAS.
+
+
