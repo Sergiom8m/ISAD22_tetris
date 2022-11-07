@@ -1,12 +1,11 @@
 #   ERREGISTROAREN INTERFAZEA   #
 
 import tkinter as tk
-import sqlite3
 import sys
 
 import view
 from view.Profila import Profila
-
+from controller.db_conn import DbConn
 
 # Koloreak
 botoi_kolor = "#ffffff"
@@ -88,12 +87,7 @@ class Erregistroa(object):
         self.window.destroy()
         view.HasierakoMenua.HasierakoMenua().__init__()
 
-
-    #DATUBASEARI KONEKTATZEKO METODOA
-
     def erabiltzaileaGorde(self):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
         id = self.erabil.get()
         galdera = self.galdera.get()
         p1 = self.pasahitz1.get()
@@ -105,15 +99,10 @@ class Erregistroa(object):
             error.place(x=60, y=310)
         else:
             if (len(id) != 0) & (len(galdera) != 0) & (len(p1) != 0) & (len(p2) != 0):
-                cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa)")
-                res = cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-                ezDago = res.fetchone() is None
-                if ezDago:
+                erabiltzailea = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
+                if erabiltzailea is None:
                     if p1 == p2:
-
-                        cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?)", (id, galdera, p1, 0))
-                        con.commit() # Datu basean insert-aren commit-a egiten da
-
+                        DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, p1, 0)
                         # PROFIL PANTAILARA ALDATZEKO:
                         self.window.destroy()
                         Profila(id).__init__()
@@ -129,5 +118,3 @@ class Erregistroa(object):
                 error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
                                  font=("Times New Roman", 12))
                 error.place(x=60, y=310)
-
-

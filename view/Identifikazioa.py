@@ -1,10 +1,10 @@
 import sys
 import tkinter as tk
-import sqlite3
 
 import view.HasierakoMenua
 from view.Profila import Profila
 from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
+from controller.db_conn import DbConn
 
 # Koloreak
 botoi_kolor = "#ffffff"
@@ -65,37 +65,31 @@ class Identifikazioa(object):
 
     # DATU BASEAREKIN KONEKTATZEKO:
     def identifik_erregis(self):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
         id = self.erabiltzaile.get()
-        p = self.pasahitza.get()
+        pasahitza = self.pasahitza.get()
 
-        if ((len(id) != 0) & (len(p) != 0)):
-            cur.execute("CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, pasahitza, puntuazioa)")
-            res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-            a = res.fetchone()
-            ezDago = a is None
-            if (ezDago):
-                if(id == "admin" and p == "123"):
-                    # PROFIL PANTAILARA JOTZEKO
-                    self.window.destroy()
-                    Profila(id).__init__(id)
-                else:
+        if (len(id) != 0) & (len(pasahitza) != 0):
+            if id == "admin" and pasahitza == "123":
+                # PROFIL PANTAILARA JOTZEKO
+                self.window.destroy()
+                Profila(id).__init__(id)
+            else:
+                db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
+                if db_pasahitza is None:
                     error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                      text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
                     error.place(x=70, y=300)
-            else:
-                res = cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id,))
-                res = res.fetchone()[0]
-                if (p != res):
-                    error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
+                else:
+                    db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
+                    if pasahitza != db_pasahitza:
+                        error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                      text='Pasahitza ez du koinziditzen                ',
                                      font=("Times New Roman", 16))
-                    error.place(x=70, y=300)
-                else:
-                    # PROFIL PANTAILARA JOTZEKO
-                    self.window.destroy()
-                    Profila(id).__init__(id)
+                        error.place(x=70, y=300)
+                    else:
+                        # PROFIL PANTAILARA JOTZEKO
+                        self.window.destroy()
+                        Profila(id).__init__(id)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                  ',
                              font=("Times New Roman", 16))
