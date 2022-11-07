@@ -51,9 +51,9 @@ class Profila(object):
 
         separador.pack()
 
-        self.erantzuna =  DbConn.partida_kargatuta(DbConn(), self.erabiltzaile)
+        self.erantzuna = DbConn.partida_kargatuta(DbConn(), self.erabiltzaile)
 
-        if  self.erantzuna == "#":
+        if self.erantzuna == "#":
             button = tk.Button(self.window,bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, state="disabled")
             button.pack(ipadx=10, ipady=10)
 
@@ -61,7 +61,7 @@ class Profila(object):
             button = tk.Button(self.window, bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, command=self.partidaKargatu)
             button.pack(ipadx=10, ipady=10)
 
-        if(self.erabiltzaile=="admin"):
+        if self.erabiltzaile == "admin":
             buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
         else:

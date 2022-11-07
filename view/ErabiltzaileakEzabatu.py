@@ -1,16 +1,16 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import sqlite3
 import sys
 from view import Profila
-
+from controller.db_conn import DbConn
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
 
-#Koloreak
+# Koloreak
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
+
 
 class ErabiltzaileakEzabatu(object):
 
@@ -44,34 +44,22 @@ class ErabiltzaileakEzabatu(object):
         # 6 add that new frame to a window in the canvas
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
-        emaitza = self.erabiltzailea_guztiak_lortu()
+        emaitza = DbConn.erabiltzaile_guztiak_lortu(DbConn())
         lerroKop = 0
 
         Label(self.marko, text="Datu baseko erabiltzaileak:", font="Helvetica 12 bold", bg=atzeko_kolor).grid(row=0, column=0, pady=10, padx=10)
         for i in range(len(emaitza)):
             Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+1, column=0, pady=10, padx=10)
-            Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda: self.erabiltzailea_ezabatu(i, emaitza)).grid(row=i+1, column=1, pady=10, padx=10)
+            Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda: self.erabiltzailea_ezabatu(emaitza[i][0])).grid(row=i+1, column=1, pady=10, padx=10)
             lerroKop = i
         if len(emaitza) == 0:
-            Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop+1,column=0,pady=10, padx=10)
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor ,command=self.irten).grid(row=lerroKop+3, column=1, pady=10, padx=10)
+            Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop+1, column=0, pady=10, padx=10)
+        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=1, pady=10, padx=10)
 
         self.window.mainloop()
 
-    def erabiltzailea_guztiak_lortu(self):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
-        emaitza = cur.execute("SELECT erabiltzailea FROM jokalariak").fetchall()
-        print(emaitza)
-        con.close()
-        return emaitza
-
-    def erabiltzailea_ezabatu(self, row_numb, kontsulta):
-        con = sqlite3.connect("datubase.db")  # konexioa ezarri
-        cur = con.cursor()
-        cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (kontsulta[row_numb][0],))
-        con.commit()
-        con.close()
+    def erabiltzailea_ezabatu(self, id_erabiltzaile):
+        DbConn.erabiltzaile_ezabatu(DbConn(), id_erabiltzaile)
         self.window.destroy()
         ErabiltzaileakEzabatu().__init__()
 
