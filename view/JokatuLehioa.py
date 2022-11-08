@@ -68,8 +68,7 @@ class JokatuLehioa(object):
 
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
-        gorde = "#"
-        gorde = gorde + self.tamaina + "#" + self.abiadura + "#"
+        gorde =self.tamaina + "#" + self.abiadura + "#"
         for i in range(matrizea.tamaina[1]):
             for j in range(matrizea.tamaina[0]):
 
@@ -77,7 +76,6 @@ class JokatuLehioa(object):
                     gorde = gorde + "None#"
                 else:
                     gorde = gorde + matrizea.tab[i][j] + "#"
-
         DbConn.partida_gorde(DbConn(), self.erabiltzaile, gorde, self.canvas.tab.puntuazioa)
         self.window.destroy()
         view.Ezarpenak.Ezarpenak(self.erabiltzaile).__init__()
