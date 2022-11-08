@@ -45,12 +45,7 @@ class DbConn(object):
 
     def partida_kargatuta(self, id_erabiltzaile):
         res = self.cur.execute("SELECT partida FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
-        partida = res.fetchone()
-        print(partida)
-        if partida is None:
-            return partida
-        else:
-            return partida[0]
+        return res.fetchone()[0]
 
     def puntuazioa_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT puntuazioa FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))

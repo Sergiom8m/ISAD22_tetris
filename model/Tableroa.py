@@ -5,13 +5,21 @@ class Tableroa:
 		self.tamaina = tamaina
 		self.hasieratu_tableroa()
 
-	def kargatu_partida(self, puntuazioa, partida):
-		self.puntuazioa=puntuazioa
+	def kargatu_partida(self, partida):
+		datuak = str(partida).split(sep='#')
+		self.puntuazioa = datuak.pop(0)
+		datuak.pop(0)
+		datuak.pop(0)
 		self.pieza=None
-		#TODO: LA ABIADURA TIENE QUE IR EN JOKATU LEHIOA Y PROBABLEMENTE EL TAMAINA TAMBIEN
-		datuak= str(partida).split(sep='#')
-		self.tamaina= int(datuak[0])
-		self.tab=[[None for y in range(self.tamaina[0])] for x in range(self.tamaina[1])]
+		#self.tab=[[None for y in range(self.tamaina[0])] for x in range(self.tamaina[1])]
+		for i in range(self.tamaina[1]):
+			for j in range(self.tamaina[0]):
+				unekoa = datuak.pop(0)
+				if unekoa.__eq__("None"):
+					self.tab[i][j] = None
+				else:
+					self.tab[i][j] = unekoa
+
 
 	def hasieratu_tableroa(self):
 		self.tab = [ [ None for y in range(self.tamaina[0])]for x in range(self.tamaina[1])]

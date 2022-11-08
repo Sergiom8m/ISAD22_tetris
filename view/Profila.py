@@ -97,8 +97,14 @@ class Profila(object):
 
     def partidaKargatu(self):
 
-        self.puntuazioa = DbConn.puntuazioa_lortu(DbConn(), self.erabiltzaile)
-        JokatuLehioa(None, None, self.erabiltzaile, self.puntuazioa, self.erantzuna).__init__()
+        datuak = str(self.erantzuna).split(sep='#')
+        puntuazioa = int(datuak[0])
+        tamaina = int(datuak[1])
+        abiadura = int(datuak[2])
+        datuak.pop(0)
+        datuak.pop(0)
+        datuak.pop(0)
+        JokatuLehioa(abiadura, tamaina, self.erabiltzaile, puntuazioa, self.erantzuna).__init__()
 
 
 

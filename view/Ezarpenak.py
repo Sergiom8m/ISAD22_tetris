@@ -1,6 +1,5 @@
 import tkinter as tk
 import sys
-
 import view
 from controller.db_conn import DbConn
 from view.JokatuLehioa import JokatuLehioa, TableroaPanela
@@ -93,10 +92,4 @@ class Ezarpenak(object):
         elif (self.opcion2.get() == 3): tamaina = 40
         elif (self.opcion2.get() == 4): tamaina = 50
 
-        self.puntuazioa = 0
-        self.partida = None
-
-        if self.erabiltzaile is not None:
-            self.puntuazioa =  DbConn.puntuazioa_lortu(DbConn(), self.erabiltzaile)
-
-        JokatuLehioa(abiadura, tamaina, self.erabiltzaile, self.puntuazioa, self.partida).__init__()
+        JokatuLehioa(abiadura, tamaina, self.erabiltzaile, 0, None).__init__()

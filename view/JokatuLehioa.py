@@ -68,7 +68,7 @@ class JokatuLehioa(object):
 
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
-        gorde =self.tamaina + "#" + self.abiadura + "#"
+        gorde = str(matrizea.puntuazioa) + "#" + str(tamaina2) + "#" + str(self.abiadura) + "#"
         for i in range(matrizea.tamaina[1]):
             for j in range(matrizea.tamaina[0]):
 
@@ -91,7 +91,7 @@ class TableroaPanela(tk.Frame):
         global abiadura
 
         # Irudia gehitu
-        bg = PhotoImage(file="Irudiak/fondo.png")
+        # bg = PhotoImage(file="Irudiak/fondo.png")
 
         # Canvas sortu eta bere ezaugarriak gehitu
         self.canvas = tk.Canvas(
@@ -166,7 +166,10 @@ class TableroaPanela(tk.Frame):
     def jolastu(self):
         if self.jokatzen:
             self.after_cancel(self.jokatzen)
-        self.tab.hasieratu_tableroa()
+        if self.partida is None:
+            self.tab.hasieratu_tableroa()
+        else:
+            self.tab.kargatu_partida(self.partida)
         pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
         self.tab.sartu_pieza(random.choice(pieza_posibleak)())
         self.marraztu_tableroa()
