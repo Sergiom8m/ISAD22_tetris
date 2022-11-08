@@ -69,6 +69,7 @@ class JokatuLehioa(object):
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
         gorde = "#"
+        gorde = gorde + self.tamaina + "#" + self.abiadura + "#"
         for i in range(matrizea.tamaina[1]):
             for j in range(matrizea.tamaina[0]):
 

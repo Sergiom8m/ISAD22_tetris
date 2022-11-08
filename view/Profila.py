@@ -98,7 +98,7 @@ class Profila(object):
     def partidaKargatu(self):
 
         self.puntuazioa = DbConn.puntuazioa_lortu(DbConn(), self.erabiltzaile)
-        #JokatuLehioa(abiadura, tamaina, self.erabiltzaile, self.puntuazioa, self.erantzuna).__init__()
-        #FALTA GUARDAR EN LA DB LAS EZARPENAK DE LA PARTIDA ADEMAS DE LA PUNTUACION Y LA POSICION DE LAS PIEZAS.
+        JokatuLehioa(None, None, self.erabiltzaile, self.puntuazioa, self.erantzuna).__init__()
+
 
 
