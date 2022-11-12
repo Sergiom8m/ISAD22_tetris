@@ -11,7 +11,7 @@ class Tableroa:
 		datuak.pop(0)
 		datuak.pop(0)
 		self.pieza=None
-		#self.tab=[[None for y in range(self.tamaina[0])] for x in range(self.tamaina[1])]
+		self.tab=[[None for y in range(self.tamaina[0])] for x in range(self.tamaina[1])]
 		for i in range(self.tamaina[1]):
 			for j in range(self.tamaina[0]):
 				unekoa = datuak.pop(0)
@@ -46,6 +46,7 @@ class Tableroa:
 			yb = pos[1] + self.pieza.get_y(i)
 			self.tab[xb][yb] = self.pieza.get_kolorea()
 		self.pieza = None
+		print(self.tab)
 
 	def pieza_kokatu_behean(self):
 		for i in range(1,self.tamaina[1]):

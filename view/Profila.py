@@ -25,7 +25,7 @@ class Profila(object):
         self.window.title("Jokalariaren Profila")
         self.window.resizable(False, False)
 
-        separador = tk.Label(self.window, text='       ', bg=atzeko_kolor, font=("Times New Roman", 25))
+        separador = tk.Label(self.window, text='       ', bg=atzeko_kolor, font=("Times New Roman", 20))
 
         separador.pack()
 
@@ -33,7 +33,7 @@ class Profila(object):
 
         izenburua.pack()
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 25))
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 15))
 
         separador.pack()
 
@@ -61,6 +61,9 @@ class Profila(object):
             button = tk.Button(self.window, bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, command=self.partidaKargatu)
             button.pack(ipadx=10, ipady=10)
 
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
+        separador.pack()
+
         if self.erabiltzaile == "admin":
             buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
@@ -68,8 +71,8 @@ class Profila(object):
             buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, state="disabled")
             buttonBerezi.pack(ipadx=10, ipady=10)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 25))
 
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 10))
         separador.pack()
 
         button = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", command=self.irten)
@@ -96,14 +99,11 @@ class Profila(object):
         view.HasierakoMenua.HasierakoMenua().__init__()
 
     def partidaKargatu(self):
-
+        self.window.destroy() #Por esto no funcionaba (no estaba esta linea de codigo)
         datuak = str(self.erantzuna).split(sep='#')
         puntuazioa = int(datuak[0])
         tamaina = int(datuak[1])
         abiadura = int(datuak[2])
-        datuak.pop(0)
-        datuak.pop(0)
-        datuak.pop(0)
         JokatuLehioa(abiadura, tamaina, self.erabiltzaile, puntuazioa, self.erantzuna).__init__()
 
 
