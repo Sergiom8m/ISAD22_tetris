@@ -11,7 +11,6 @@ atzeko_kolor = "#7ec0ee"
 
 class Ezarpenak(object):
 
-
     def __init__(self, erabiltzaile):
         super(Ezarpenak, self).__init__()
         self.erabiltzaile=erabiltzaile

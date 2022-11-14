@@ -4,6 +4,7 @@ import sys
 import view
 from view.PasahitzaAldatu import PasahitzaAldatu
 from view.Ezarpenak import Ezarpenak
+from view.Pertsonalizatu import Pertsonalizatu
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 
 
@@ -31,7 +32,7 @@ class Profila(object):
 
         izenburua.pack()
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 25))
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 10))
 
         separador.pack()
 
@@ -49,6 +50,13 @@ class Profila(object):
 
         separador.pack()
 
+        button = tk.Button(self.window, bg=botoi_kolor, text="Jokoa pertsonalizatu", cursor="hand2", width=30, command=self.pertsonalizatu)
+        button.pack(ipadx=10, ipady=10)
+
+        separador = tk.Label(self.window,  bg=atzeko_kolor, text='       ', font=("Calibri", 2))
+
+        separador.pack()
+
         if(self.erabiltzaile=="admin"):
             buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=10)
@@ -56,7 +64,7 @@ class Profila(object):
             buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, state="disabled")
             buttonBerezi.pack(ipadx=10, ipady=10)
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 25))
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 10))
 
         separador.pack()
 
@@ -71,6 +79,12 @@ class Profila(object):
         i=self.erabiltzaile
         self.window.destroy()
         PasahitzaAldatu(i).__init__()
+
+
+    def pertsonalizatu(self):
+        i=self.erabiltzaile
+        self.window.destroy()
+        Pertsonalizatu(i).__init__()
 
     def erabiltzaileakEzabatu(self):
         self.window.destroy()
