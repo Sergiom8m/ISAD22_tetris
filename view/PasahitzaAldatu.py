@@ -20,7 +20,7 @@ class PasahitzaAldatu(object):
         self.window.geometry('400x400')
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
-        espacio= tk.Label(self.window, bg=atzeko_kolor, text="")
+        espacio= tk.Label(self.window, bg=atzeko_kolor, text="", font=("Times New Roman", 7))
         izenburua = tk.Label(self.window, bg=atzeko_kolor, text='PASAHITZA ALDATU', font=("Times New Roman", 25))
         izenburua.pack()
 

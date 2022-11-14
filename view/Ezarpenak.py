@@ -1,7 +1,7 @@
 import tkinter as tk
 import sys
-
 import view
+from controller.db_conn import DbConn
 from view.JokatuLehioa import JokatuLehioa, TableroaPanela
 from decimal import *
 
@@ -91,4 +91,4 @@ class Ezarpenak(object):
         elif (self.opcion2.get() == 3): tamaina = 40
         elif (self.opcion2.get() == 4): tamaina = 50
 
-        JokatuLehioa(abiadura, tamaina, self.erabiltzaile).__init__()
+        JokatuLehioa(abiadura, tamaina, self.erabiltzaile, 0, None).__init__()
