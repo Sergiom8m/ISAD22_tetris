@@ -39,7 +39,6 @@ class Tableroa:
 		return True
 
 	def pieza_finkotu(self, pos):
-		print("Finkotu")
 		if not self.probatu_mugimendua(pos):
 			raise Exception("Pieza ezin da hor sartu")
 		for i in range(4):
@@ -50,7 +49,6 @@ class Tableroa:
 
 
 	def pieza_kokatu_behean(self):
-		print("Behean")
 		for i in range(1,self.tamaina[1]):
 			posizio_berria = (self.posizioa[0]+i, self.posizioa[1])
 			if not self.probatu_mugimendua(posizio_berria):
@@ -101,7 +99,6 @@ class Tableroa:
 			raise Exception("Pieza ezin da orain biratu")
 
 	def lerroa_ezabatu(self, lerro):
-		print("Ezabatu")
 		for l in range(lerro-1,0,-1):
 			for j in range(self.tamaina[0]):
 				self.tab[l+1][j] = self.tab[l][j]

@@ -77,8 +77,6 @@ class Ezarpenak(object):
     def jolastenHasi(self):
         self.window.destroy()
         abiadura = 1
-        print(self.opcion.get())
-        print(self.opcion2.get())
 
         if(self.opcion.get() == 1): abiadura = 800
         elif(self.opcion.get() == 2): abiadura = 400
