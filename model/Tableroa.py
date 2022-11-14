@@ -7,11 +7,10 @@ class Tableroa:
 
 	def kargatu_partida(self, partida):
 		datuak = str(partida).split(sep='#')
+		self.hasieratu_tableroa()
 		self.puntuazioa = datuak.pop(0)
 		datuak.pop(0)
 		datuak.pop(0)
-		self.pieza=None
-		self.tab=[[None for y in range(self.tamaina[0])] for x in range(self.tamaina[1])]
 		for i in range(self.tamaina[1]):
 			for j in range(self.tamaina[0]):
 				unekoa = datuak.pop(0)
@@ -27,6 +26,7 @@ class Tableroa:
 		self.puntuazioa = 0
 
 	def probatu_mugimendua(self, pos_berria):
+
 		for i in range(4):
 			x = pos_berria[0] + self.pieza.get_x(i)
 			y = pos_berria[1] + self.pieza.get_y(i)
@@ -39,6 +39,7 @@ class Tableroa:
 		return True
 
 	def pieza_finkotu(self, pos):
+		print("Finkotu")
 		if not self.probatu_mugimendua(pos):
 			raise Exception("Pieza ezin da hor sartu")
 		for i in range(4):
@@ -46,9 +47,10 @@ class Tableroa:
 			yb = pos[1] + self.pieza.get_y(i)
 			self.tab[xb][yb] = self.pieza.get_kolorea()
 		self.pieza = None
-		print(self.tab)
+
 
 	def pieza_kokatu_behean(self):
+		print("Behean")
 		for i in range(1,self.tamaina[1]):
 			posizio_berria = (self.posizioa[0]+i, self.posizioa[1])
 			if not self.probatu_mugimendua(posizio_berria):
@@ -99,6 +101,7 @@ class Tableroa:
 			raise Exception("Pieza ezin da orain biratu")
 
 	def lerroa_ezabatu(self, lerro):
+		print("Ezabatu")
 		for l in range(lerro-1,0,-1):
 			for j in range(self.tamaina[0]):
 				self.tab[l+1][j] = self.tab[l][j]
