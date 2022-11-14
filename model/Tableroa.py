@@ -8,7 +8,7 @@ class Tableroa:
 	def kargatu_partida(self, partida):
 		datuak = str(partida).split(sep='#')
 		self.hasieratu_tableroa()
-		self.puntuazioa = datuak.pop(0)
+		self.puntuazioa = int(datuak.pop(0))
 		datuak.pop(0)
 		datuak.pop(0)
 		for i in range(self.tamaina[1]):
