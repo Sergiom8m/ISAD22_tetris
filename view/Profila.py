@@ -6,6 +6,7 @@ from view.JokatuLehioa import JokatuLehioa
 from view.PasahitzaAldatu import PasahitzaAldatu
 from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
+from view.Pertsonalizatu import Pertsonalizatu
 from controller.db_conn import DbConn
 
 
@@ -25,7 +26,7 @@ class Profila(object):
         self.window.title("Jokalariaren Profila")
         self.window.resizable(False, False)
 
-        separador = tk.Label(self.window, text='       ', bg=atzeko_kolor, font=("Times New Roman", 20))
+        separador = tk.Label(self.window, text='       ', bg=atzeko_kolor, font=("Times New Roman", 10))
 
         separador.pack()
 
@@ -33,19 +34,19 @@ class Profila(object):
 
         izenburua.pack()
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 15))
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 8))
 
         separador.pack()
 
         button = tk.Button(self.window,bg=botoi_kolor, text="Partida berria hasi", cursor="hand2", width=30, command=self.partidaHasi)
-        button.pack(ipadx=10, ipady=10)
+        button.pack(ipadx=10, ipady=8)
 
         separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
         button = tk.Button(self.window,bg=botoi_kolor, text="Zure pasahitza aldatu", cursor="hand2", width=30, command=self.pasahitzaAldatu)
-        button.pack(ipadx=10, ipady=10)
+        button.pack(ipadx=10, ipady=8)
 
         separador = tk.Label(self.window,  bg=atzeko_kolor, text='       ', font=("Calibri", 2))
 
@@ -55,28 +56,38 @@ class Profila(object):
 
         if self.erantzuna == "#":
             button = tk.Button(self.window,bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, state="disabled")
-            button.pack(ipadx=10, ipady=10)
+            button.pack(ipadx=10, ipady=8)
 
         else:
             button = tk.Button(self.window, bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, command=self.partidaKargatu)
-            button.pack(ipadx=10, ipady=10)
+            button.pack(ipadx=10, ipady=8)
 
         separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
         separador.pack()
 
+        # Jokoa Pertsonalizatzeko
+
+        button = tk.Button(self.window, bg=botoi_kolor, text="Jokoa Pertsonalizatu", cursor="hand2", width=30,
+                           command=self.pertsonalizazioa)
+        button.pack(ipadx=10, ipady=8)
+
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 2))
+
+        separador.pack()
+
         if self.erabiltzaile == "admin":
             buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
-            buttonBerezi.pack(ipadx=10, ipady=10)
+            buttonBerezi.pack(ipadx=10, ipady=8)
         else:
             buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, state="disabled")
-            buttonBerezi.pack(ipadx=10, ipady=10)
+            buttonBerezi.pack(ipadx=10, ipady=8)
 
 
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 10))
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 6))
         separador.pack()
 
         button = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", command=self.irten)
-        button.pack(ipadx=10, ipady=10)
+        button.pack(ipadx=10, ipady=8)
 
 
         self.window.mainloop()
@@ -87,6 +98,9 @@ class Profila(object):
         self.window.destroy()
         PasahitzaAldatu(i).__init__()
 
+    def pertsonalizazioa(self):
+        self.window.destroy()
+        Pertsonalizatu(self.erabiltzaile).__init__()
     def erabiltzaileakEzabatu(self):
         self.window.destroy()
         ErabiltzaileakEzabatu().__init__()
@@ -105,6 +119,4 @@ class Profila(object):
         tamaina = int(datuak[1])
         abiadura = int(datuak[2])
         JokatuLehioa(abiadura, tamaina, self.erabiltzaile, puntuazioa, self.erantzuna).__init__()
-
-
 
