@@ -32,19 +32,19 @@ class GalderaErantzun(object):
         mezu.place(x=60, y=100)
         mezu2 = tk.Label(self.window, bg=atzeko_kolor, text=f'{g}',
                          font=("Times New Roman", 16))
-        mezu2.place(x=60, y=130)
+        mezu2.place(x=60, y=170)
 
         self.erantzuna = tk.Entry(self.window, bg=botoi_kolor, justify=tk.LEFT, width=26,
                              font=("Times New Roman", 16))
-        self.erantzuna.place(x=60, y=240)
+        self.erantzuna.place(x=60, y=200)
 
 
         buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
-        buttonirten.place(x=70, y=300)
+        buttonirten.place(x=70, y=350)
         self.berresk = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Berreskuratu", width=8,
                                  font=("Calibri"),
                                  command=self.konprobatu)
-        self.berresk.place(x=220, y=300)
+        self.berresk.place(x=220, y=350)
 
 
         self.window.mainloop()

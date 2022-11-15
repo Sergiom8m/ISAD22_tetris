@@ -33,17 +33,17 @@ class PasahitzaBerreskuratu(object):
         espacio.pack()
 
         erab = tk.Label(self.window, bg=atzeko_kolor, text='Sartu zure erabiltzailearen izena... ', font=("Times New Roman", 16))
-        erab.place(x=60, y=120)
+        erab.place(x=60, y=170)
 
         self.lehio = tk.Entry(self.window, bg=botoi_kolor, justify=tk.LEFT, width=26 ,font=("Times New Roman", 16))
-        self.lehio.place(x=60,y=150)
+        self.lehio.place(x=60,y=200)
 
 
 
         buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
-        buttonirten.place(x=70, y=300)
+        buttonirten.place(x=70, y=350)
         self.buttonados = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Ados", width=8, font=("Calibri"), command=self.berreskuratuta)
-        self.buttonados.place(x=220, y=300)
+        self.buttonados.place(x=220, y=350)
 
 
 
