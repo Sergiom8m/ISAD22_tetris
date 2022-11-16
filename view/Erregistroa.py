@@ -19,7 +19,7 @@ class Erregistroa(object):
         super(Erregistroa, self).__init__()
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
-        self.window.geometry('400x400')
+        self.window.geometry('420x420')
         self.window.title("Erregistroa")
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
@@ -39,7 +39,8 @@ class Erregistroa(object):
 
         #EGUNERAPENAK
         identifik = tk.StringVar()
-        e= tk.StringVar()
+        g= tk.StringVar()
+        eran = tk.StringVar()
         pasahitza1 = tk.StringVar()
         pasahitza2 = tk.StringVar()
 
@@ -50,35 +51,43 @@ class Erregistroa(object):
         self.erabil = tk.Entry(self.window, textvar=identifik, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
         self.erabil.place(x=60, y=90)
 
-        # Emailaren sarrera
+        # Galderaren sarrera
         b=tk.Label(self.window,bg=atzeko_kolor, text='Berreskurapen galdera sartu (pasahitzarako)', font=("Times New Roman", 12))
         b.place(x=60, y=130)
 
 
-        self.galdera = tk.Entry(self.window, textvar=e, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
+        self.galdera = tk.Entry(self.window, textvar=g, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
         self.galdera.place(x=60, y=150)
+
+        #Erantzunaren sarrera
+        mezu = tk.Label(self.window, bg=atzeko_kolor, text='Berreskurapen galderari erantzuna eman: ',
+                     font=("Times New Roman", 12))
+        mezu.place(x=60, y=190)
+
+        self.erantzuna = tk.Entry(self.window, textvar=eran, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
+        self.erantzuna.place(x=60, y=210)
 
         # Pasahitzaren sarrera
         pas1 = tk.Label(self.window,bg=atzeko_kolor, text='Pasahitza... ', font=("Times New Roman", 12))
-        pas1.place(x=60, y=190)
+        pas1.place(x=60, y=250)
 
         self.pasahitz1 = tk.Entry(self.window, textvar=pasahitza1, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
-        self.pasahitz1.place(x=60, y=210)
+        self.pasahitz1.place(x=60, y=270)
 
         pas2 = tk.Label(self.window,bg=atzeko_kolor, text='Pasahitza errepikatu... ', font=("Times New Roman", 12))
-        pas2.place(x=60, y=250)
+        pas2.place(x=60, y=310)
 
         self.pasahitz2 = tk.Entry(self.window, textvar=pasahitza2, width=32, bg=botoi_kolor, font=("Times New Roman", 14))
-        self.pasahitz2.place(x=60, y=270)
+        self.pasahitz2.place(x=60, y=330)
 
 
         # BOTOIAK
         sartu = tk.Button(self.window, text="Sartu", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14),
                           command=self.erabiltzaileaGorde)
-        sartu.place(x=240, y=350)
+        sartu.place(x=240, y=370)
 
         irten = tk.Button(self.window, text="Irten", cursor="hand2", bg=botoi_kolor, width=8, font=("Times New Roman", 14), command=self.irten)
-        irten.place(x=60, y=350)
+        irten.place(x=60, y=370)
 
         self.window.mainloop()
 
@@ -90,6 +99,7 @@ class Erregistroa(object):
     def erabiltzaileaGorde(self):
         id = self.erabil.get()
         galdera = self.galdera.get()
+        erantzuna = self.erantzuna.get()
         p1 = self.pasahitz1.get()
         p2 = self.pasahitz2.get()
 
@@ -97,7 +107,7 @@ class Erregistroa(object):
             erabiltzailea = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
             if erabiltzailea is None:
                 if p1 == p2:
-                    DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, p1, 0, "#")
+                    DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, erantzuna, p1, 0, "#")
                     # PROFIL PANTAILARA ALDATZEKO:
                     self.window.destroy()
                     Profila(id).__init__()
