@@ -36,8 +36,8 @@ class Pertsonalizatu(object):
 
         espacio.pack()
 
-        titulo_kolorea = tk.Label(self.window, bg=atzeko_kolor, text="Kolorea:", font=("Calibri", 14))
-        titulo_kolorea.place(x=60, y= 120)
+        titulo_fondo = tk.Label(self.window, bg=atzeko_kolor, text="Atzeko kolorea:", font=("Calibri", 14))
+        titulo_fondo.place(x=60, y= 120)
 
         self.opcion = tk.IntVar()
         self.opcion.set(value=1)
@@ -47,11 +47,26 @@ class Pertsonalizatu(object):
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion, value=3).place(x=210, y=150)
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion, value=4).place(x=280, y=150)
 
-        titulo_adreiluak = tk.Label(self.window, bg=atzeko_kolor, text="Adreiluak:", font=("Calibri", 10))
-        titulo_adreiluak.place(x=60, y=190)
+        titulo_botoiak = tk.Label(self.window, bg=atzeko_kolor, text="Botoien kolorea:", font=("Calibri", 14))
+        titulo_botoiak.place(x=60, y=120)
 
         self.opcion2 = tk.IntVar()
         self.opcion2.set(value=1)
+
+        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion, value=1).place(
+            x=50, y=150)
+        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion, value=2).place(
+            x=130, y=150)
+        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion, value=3).place(
+            x=210, y=150)
+        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion, value=4).place(
+            x=280, y=150)
+
+        titulo_adreiluak = tk.Label(self.window, bg=atzeko_kolor, text="Adreiluak:", font=("Calibri", 10))
+        titulo_adreiluak.place(x=60, y=190)
+
+        self.opcion3 = tk.IntVar()
+        self.opcion3.set(value=1)
 
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion2, value=1).place(x=50, y=230)
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion2, value=2).place(x=130, y=230)

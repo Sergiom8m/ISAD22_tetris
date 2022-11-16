@@ -60,3 +60,4 @@ class DbConn(object):
 
     def konexioa_itxi(self):
         self.con.close()
+
