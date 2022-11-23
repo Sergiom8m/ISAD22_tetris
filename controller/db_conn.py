@@ -8,11 +8,11 @@ class DbConn(object):
         self.con = sqlite3.connect("datubase.db")  # konexioa ezarri
         self.cur = self.con.cursor()
 
-        # Taula sortu:
+        # "JOKALARIAK" Taula sortu:
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida)")
 
-        # "admin" erabiltzailea sortu:
+        # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
         query = self.cur.execute("SELECT * FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile_izena,))
         if query.fetchone() is None:
