@@ -9,6 +9,7 @@ import Irudiak
 from tkinter import *
 from decimal import *
 from controller.db_conn import DbConn
+from controller.Soinuak import Soinuak
 
 abiadura = 1
 tamaina2 = 2
@@ -22,6 +23,7 @@ class JokatuLehioa(object):
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
         self.erabiltzaile = erab
+        Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
@@ -58,6 +60,7 @@ class JokatuLehioa(object):
 
     # Irtetzeko metodoa:
     def irten(self):
+        Soinuak.quit_music(Soinuak())
         self.window.destroy()
         if self.erabiltzaile is None:
             view.HasierakoMenua.HasierakoMenua().__init__()

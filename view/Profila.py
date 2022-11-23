@@ -18,7 +18,7 @@ class Profila(object):
 
     def __init__(self, erabiltzaile):
         super(Profila, self).__init__()
-        self.erabiltzaile=erabiltzaile
+        self.erabiltzaile = erabiltzaile
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')

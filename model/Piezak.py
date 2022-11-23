@@ -1,3 +1,5 @@
+from controller.Soinuak import Soinuak
+
 class Pieza:
 	def __init__(self, forma, kolorea):
 		self.forma = forma
@@ -16,6 +18,7 @@ class Pieza:
 		self.forma[i][1] = b
 
 	def biratuEzkerrera(self):
+		Soinuak.play_rotate(Soinuak)
 		for i in range(4):
 			aurr_x = self.get_x(i)
 			aurr_y = self.get_y(i)
@@ -24,6 +27,7 @@ class Pieza:
 			self.set_y(i, -aurr_x)
 
 	def biratuEskuinera(self):
+		Soinuak.play_rotate(Soinuak)
 		for i in range(4):
 			aurr_x = self.get_x(i)
 			aurr_y = self.get_y(i)

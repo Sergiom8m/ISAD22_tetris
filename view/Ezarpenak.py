@@ -1,9 +1,7 @@
 import tkinter as tk
 import sys
 import view
-from controller.db_conn import DbConn
-from view.JokatuLehioa import JokatuLehioa, TableroaPanela
-from decimal import *
+from view.JokatuLehioa import JokatuLehioa
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -18,7 +16,7 @@ class Ezarpenak(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')
         self.window.title("Tetris Jokoa")
-        self.window['bg']=atzeko_kolor
+        self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
 
@@ -78,15 +76,15 @@ class Ezarpenak(object):
         self.window.destroy()
         abiadura = 1
 
-        if(self.opcion.get() == 1): abiadura = 800
-        elif(self.opcion.get() == 2): abiadura = 400
-        elif(self.opcion.get() == 3): abiadura = 200
-        elif(self.opcion.get() == 4): abiadura = 100
+        if self.opcion.get() == 1: abiadura = 800
+        elif self.opcion.get() == 2: abiadura = 400
+        elif self.opcion.get() == 3: abiadura = 200
+        elif self.opcion.get() == 4: abiadura = 100
 
         tamaina = 1
-        if (self.opcion2.get() == 1): tamaina = 20
-        elif (self.opcion2.get() == 2): tamaina = 30
-        elif (self.opcion2.get() == 3): tamaina = 40
-        elif (self.opcion2.get() == 4): tamaina = 50
+        if self.opcion2.get() == 1: tamaina = 20
+        elif self.opcion2.get() == 2: tamaina = 30
+        elif self.opcion2.get() == 3: tamaina = 40
+        elif self.opcion2.get() == 4: tamaina = 50
 
         JokatuLehioa(abiadura, tamaina, self.erabiltzaile, 0, None).__init__()
