@@ -23,7 +23,8 @@ class JokatuLehioa(object):
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
         self.erabiltzaile = erab
-        Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
+        if self.erabiltzaile is not None:
+            Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
