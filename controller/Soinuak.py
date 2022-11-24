@@ -19,15 +19,16 @@ class Soinuak():
         pygame.quit()
         pygame.init()
         pygame.mixer.init()
-        if musika == "original":
-            abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Original_Tetris_Theme.wav")
-        elif musika == "99":
-            abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_99_Main_Theme.wav")
-        elif musika == "orchestra":
-            abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_Orchestra.wav")
-        elif musika == "piano":
-            abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_Piano_Version.wav")
-        pygame.mixer.Sound.play(abestia, -1)
+        if musika != "ez":
+            if musika == "original":
+                abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Original_Tetris_Theme.wav")
+            elif musika == "99":
+                abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_99_Main_Theme.wav")
+            elif musika == "orchestra":
+                abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_Orchestra.wav")
+            elif musika == "piano":
+                abestia = pygame.mixer.Sound(os.getcwd() + "/soinuak/musika/Tetris_Piano_Version.wav")
+            pygame.mixer.Sound.play(abestia, -1)
 
     def quit_music(self):
         pygame.quit()

@@ -78,16 +78,8 @@ class Pertsonalizatu(object):
         titulo_soinua = tk.Label(self.window, bg=atzeko_kolor, text="Musika:", font=("Calibri", 14))
         titulo_soinua.place(x=60, y=360)
 
-        self.musika_com_box = ttk.Combobox(self.window, state="readonly", values=["Original Theme", "99s Theme", "Orchestra Theme", "Piano Theme"])
+        self.musika_com_box = ttk.Combobox(self.window, state="readonly", values=["(Musikarik gabe)", "Original Theme", "99s Theme", "Orchestra Theme", "Piano Theme"])
         self.musika_com_box.place(x=150, y=390)
-
-        """self.opcion3 = tk.IntVar()
-        self.opcion3.set(value=1)
-
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion3, value=1).place(x=50, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion3, value=2).place(x=130, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion3, value=3).place(x=210, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion3, value=4).place(x=280, y=310)"""
 
         buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
         buttonirten.place(x=60, y=500)
@@ -149,7 +141,9 @@ class Pertsonalizatu(object):
             adreilu_kolor = "Red"
             bg = atzeko_kolor
 
-        if self.musika_com_box.get() == "Original Theme":
+        if self.musika_com_box.get() == "(Musikarik gabe)":
+            musika = "ez"
+        elif self.musika_com_box.get() == "Original Theme":
             musika = "original"
         elif self.musika_com_box.get() == "99s Theme":
             musika = "99"
