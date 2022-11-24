@@ -68,7 +68,7 @@ class JokatuLehioa(object):
             view.Profila.Profila(self.erabiltzaile).__init__()
 
     def partidaGorde(self):
-
+        Soinuak.quit_music(Soinuak())
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
         gorde = str(matrizea.puntuazioa) + "#" + str(tamaina2) + "#" + str(self.abiadura) + "#"

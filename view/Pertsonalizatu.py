@@ -152,6 +152,6 @@ class Pertsonalizatu(object):
         elif self.musika_com_box.get() == "Piano Theme":
             musika = "piano"
 
-        self.window.destroy()
+        self.irten()
         DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, botoien_kolor, adreilu_kolor, musika, self.erabiltzaile)
-        #JokatuLehioa(atzeko_kolor, atzeko_kolor, self.erabiltzaile).__init__()7
+        #JokatuLehioa(atzeko_kolor, atzeko_kolor, self.erabiltzaile).__init__()
