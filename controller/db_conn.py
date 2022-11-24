@@ -11,6 +11,8 @@ class DbConn(object):
         # "JOKALARIAK" Taula sortu:
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua)")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS PALETAK(zenbakia, lauki, zutabe, lforma, lformaalderantzizko, zforma, zformaalderantzizko, tforma)")
 
         # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
@@ -24,6 +26,11 @@ class DbConn(object):
             musika = "original"
             self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?)", (erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika))
             self.con.commit()
+
+        query1 = self.cur.execute("SELECT * FROM PALETAK")
+        if query1.fetchone() is None:
+            self.paletak_sortu()
+
 
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
@@ -84,6 +91,34 @@ class DbConn(object):
     def get_jokalari_musika(self, erabiltzaile):
         emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
         return emaitza.fetchone()[0]
+
+    def paletak_sortu(self):
+        lauki = 'yellow'
+        zutabe = 'cyan'
+        lforma = 'blue'
+        lformaalderantzizko = 'orange'
+        zforma = 'green'
+        zformaalderantzizko = 'red'
+        tforma = 'purple'
+        self.cur.execute("INSERT INTO PALETAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                         (1, lauki, zutabe, lforma, lformaalderantzizko, zforma, zformaalderantzizko, tforma))
+        self.con.commit()
+        lauki = 'snow'
+        zutabe = 'SkyBlue2'
+        lforma = 'LightBlue1'
+        lformaalderantzizko = 'cyan'
+        zforma = 'blue4'
+        zformaalderantzizko = 'sky blue'
+        tforma = 'SkyBlue4'
+        self.cur.execute("INSERT INTO PALETAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                         (2, lauki, zutabe, lforma, lformaalderantzizko, zforma, zformaalderantzizko, tforma))
+        self.con.commit()
+        self.cur.execute("INSERT INTO PALETAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                         (3, lauki, zutabe, lforma, lformaalderantzizko, zforma, zformaalderantzizko, tforma))
+        self.con.commit()
+        self.cur.execute("INSERT INTO PALETAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                         (4, lauki, zutabe, lforma, lformaalderantzizko, zforma, zformaalderantzizko, tforma))
+        self.con.commit()
 
     def konexioa_itxi(self):
         self.con.close()
