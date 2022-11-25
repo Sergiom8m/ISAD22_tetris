@@ -89,8 +89,10 @@ class DbConn(object):
         return emaitza.fetchone()[0]
 
     def paleta_lortu(self, erabiltzaile):
-        emaitza = self.cur.execute("SELECT paleta FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-        return emaitza.fetchone()[0]
+        if erabiltzaile is not None:
+            emaitza = self.cur.execute("SELECT paleta FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return emaitza.fetchone()[0]
+        return 1
 
     def konexioa_itxi(self):
         self.con.close()

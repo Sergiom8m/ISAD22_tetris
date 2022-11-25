@@ -1,6 +1,6 @@
 from controller.Soinuak import Soinuak
 from controller.db_conn import DbConn
-erabiltzailea=""
+erabiltzailea= None
 
 class Pieza:
 	def __init__(self, forma, kolorea):

@@ -6,6 +6,7 @@ from model.Tableroa import Tableroa
 from model.Piezak import *
 import sys
 import Irudiak
+import model.Piezak as piezak
 from tkinter import *
 from decimal import *
 from controller.db_conn import DbConn
@@ -13,6 +14,7 @@ from controller.Soinuak import Soinuak
 
 abiadura = 1
 tamaina2 = 2
+erabiltzailea= None
 
 
 class JokatuLehioa(object):
@@ -23,6 +25,8 @@ class JokatuLehioa(object):
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
         self.erabiltzaile = erab
+        global erabiltzailea
+        erabiltzailea=self.erabiltzaile
         if self.erabiltzaile is not None:
             Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
         self.window = tk.Tk()
