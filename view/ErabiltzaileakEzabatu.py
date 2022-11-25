@@ -45,21 +45,21 @@ class ErabiltzaileakEzabatu(object):
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
         emaitza = DbConn.erabiltzaile_guztiak_lortu(DbConn())
-        lerroKop = 0
+        lerroKop = len(emaitza)
 
         Label(self.marko, text="Datu baseko erabiltzaileak:", font="Helvetica 12 bold", bg=atzeko_kolor).grid(row=0, column=0, pady=10, padx=10)
         for i in range(len(emaitza)):
-            Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+1, column=0, pady=10, padx=10)
-            Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda: self.erabiltzailea_ezabatu(emaitza[i][0])).grid(row=i+1, column=1, pady=10, padx=10)
-            lerroKop = i
-        if len(emaitza) == 0:
-            Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop+1, column=0, pady=10, padx=10)
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=1, pady=10, padx=10)
-
+            if emaitza[i][0] != "admin":  # "admin" ezin denez ezabatu, ezin da inprimatuko
+                Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+1, column=0, pady=10, padx=10)
+                Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda lerro=i: self.erabiltzailea_ezabatu(emaitza[lerro][0])).grid(row=i+1, column=1, pady=10, padx=10)
+        if lerroKop == 1:  # beti egongo da erabiltzaile bat, "admin"
+            Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
+        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+2, column=1, pady=10, padx=10)
         self.window.mainloop()
 
-    def erabiltzailea_ezabatu(self, id_erabiltzaile):
-        DbConn.erabiltzaile_ezabatu(DbConn(), id_erabiltzaile)
+    def erabiltzailea_ezabatu(self, erabiltzaile):
+        print(erabiltzaile)
+        DbConn.erabiltzaile_ezabatu(DbConn(), erabiltzaile)
         self.window.destroy()
         ErabiltzaileakEzabatu().__init__()
 

@@ -8,11 +8,11 @@ class DbConn(object):
         self.con = sqlite3.connect("datubase.db")  # konexioa ezarri
         self.cur = self.con.cursor()
 
-        # Taula sortu:
+        # "JOKALARIAK" Taula sortu:
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, kolorea, adreiluak, soinua)")
+            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, paleta)")
 
-        # "admin" erabiltzailea sortu:
+        # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
         query = self.cur.execute("SELECT * FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile_izena,))
         if query.fetchone() is None:
@@ -21,8 +21,12 @@ class DbConn(object):
             pasahitza = "123"
             puntuazioa = "0"
             partida = "#"
-            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?)", (erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida))
+            musika = "original"
+            paleta = 1
+            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta))
             self.con.commit()
+
+
 
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
@@ -36,8 +40,8 @@ class DbConn(object):
         res = self.cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()
 
-    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida):
-        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?)", (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida))
+    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta):
+        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta))
         self.con.commit()  # Datu basean insert-aren commit-a egiten da
 
     def partida_gorde(self, id_erabiltzaile, partida, puntuazioa):
@@ -76,12 +80,19 @@ class DbConn(object):
             return True
         return False
 
-    ############################## KOLOREA ALDATU ##############################
+    def pertsonalizazioa_aldatu(self, atzeko, botoi, adreilu, musika, erabiltzaile):
+        self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
+        self.con.commit()
 
-    def fondoaren_kolorea_aldatu(self):
-        # TODO
+    def get_jokalari_musika(self, erabiltzaile):
+        emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+        return emaitza.fetchone()[0]
 
+    def paleta_lortu(self, erabiltzaile):
+        if erabiltzaile is not None:
+            emaitza = self.cur.execute("SELECT paleta FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return emaitza.fetchone()[0]
+        return 1
 
     def konexioa_itxi(self):
         self.con.close()
-

@@ -4,7 +4,7 @@ import tkinter as tk
 from view import Erregistroa
 from view import Ezarpenak
 from view import Identifikazioa
-from tkinter import PhotoImage,Label
+
 
 # Koloreak
 botoi_kolor = "#ffffff"

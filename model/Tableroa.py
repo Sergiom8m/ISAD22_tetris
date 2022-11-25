@@ -1,4 +1,4 @@
-from model import Piezak
+from controller.Soinuak import Soinuak
 
 class Tableroa:
 	def __init__(self, tamaina):
@@ -49,6 +49,7 @@ class Tableroa:
 
 
 	def pieza_kokatu_behean(self):
+		Soinuak.play_fall(Soinuak)
 		for i in range(1,self.tamaina[1]):
 			posizio_berria = (self.posizioa[0]+i, self.posizioa[1])
 			if not self.probatu_mugimendua(posizio_berria):
@@ -99,6 +100,7 @@ class Tableroa:
 			raise Exception("Pieza ezin da orain biratu")
 
 	def lerroa_ezabatu(self, lerro):
+		Soinuak.play_crash(Soinuak())
 		for l in range(lerro-1,0,-1):
 			for j in range(self.tamaina[0]):
 				self.tab[l+1][j] = self.tab[l][j]

@@ -6,12 +6,15 @@ from model.Tableroa import Tableroa
 from model.Piezak import *
 import sys
 import Irudiak
+import model.Piezak as piezak
 from tkinter import *
 from decimal import *
 from controller.db_conn import DbConn
+from controller.Soinuak import Soinuak
 
 abiadura = 1
 tamaina2 = 2
+erabiltzailea= None
 
 
 class JokatuLehioa(object):
@@ -22,6 +25,10 @@ class JokatuLehioa(object):
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
         self.erabiltzaile = erab
+        global erabiltzailea
+        erabiltzailea=self.erabiltzaile
+        if self.erabiltzaile is not None:
+            Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
@@ -43,7 +50,8 @@ class JokatuLehioa(object):
         puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
         puntuazioalabel.pack()
 
-        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa, partida=partida)
+        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa,
+                                     partida=partida)
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
         if self.erabiltzaile is not None:
@@ -58,6 +66,7 @@ class JokatuLehioa(object):
 
     # Irtetzeko metodoa:
     def irten(self):
+        Soinuak.quit_music(Soinuak())
         self.window.destroy()
         if self.erabiltzaile is None:
             view.HasierakoMenua.HasierakoMenua().__init__()
@@ -65,7 +74,7 @@ class JokatuLehioa(object):
             view.Profila.Profila(self.erabiltzaile).__init__()
 
     def partidaGorde(self):
-
+        Soinuak.quit_music(Soinuak())
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
         gorde = str(matrizea.puntuazioa) + "#" + str(tamaina2) + "#" + str(self.abiadura) + "#"
