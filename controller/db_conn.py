@@ -10,7 +10,7 @@ class DbConn(object):
 
         # Taula sortu:
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida)")
+            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, kolorea, adreiluak, soinua)")
 
         # "admin" erabiltzailea sortu:
         erabiltzaile_izena = "admin"
@@ -75,6 +75,11 @@ class DbConn(object):
         if (erantzun_zuzen.__eq__(erantzuna)):
             return True
         return False
+
+    ############################## KOLOREA ALDATU ##############################
+
+    def fondoaren_kolorea_aldatu(self):
+        # TODO
 
 
     def konexioa_itxi(self):
