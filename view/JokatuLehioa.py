@@ -46,7 +46,8 @@ class JokatuLehioa(object):
         puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
         puntuazioalabel.pack()
 
-        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa, partida=partida)
+        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa,
+                                     partida=partida)
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
         if self.erabiltzaile is not None:

@@ -107,7 +107,7 @@ class Erregistroa(object):
             erabiltzailea = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
             if erabiltzailea is None:
                 if p1 == p2:
-                    DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, erantzuna, p1, 0, "#", "original")
+                    DbConn.erabiltzaile_berria_erregistratu(DbConn(), id, galdera, erantzuna, p1, 0, "#", "original", 1)
                     # PROFIL PANTAILARA ALDATZEKO:
                     self.window.destroy()
                     Profila(id).__init__()
