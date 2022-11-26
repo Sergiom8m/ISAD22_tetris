@@ -82,11 +82,16 @@ class DbConn(object):
 
     def pertsonalizazioa_aldatu(self, atzeko, botoi, adreilu, musika, erabiltzaile):
         self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
+        self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
         self.con.commit()
 
     def get_jokalari_musika(self, erabiltzaile):
         emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
         return emaitza.fetchone()[0]
+
+    def get_jokalari_fondoa(self, erabiltzaile):
+        fondo = self.cur.execute("SELECT atzekoa FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+        return fondo.fetchone()[0]
 
     def paleta_lortu(self, erabiltzaile):
         if erabiltzaile is not None:

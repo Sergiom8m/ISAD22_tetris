@@ -39,13 +39,17 @@ class Pertsonalizatu(object):
         titulo_fondo = tk.Label(self.window, bg=atzeko_kolor, text="Atzeko kolorea:", font=("Calibri", 14))
         titulo_fondo.place(x=60, y= 120)
 
-        self.opcion = tk.IntVar()
-        self.opcion.set(value=1)
+        self.fondoa_com_box = ttk.Combobox(self.window, state="readonly",
+                                           values=["Larrosa", "Gorria", "Urdina", "Berdea"])
+        self.fondoa_com_box.place(x=150, y=150)
 
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion, value=1).place(x=50, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion, value=2).place(x=130, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion, value=3).place(x=210, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion, value=4).place(x=280, y=150)
+        #self.opcion = tk.IntVar()
+        #self.opcion.set(value=1)
+
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion, value=1).place(x=50, y=150)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion, value=2).place(x=130, y=150)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion, value=3).place(x=210, y=150)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion, value=4).place(x=280, y=150)
 
         # ************** BOTOIEN KOLOREA *******************
 
@@ -54,6 +58,7 @@ class Pertsonalizatu(object):
 
         self.opcion2 = tk.IntVar()
         self.opcion2.set(value=1)
+
 
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion2, value=1).place(x=50, y=230)
         tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion2, value=2).place(x=130, y=230)
@@ -90,27 +95,26 @@ class Pertsonalizatu(object):
         self.window.mainloop()
 
     # PANTAILETAN MUGITZEKO
+
+
     def irten(self):
         self.window.destroy()
         view.Profila.Profila(self.erabiltzaile).__init__()
 
 
     def aldaketak(self):
-        atzeko_kolor = "#ffffff"
-        print(self.opcion.get())
-        print(self.opcion2.get())
 
-        if self.opcion.get() == 1:
+        if self.fondoa_com_box.get() == "Larrosa":
+            atzeko_kolor = "Pink"
+            bg = atzeko_kolor
+        elif self.fondoa_com_box.get() == "Gorria":
             atzeko_kolor = "Red"
             bg = atzeko_kolor
-        elif self.opcion.get() == 2:
-            atzeko_kolor = "Red"
+        elif self.fondoa_com_box.get() == "Urdina":
+            atzeko_kolor = "Blue"
             bg = atzeko_kolor
-        elif self.opcion.get() == 3:
-            atzeko_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion.get() == 4:
-            atzeko_kolor = "Red"
+        elif self.fondoa_com_box.get() == "Orchestra Theme":
+            atzeko_kolor = "Green"
             bg = atzeko_kolor
 
         pieza_kolorea = "#ffffff"
