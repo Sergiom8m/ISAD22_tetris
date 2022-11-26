@@ -10,23 +10,23 @@ class DbConn(object):
 
         # "JOKALARIAK" Taula sortu:
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, paleta)")
+            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, paleta)")
 
         # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
         query = self.cur.execute("SELECT * FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile_izena,))
         if query.fetchone() is None:
             galdera = "XXX"
-            erantzuna= "XXX"
+            erantzuna = "XXX"
             pasahitza = "123"
             puntuazioa = "0"
             partida = "#"
             musika = "original"
+            atzeko = "#7ec0ee"
             paleta = 1
-            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta))
+            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (
+            erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, paleta))
             self.con.commit()
-
-
 
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
@@ -40,12 +40,15 @@ class DbConn(object):
         res = self.cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()
 
-    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta):
-        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, paleta))
+    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida,
+                                         musika, atzeko, paleta):
+        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, paleta))
         self.con.commit()  # Datu basean insert-aren commit-a egiten da
 
     def partida_gorde(self, id_erabiltzaile, partida, puntuazioa):
-        self.cur.execute("UPDATE JOKALARIAK SET partida=(?), puntuazioa=(?) WHERE erabiltzailea=(?)", (partida, puntuazioa, id_erabiltzaile))
+        self.cur.execute("UPDATE JOKALARIAK SET partida=(?), puntuazioa=(?) WHERE erabiltzailea=(?)",
+                         (partida, puntuazioa, id_erabiltzaile))
         self.con.commit()
 
     def partida_kargatuta(self, id_erabiltzaile):
@@ -80,24 +83,41 @@ class DbConn(object):
             return True
         return False
 
-    def pertsonalizazioa_aldatu(self, atzeko, botoi, adreilu, musika, erabiltzaile):
-        self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
-        self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
+    def pertsonalizazioa_aldatu(self, atzeko, adreilu, musika, erabiltzaile):
+        # EZ BADA EZER ALDATU NAHI PARAMETROREN BATEAN EZ DIRA UPDATE-AK EGIN BEHAR -> if X is not None
+        if musika is not None:
+            self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
+
+        if atzeko is not None:
+            self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
+
+        if adreilu is not None:
+            self.cur.execute("UPDATE JOKALARIAK SET paleta=(?) WHERE erabiltzailea=(?)", (adreilu, erabiltzaile,))
+
         self.con.commit()
 
     def get_jokalari_musika(self, erabiltzaile):
-        emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-        return emaitza.fetchone()[0]
+        if erabiltzaile is not None:
+            emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return emaitza.fetchone()[0]
+        return "ez"
 
     def get_jokalari_fondoa(self, erabiltzaile):
-        fondo = self.cur.execute("SELECT atzekoa FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-        return fondo.fetchone()[0]
+        if erabiltzaile is not None:
+            fondo = self.cur.execute("SELECT atzeko FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return fondo.fetchone()[0]
+        return "#7ec0ee"
 
     def paleta_lortu(self, erabiltzaile):
         if erabiltzaile is not None:
+            print("paleta hartzera")
             emaitza = self.cur.execute("SELECT paleta FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return emaitza.fetchone()[0]
-        return 1
+            e = emaitza.fetchone()[0]
+            print(e)
+            return e
+        else:
+            print("Bat")
+            return 1
 
     def konexioa_itxi(self):
         self.con.close()

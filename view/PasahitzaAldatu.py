@@ -19,6 +19,9 @@ class PasahitzaAldatu(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.title("Pasahitza Aldatu")
         self.window.geometry('420x420')
+        self.aldatu =False
+        global atzeko_kolor
+        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
         izenburua = tk.Label(self.window, bg=atzeko_kolor, text='PASAHITZA ALDATU', font=("Times New Roman", 25))
@@ -65,7 +68,10 @@ class PasahitzaAldatu(object):
     #PANTAILETAN MUGITZEKO
     def irten(self):
         self.window.destroy()
-        view.Identifikazioa.Identifikazioa().__init__()
+        if self.aldatu:
+            view.Identifikazioa.Identifikazioa().__init__()
+        else:
+            view.Profila.Profila(self.erabiltzaile).__init__()
     #DATU BASEAREKIN KONEKTATZEKO METODOA:
 
     def aldatuta(self):
@@ -87,7 +93,7 @@ class PasahitzaAldatu(object):
                                     font=("Calibri"))
                     mezu.place(x=60, y=350)
                     DbConn.pasahitza_aldatu(DbConn(), id, p1, g, e)
-
+                    self.aldatu=True
                 else:
                     mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Pasahitzak ez dira berdinak        ',
                                     font=("Calibri"))

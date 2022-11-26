@@ -51,9 +51,9 @@ class Laukia(Pieza):
 		if paleta == 1:
 			kolorea = "yellow"
 		elif paleta == 2:
-			kolorea = "orange"
+			kolorea = "sky blue"
 		elif paleta == 3:
-			kolorea = "red"
+			kolorea = "snow"
 		else:
 			kolorea = "green"
 
@@ -64,13 +64,13 @@ class Zutabea(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
+			kolorea = "cyan"
 		elif paleta == 2:
-			kolorea = "orange"
+			kolorea = "pink"
 		elif paleta == 3:
-			kolorea = "red"
+			kolorea = "SkyBlue2"
 		else:
-			kolorea = "green"
+			kolorea = "SeaGreen1"
 
 		super(Zutabea, self).__init__([[0,-1],[0,0],[0,1],[0,2]], kolorea)
 
@@ -79,13 +79,13 @@ class Lforma(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
+			kolorea = "blue"
 		elif paleta == 2:
-			kolorea = "orange"
+			kolorea = "MediumOrchid1"
 		elif paleta == 3:
-			kolorea = "red"
+			kolorea = "LightBlue1"
 		else:
-			kolorea = "green"
+			kolorea = "SpringGreen4"
 
 		super(Lforma, self).__init__([[-1,-1],[0,-1],[0,0],[0,1]], kolorea)
 
@@ -94,13 +94,13 @@ class LformaAlderantzizko(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
-		elif paleta == 2:
 			kolorea = "orange"
+		elif paleta == 2:
+			kolorea = "khaki"
 		elif paleta == 3:
-			kolorea = "red"
+			kolorea = "cyan"
 		else:
-			kolorea = "green"
+			kolorea = "OliveDrab2"
 
 		super(LformaAlderantzizko, self).__init__([[1,-1],[0,-1],[0,0],[0,1]], kolorea)
 
@@ -110,13 +110,13 @@ class Zforma(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
-		elif paleta == 2:
-			kolorea = "orange"
-		elif paleta == 3:
-			kolorea = "red"
-		else:
 			kolorea = "green"
+		elif paleta == 2:
+			kolorea = "pale green"
+		elif paleta == 3:
+			kolorea = "SkyBlue4"
+		else:
+			kolorea = "dark green"
 
 
 		super(Zforma, self).__init__([[0,-1],[0,0],[-1,0],[-1,1]], kolorea)
@@ -126,13 +126,13 @@ class ZformaAlderantzizko(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
-		elif paleta == 2:
-			kolorea = "orange"
-		elif paleta == 3:
 			kolorea = "red"
+		elif paleta == 2:
+			kolorea = "azure"
+		elif paleta == 3:
+			kolorea = "sky blue"
 		else:
-			kolorea = "green"
+			kolorea = "SpringGreen4"
 
 		super(ZformaAlderantzizko, self).__init__([[0,-1],[0,0],[1,0],[1,1]], kolorea)
 
@@ -141,12 +141,12 @@ class Tforma(Pieza):
 
 		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
 		if paleta == 1:
-			kolorea = "yellow"
+			kolorea = "purple"
 		elif paleta == 2:
-			kolorea = "orange"
+			kolorea = "peach puff"
 		elif paleta == 3:
-			kolorea = "red"
+			kolorea = "navy"
 		else:
-			kolorea = "green"
+			kolorea = "forest green"
 
 		super(Tforma, self).__init__([[-1,0],[0,0],[1,0],[0,1]], kolorea)

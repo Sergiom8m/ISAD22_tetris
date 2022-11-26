@@ -18,6 +18,8 @@ class Pertsonalizatu(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x800')
         self.window.title("Pertsonalizazio Menua")
+        global atzeko_kolor
+        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
@@ -53,43 +55,40 @@ class Pertsonalizatu(object):
 
         # ************** BOTOIEN KOLOREA *******************
 
-        titulo_botoiak = tk.Label(self.window, bg=atzeko_kolor, text="Botoien kolorea:", font=("Calibri", 14))
-        titulo_botoiak.place(x=60, y=200)
+        #titulo_botoiak = tk.Label(self.window, bg=atzeko_kolor, text="Botoien kolorea:", font=("Calibri", 14))
+        #titulo_botoiak.place(x=60, y=200)
 
-        self.opcion2 = tk.IntVar()
-        self.opcion2.set(value=1)
+        #self.opcion2 = tk.IntVar()
+        #self.opcion2.set(value=1)
 
 
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion2, value=1).place(x=50, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion2, value=2).place(x=130, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion2, value=3).place(x=210, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion2, value=4).place(x=280, y=230)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion2, value=1).place(x=50, y=230)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion2, value=2).place(x=130, y=230)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="3", variable=self.opcion2, value=3).place(x=210, y=230)
+        #tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion2, value=4).place(x=280, y=230)
 
         # ************** ADREILUEN KOLOREA *******************
 
         titulo_adreiluak = tk.Label(self.window, bg=atzeko_kolor, text="Adreiluak:", font=("Calibri", 14))
-        titulo_adreiluak.place(x=60, y=280)
+        titulo_adreiluak.place(x=60, y=200)
 
-        self.opcion3 = tk.IntVar()
-        self.opcion3.set(value=1)
+        self.adreilu_com_box = ttk.Combobox(self.window, state="readonly",
+                                          values=["(Default)", "Pastel", "Urdinak", "Berdeak"])
+        self.adreilu_com_box.place(x=150, y=250)
 
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="1", variable=self.opcion3, value=1).place(x=50, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="2", variable=self.opcion3, value=2).place(x=130, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor,text="3", variable=self.opcion3, value=3).place(x=210, y=310)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="4", variable=self.opcion3, value=4).place(x=280, y=310)
 
-        # ************** SONINUA *******************
+        # ************** SOINUA *******************
 
         titulo_soinua = tk.Label(self.window, bg=atzeko_kolor, text="Musika:", font=("Calibri", 14))
-        titulo_soinua.place(x=60, y=360)
+        titulo_soinua.place(x=60, y=300)
 
         self.musika_com_box = ttk.Combobox(self.window, state="readonly", values=["(Musikarik gabe)", "Original Theme", "99s Theme", "Orchestra Theme", "Piano Theme"])
-        self.musika_com_box.place(x=150, y=390)
+        self.musika_com_box.place(x=150, y=350)
 
         buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
-        buttonirten.place(x=60, y=500)
+        buttonirten.place(x=60, y=400)
         buttonGorde = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Aldaketak gorde", width=14, font=("Calibri"), command=self.aldaketak)
-        buttonGorde.place(x=220, y=500)
+        buttonGorde.place(x=220, y=400)
 
 
         self.window.mainloop()
@@ -104,47 +103,32 @@ class Pertsonalizatu(object):
 
     def aldaketak(self):
 
+        atzeko_kolor = None
+        #Atzeko kolorea:
         if self.fondoa_com_box.get() == "Larrosa":
             atzeko_kolor = "Pink"
-            bg = atzeko_kolor
         elif self.fondoa_com_box.get() == "Gorria":
-            atzeko_kolor = "Red"
-            bg = atzeko_kolor
+            atzeko_kolor = "tomato"
         elif self.fondoa_com_box.get() == "Urdina":
-            atzeko_kolor = "Blue"
-            bg = atzeko_kolor
-        elif self.fondoa_com_box.get() == "Orchestra Theme":
-            atzeko_kolor = "Green"
-            bg = atzeko_kolor
+            atzeko_kolor = "#7ec0ee"
+        elif self.fondoa_com_box.get() == "Berdea":
+            atzeko_kolor = "pale green"
 
-        pieza_kolorea = "#ffffff"
-        if self.opcion2.get() == 1:
-            botoien_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion2.get() == 2:
-            botoien_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion2.get() == 3:
-            botoien_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion2.get() == 4:
-            botoien_kolor = "Red"
-            bg = atzeko_kolor
+        self.window['bg'] = atzeko_kolor
 
-        pieza_kolorea = "#ffffff"
-        if self.opcion3.get() == 1:
-            adreilu_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion3.get() == 2:
-            adreilu_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion3.get() == 3:
-            adreilu_kolor = "Red"
-            bg = atzeko_kolor
-        elif self.opcion3.get() == 4:
-            adreilu_kolor = "Red"
-            bg = atzeko_kolor
+        #Piezen kolorea:
+        adreilu_kolor = None
+        if self.adreilu_com_box.get() == "(Default)":
+            adreilu_kolor = 1
+        elif self.adreilu_com_box.get() == "Pastel":
+            adreilu_kolor = 2
+        elif self.adreilu_com_box.get() == "Urdinak":
+            adreilu_kolor = 3
+        elif self.adreilu_com_box.get() == "Berdeak":
+            adreilu_kolor = 4
 
+        #Musika:
+        musika = None
         if self.musika_com_box.get() == "(Musikarik gabe)":
             musika = "ez"
         elif self.musika_com_box.get() == "Original Theme":
@@ -156,6 +140,6 @@ class Pertsonalizatu(object):
         elif self.musika_com_box.get() == "Piano Theme":
             musika = "piano"
 
+        DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, adreilu_kolor, musika, self.erabiltzaile)
         self.irten()
-        DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, botoien_kolor, adreilu_kolor, musika, self.erabiltzaile)
         #JokatuLehioa(atzeko_kolor, atzeko_kolor, self.erabiltzaile).__init__()

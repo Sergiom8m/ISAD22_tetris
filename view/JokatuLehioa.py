@@ -22,17 +22,20 @@ class JokatuLehioa(object):
 
     def __init__(self, abiadura_param, tamaina_param, erab, puntuazioa_param, partida):
         super(JokatuLehioa, self).__init__()
+
         self.abiadura = abiadura_param
         self.tamaina = tamaina_param
+
         self.erabiltzaile = erab
         global erabiltzailea
         erabiltzailea=self.erabiltzaile
-        if self.erabiltzaile is not None:
-            Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
+        piezak.erabiltzailea = erabiltzailea
+
+        Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
-        leihoTamaina = (str(self.tamaina * 27) + "x" + "895")
+        leihoTamaina = (str(self.tamaina * 27) + "x" + "700")
         self.window.geometry(leihoTamaina)
         self.window.title("Tetris Jokoa")
         # self.window.resizable(False,False)
@@ -50,7 +53,7 @@ class JokatuLehioa(object):
         puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
         puntuazioalabel.pack()
 
-        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 40), puntuazioalabel=puntuazioa,
+        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 30), puntuazioalabel=puntuazioa,
                                      partida=partida)
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
@@ -74,7 +77,6 @@ class JokatuLehioa(object):
             view.Profila.Profila(self.erabiltzaile).__init__()
 
     def partidaGorde(self):
-        Soinuak.quit_music(Soinuak())
         self.canvas.after_cancel(self.canvas.jokatzen)
         matrizea = self.canvas.tab
         gorde = str(matrizea.puntuazioa) + "#" + str(tamaina2) + "#" + str(self.abiadura) + "#"
@@ -86,8 +88,7 @@ class JokatuLehioa(object):
                 else:
                     gorde = gorde + matrizea.tab[i][j] + "#"
         DbConn.partida_gorde(DbConn(), self.erabiltzaile, gorde, self.canvas.tab.puntuazioa)
-        self.window.destroy()
-        view.Ezarpenak.Ezarpenak(self.erabiltzaile).__init__()
+        self.irten()
 
 
 class TableroaPanela(tk.Frame):
