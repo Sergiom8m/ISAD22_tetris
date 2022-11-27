@@ -10,7 +10,7 @@ class DbConn(object):
 
         # "JOKALARIAK" Taula sortu:
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, paleta)")
+            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, botoiKol, paleta)")
 
         # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
@@ -23,9 +23,10 @@ class DbConn(object):
             partida = "#"
             musika = "original"
             atzeko = "#7ec0ee"
+            botoiKol = "#ffffff"
             paleta = 1
-            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (
-            erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, paleta))
+            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (
+            erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
             self.con.commit()
 
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
@@ -41,9 +42,9 @@ class DbConn(object):
         return res.fetchone()
 
     def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida,
-                                         musika, atzeko, paleta):
-        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                         (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, paleta))
+                                         musika, atzeko, botoiKol, paleta):
+        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
         self.con.commit()  # Datu basean insert-aren commit-a egiten da
 
     def partida_gorde(self, id_erabiltzaile, partida, puntuazioa):
@@ -91,6 +92,9 @@ class DbConn(object):
         if atzeko is not None:
             self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
 
+        #if botoiKol is not None:
+        #    self.cur.execute("UPDATE JOKALARIAK SET botoiKol=(?) WHERE erabiltzailea=(?)", (botoiKol, erabiltzaile,))
+
         if adreilu is not None:
             self.cur.execute("UPDATE JOKALARIAK SET paleta=(?) WHERE erabiltzailea=(?)", (adreilu, erabiltzaile,))
 
@@ -105,13 +109,14 @@ class DbConn(object):
     def get_jokalari_fondoa(self, erabiltzaile):
         if erabiltzaile is not None:
             fondo = self.cur.execute("SELECT atzeko FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            #botKol = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
             return fondo.fetchone()[0]
         return "#7ec0ee"
 
     def get_jokalari_botoi_kolor(self, erabiltzaile):
         if erabiltzaile is not None:
-            bot_kol = self.cur.execute("SELECT kolore_botoi FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return bot_kol.fetchone()
+            botKol = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return botKol.fetchone()
         return "#ffffff"
 
     def paleta_lortu(self, erabiltzaile):

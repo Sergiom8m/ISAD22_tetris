@@ -104,7 +104,8 @@ class Pertsonalizatu(object):
     def aldaketak(self):
 
         atzeko_kolor = None
-        #Atzeko kolorea:
+        botoi_kolor = None
+
         if self.fondoa_com_box.get() == "Larrosa":
             atzeko_kolor = "Pink"
             botoi_kolor = "tomato"
