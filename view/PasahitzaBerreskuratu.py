@@ -71,5 +71,3 @@ class PasahitzaBerreskuratu(object):
         else:
             mezu = tk.Label(self.window,  bg=atzeko_kolor,fg="red", text='Sartu erabiltzaile bat              ',font=("Calibri"))
             mezu.place(x=60, y=240)
-
-
