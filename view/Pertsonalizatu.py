@@ -44,7 +44,7 @@ class Pertsonalizatu(object):
         titulo_fondo.place(x=60, y= 120)
 
         self.fondoa_com_box = ttk.Combobox(self.window, state="readonly",
-                                           values=["Larrosa", "Gorria", "Urdina", "Berdea", "(Default)"])
+                                           values=["(Default)", "Larrosa", "Gorria", "Urdina", "Berdea"])
         self.fondoa_com_box.place(x=150, y=150)
 
         #self.opcion = tk.IntVar()
@@ -108,7 +108,10 @@ class Pertsonalizatu(object):
         atzeko_kolor = None
         botoi_kolor = None
 
-        if self.fondoa_com_box.get() == "Larrosa":
+        if self.fondoa_com_box.get() == "(Default)":
+            atzeko_kolor = "#7ec0ee"
+            botoi_kolor = "#ffffff"
+        elif self.fondoa_com_box.get() == "Larrosa":
             atzeko_kolor = "#fdcae1"
             botoi_kolor = "#ede6ec"
         elif self.fondoa_com_box.get() == "Gorria":
@@ -120,9 +123,7 @@ class Pertsonalizatu(object):
         elif self.fondoa_com_box.get() == "Berdea":
             atzeko_kolor = "#5ccb5f"
             botoi_kolor = "#98ff96"
-        elif self.fondoa_com_box.get() == "(Default)":
-            atzeko_kolor = "#7ec0ee"
-            botoi_kolor = "#ffffff"
+
 
 
         self.window['bg'] = atzeko_kolor
