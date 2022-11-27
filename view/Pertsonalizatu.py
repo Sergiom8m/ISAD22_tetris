@@ -109,16 +109,17 @@ class Pertsonalizatu(object):
         botoi_kolor = None
 
         if self.fondoa_com_box.get() == "Larrosa":
-            atzeko_kolor = "Pink"
-            botoi_kolor = "tomato"
+            atzeko_kolor = "#fdcae1"
+            botoi_kolor = "fe5f0"
         elif self.fondoa_com_box.get() == "Gorria":
-            atzeko_kolor = "tomato"
-            botoi_kolor = "tomato"
+            atzeko_kolor = "#ff4040"
+            botoi_kolor = "#ff7676"
         elif self.fondoa_com_box.get() == "Urdina":
-            atzeko_kolor = "#7ec0ee"
-            botoi_kolor = "tomato"
+            atzeko_kolor = "#2196f3"
+            botoi_kolor = "#81c9fa"
         elif self.fondoa_com_box.get() == "Berdea":
-            atzeko_kolor = "pale green"
+            atzeko_kolor = "#5ccb5f"
+            botoi_kolor = "#98ff96"
 
 
         self.window['bg'] = atzeko_kolor
