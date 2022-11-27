@@ -12,8 +12,8 @@ ISAD (Informazio Sistemen Analisia eta Diseinua) irakasgairen Tetris jokoaren pr
 ## Jolasten hasi baino lehen:
 
 Musika ondo funtzionatzeko bi pakete instalatu behar dira (hauek controller karpetaren barruko Soinuak.py fitxategian erabiltzen dira):
-  - Playsound
-  - Pygame
+  - Playsound: pip install playsound
+  - Pygame: pip install pygame
  
 
 
