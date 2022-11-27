@@ -23,6 +23,9 @@ class ErabiltzaileakEzabatu(object):
         self.window.resizable(False, False)
         global atzeko_kolor
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), "admin")
+        global  botoi_kolor
+        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), "admin")
+
 
         # 1 create a main frame
         nagusia = Frame(self.window, bg=atzeko_kolor)

@@ -20,6 +20,8 @@ class Pertsonalizatu(object):
         self.window.title("Pertsonalizazio Menua")
         global atzeko_kolor
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        global  botoi_kolor
+        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

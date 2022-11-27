@@ -115,8 +115,8 @@ class DbConn(object):
 
     def get_jokalari_botoi_kolor(self, erabiltzaile):
         if erabiltzaile is not None:
-            botKol = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return botKol.fetchone()
+            botoi_kolor = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return botoi_kolor.fetchone()
         return "#ffffff"
 
     def paleta_lortu(self, erabiltzaile):
