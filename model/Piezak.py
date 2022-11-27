@@ -128,7 +128,7 @@ class ZformaAlderantzizko(Pieza):
 		if paleta == 1:
 			kolorea = "red"
 		elif paleta == 2:
-			kolorea = "ff709b"
+			kolorea = "#ff709b"
 		elif paleta == 3:
 			kolorea = "sky blue"
 		else:

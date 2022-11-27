@@ -64,12 +64,12 @@ class PasahitzaBerreskuratu(object):
             erabiltzaile= DbConn.erabiltzailea_idz_lortu(DbConn(), id)
             if(erabiltzaile is None):
                 mezu2 = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Erabiltzailea ez da existitzen', font=("Calibri"))
-                mezu2.place(x=60, y=220)
+                mezu2.place(x=60, y=240)
             else:
                 self.window.destroy()
                 GalderaErantzun(id).__init__()
         else:
-            mezu = tk.Label(self.window,  bg=atzeko_kolor,fg="red", text='Sartu erabiltzaile bat',font=("Calibri"))
-            mezu.place(x=60, y=220)
+            mezu = tk.Label(self.window,  bg=atzeko_kolor,fg="red", text='Sartu erabiltzaile bat              ',font=("Calibri"))
+            mezu.place(x=60, y=240)
 
 

@@ -114,12 +114,21 @@ class Erregistroa(object):
                 else:
                     error = tk.Label(self.window, bg=atzeko_kolor,  fg="red", text='Pasahitza ez du koinziditzen               ',
                                      font=("Times New Roman", 12))
-                    error.place(x=60, y=310)
+                    error.place(x=60, y=307)
+                    #Ondo daudenak berriz ipini
+                    tk.Label(self.window, bg=atzeko_kolor, text='Identifikatzailea...                         ', font=("Times New Roman", 12)).place(x=60, y=67)
+                    tk.Label(self.window, bg=atzeko_kolor, text="           Mesedez, zeure burua erregistratu",  font=("Times New Roman", 12)).place(x=60, y=40)
             else:
                 error = tk.Label(self.window,bg=atzeko_kolor,fg="red",  text='Erabiltzailea jada existitzen da                  ',
                                  font=("Times New Roman", 12))
-                error.place(x=60, y=310)
+                error.place(x=60, y=67)
+                # Ondo daudenak berriz ipini
+                tk.Label(self.window, bg=atzeko_kolor, text='Pasahitza errepikatu...                          ', font=("Times New Roman", 12)).place(x=60, y=307)
+                tk.Label(self.window, bg=atzeko_kolor, text="           Mesedez, zeure burua erregistratu", font=("Times New Roman", 12)).place(x=60, y=40)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                                   ',
                              font=("Times New Roman", 12))
-            error.place(x=60, y=310)
+            error.place(x=60, y=40)
+            # Ondo daudenak berriz ipini
+            tk.Label(self.window, bg=atzeko_kolor, text='Identifikatzailea...                            ', font=("Times New Roman", 12)).place(x=60, y=67)
+            tk.Label(self.window, bg=atzeko_kolor, text='Pasahitza errepikatu...                         ', font=("Times New Roman", 12)).place(x=60, y=307)

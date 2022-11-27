@@ -64,4 +64,4 @@ class GalderaErantzun(object):
             view.PasahitzaAldatu.PasahitzaAldatu(self.id).__init__()
         else:
             mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Erantzuna ez da egokia', font=("Calibri"))
-            mezu.place(x=60, y=170)
+            mezu.place(x=60, y=250)
