@@ -84,7 +84,7 @@ class DbConn(object):
             return True
         return False
 
-    def pertsonalizazioa_aldatu(self, atzeko, adreilu, musika, erabiltzaile):
+    def pertsonalizazioa_aldatu(self, atzeko, adreilu, botoi, musika, erabiltzaile):
         # EZ BADA EZER ALDATU NAHI PARAMETROREN BATEAN EZ DIRA UPDATE-AK EGIN BEHAR -> if X is not None
         if musika is not None:
             self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
@@ -92,8 +92,8 @@ class DbConn(object):
         if atzeko is not None:
             self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
 
-        #if botoiKol is not None:
-        #    self.cur.execute("UPDATE JOKALARIAK SET botoiKol=(?) WHERE erabiltzailea=(?)", (botoiKol, erabiltzaile,))
+        if botoi is not None:
+            self.cur.execute("UPDATE JOKALARIAK SET botoiKol=(?) WHERE erabiltzailea=(?)", (botoi, erabiltzaile,))
 
         if adreilu is not None:
             self.cur.execute("UPDATE JOKALARIAK SET paleta=(?) WHERE erabiltzailea=(?)", (adreilu, erabiltzaile,))
@@ -116,7 +116,7 @@ class DbConn(object):
     def get_jokalari_botoi_kolor(self, erabiltzaile):
         if erabiltzaile is not None:
             botoi_kolor = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return botoi_kolor.fetchone()
+            return botoi_kolor.fetchone()[0]
         return "#ffffff"
 
     def paleta_lortu(self, erabiltzaile):

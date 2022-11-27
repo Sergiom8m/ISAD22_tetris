@@ -21,6 +21,8 @@ class PasahitzaAldatu(object):
         self.window.geometry('420x420')
         self.aldatu =False
         global atzeko_kolor
+        global botoi_kolor
+        botoi_kolor= DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)

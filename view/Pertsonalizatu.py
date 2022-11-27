@@ -16,7 +16,7 @@ class Pertsonalizatu(object):
         self.erabiltzaile = erabiltzaile
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
-        self.window.geometry('400x800')
+        self.window.geometry('400x450')
         self.window.title("Pertsonalizazio Menua")
         global atzeko_kolor
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
@@ -44,7 +44,7 @@ class Pertsonalizatu(object):
         titulo_fondo.place(x=60, y= 120)
 
         self.fondoa_com_box = ttk.Combobox(self.window, state="readonly",
-                                           values=["Larrosa", "Gorria", "Urdina", "Berdea"])
+                                           values=["Larrosa", "Gorria", "Urdina", "Berdea", "(Default)"])
         self.fondoa_com_box.place(x=150, y=150)
 
         #self.opcion = tk.IntVar()
@@ -110,16 +110,19 @@ class Pertsonalizatu(object):
 
         if self.fondoa_com_box.get() == "Larrosa":
             atzeko_kolor = "#fdcae1"
-            botoi_kolor = "fe5f0"
+            botoi_kolor = "#ede6ec"
         elif self.fondoa_com_box.get() == "Gorria":
             atzeko_kolor = "#ff4040"
             botoi_kolor = "#ff7676"
         elif self.fondoa_com_box.get() == "Urdina":
             atzeko_kolor = "#2196f3"
-            botoi_kolor = "#81c9fa"
+            botoi_kolor = "#b4d7f0"
         elif self.fondoa_com_box.get() == "Berdea":
             atzeko_kolor = "#5ccb5f"
             botoi_kolor = "#98ff96"
+        elif self.fondoa_com_box.get() == "(Default)":
+            atzeko_kolor = "#7ec0ee"
+            botoi_kolor = "#ffffff"
 
 
         self.window['bg'] = atzeko_kolor
@@ -148,6 +151,6 @@ class Pertsonalizatu(object):
         elif self.musika_com_box.get() == "Piano Theme":
             musika = "piano"
 
-        DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, adreilu_kolor, musika, self.erabiltzaile)
+        DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, adreilu_kolor, botoi_kolor, musika, self.erabiltzaile)
         self.irten()
         #JokatuLehioa(atzeko_kolor, atzeko_kolor, self.erabiltzaile).__init__()

@@ -15,6 +15,8 @@ from controller.Soinuak import Soinuak
 abiadura = 1
 tamaina2 = 2
 erabiltzailea= None
+botoi_kolor = "#ffffff"
+atzeko_kolor = "#7ec0ee"
 
 
 class JokatuLehioa(object):
@@ -38,19 +40,25 @@ class JokatuLehioa(object):
         leihoTamaina = (str(self.tamaina * 27) + "x" + "700")
         self.window.geometry(leihoTamaina)
         self.window.title("Tetris Jokoa")
-        # self.window.resizable(False,False)
+
+        global atzeko_kolor
+        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        global botoi_kolor
+        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        self.window['bg'] = atzeko_kolor
+
         global abiadura
         global tamaina2
         abiadura = self.abiadura
         tamaina2 = self.tamaina
 
-        button = tk.Button(self.window, cursor="hand2", text="Partida hasi", bg="#ffffff")
+        button = tk.Button(self.window, cursor="hand2", text="Partida hasi", bg=botoi_kolor)
         button.pack()
 
         puntuazioa = tk.StringVar()
         puntuazioa.set(f"Puntuazioa: {puntuazioa_param}")
 
-        puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg="#ffffff")
+        puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg=botoi_kolor)
         puntuazioalabel.pack()
 
         self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 30), puntuazioalabel=puntuazioa,
@@ -58,8 +66,8 @@ class JokatuLehioa(object):
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
         if self.erabiltzaile is not None:
-            Button(self.window, text="Partida Gorde", bg="#ffffff", command=self.partidaGorde).pack()
-        Button(self.window, text="Irten", bg="#ffffff", command=self.irten).pack()
+            Button(self.window, text="Partida Gorde", bg=botoi_kolor, command=self.partidaGorde).pack()
+        Button(self.window, text="Irten", bg=botoi_kolor, command=self.irten).pack()
         self.window.bind("<Up>", self.canvas.joku_kontrola)
         self.window.bind("<Down>", self.canvas.joku_kontrola)
         self.window.bind("<Right>", self.canvas.joku_kontrola)
