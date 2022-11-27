@@ -108,6 +108,12 @@ class DbConn(object):
             return fondo.fetchone()[0]
         return "#7ec0ee"
 
+    def get_jokalari_botoi_kolor(self, erabiltzaile):
+        if erabiltzaile is not None:
+            bot_kol = self.cur.execute("SELECT kolore_botoi FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
+            return bot_kol.fetchone()
+        return "#ffffff"
+
     def paleta_lortu(self, erabiltzaile):
         if erabiltzaile is not None:
             print("paleta hartzera")

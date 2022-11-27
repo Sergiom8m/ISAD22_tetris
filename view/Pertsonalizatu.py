@@ -36,9 +36,9 @@ class Pertsonalizatu(object):
 
         espacio.pack()
 
-        # ************** ATZEKO KOLOREA *******************
+        # ************** JOKOAREN KOLOREAK *******************
 
-        titulo_fondo = tk.Label(self.window, bg=atzeko_kolor, text="Atzeko kolorea:", font=("Calibri", 14))
+        titulo_fondo = tk.Label(self.window, bg=atzeko_kolor, text="Jokoaren paleta:", font=("Calibri", 14))
         titulo_fondo.place(x=60, y= 120)
 
         self.fondoa_com_box = ttk.Combobox(self.window, state="readonly",
@@ -107,12 +107,16 @@ class Pertsonalizatu(object):
         #Atzeko kolorea:
         if self.fondoa_com_box.get() == "Larrosa":
             atzeko_kolor = "Pink"
+            botoi_kolor = "tomato"
         elif self.fondoa_com_box.get() == "Gorria":
             atzeko_kolor = "tomato"
+            botoi_kolor = "tomato"
         elif self.fondoa_com_box.get() == "Urdina":
             atzeko_kolor = "#7ec0ee"
+            botoi_kolor = "tomato"
         elif self.fondoa_com_box.get() == "Berdea":
             atzeko_kolor = "pale green"
+
 
         self.window['bg'] = atzeko_kolor
 
