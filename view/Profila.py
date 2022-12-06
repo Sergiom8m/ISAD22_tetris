@@ -8,7 +8,7 @@ from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 from view.Pertsonalizatu import Pertsonalizatu
 from controller.db_conn import DbConn
-
+from view.RankingErabakia import RankingErabakia
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -21,7 +21,7 @@ class Profila(object):
         self.erabiltzaile = erabiltzaile
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
-        self.window.geometry('400x400')
+        self.window.geometry('400x550')
         global atzeko_kolor
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
         global botoi_kolor
@@ -92,6 +92,18 @@ class Profila(object):
         separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 6))
         separador.pack()
 
+        buttonRanking = tk.Button(self.window, bg=botoi_kolor, text="Ranking-ak ikusi", cursor="hand2", width=30, command=self.ranking)
+        buttonRanking.pack(ipadx=10, ipady=8)
+
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 6))
+        separador.pack()
+
+        buttonSari = tk.Button(self.window, bg=botoi_kolor, text="Sariak ikusi", cursor="hand2", width=30, command=self.sariak)
+        buttonSari.pack(ipadx=10, ipady=8)
+
+        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 6))
+        separador.pack()
+
         button = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", command=self.irten)
         button.pack(ipadx=10, ipady=8)
 
@@ -113,6 +125,14 @@ class Profila(object):
     def partidaHasi(self):
         self.window.destroy()
         Ezarpenak(self.erabiltzaile).__init__()
+
+    def ranking(self):
+        self.window.destroy()
+        RankingErabakia(self.erabiltzaile).__init__()
+
+    def sariak(self):
+        self.window.destroy()
+        #TODO
 
     def irten(self):
         self.window.destroy()

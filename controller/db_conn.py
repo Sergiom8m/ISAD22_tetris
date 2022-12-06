@@ -8,9 +8,27 @@ class DbConn(object):
         self.con = sqlite3.connect("datubase.db")  # konexioa ezarri
         self.cur = self.con.cursor()
 
-        # "JOKALARIAK" Taula sortu:
+        #https://www.sqlitetutorial.net/sqlite-foreign-key/
+        # Taulak sortu:
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, botoiKol, paleta)")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS MAILAK(tamaina, abiadura)")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS JOKALARIAREN_PR_MAILAKO(erabiltzailea, tamaina_maila, abiadura_maila, puntuazio_record, "
+            "FOREIGN KEY(erabiltzailea) REFERENCES JOKALARIAK(erabiltzailea),"
+            "FOREIGN KEY(tamaina_maila) REFERENCES MAILAK(tamaina), "
+            "FOREIGN KEY(abiadura_maila) REFERENCES MAILAK(abiadura))")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS SARIAK( tamaina_maila, abiadura_maila, izena, beharrezko_puntuazioa, "
+            "FOREIGN KEY(tamaina_maila) REFERENCES MAILAK(tamaina), "
+            "FOREIGN KEY(abiadura_maila) REFERENCES MAILAK(abiadura))")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS JOKALARIAREN_SARIAK(erabiltzailea, izena, tamaina_maila, abiadura_maila, "
+            "FOREIGN KEY(erabiltzailea) REFERENCES JOKALARIAK(erabiltzailea),"
+            "FOREIGN KEY(izena) REFERENCES SARIAK(izena),"
+            "FOREIGN KEY(tamaina_maila) REFERENCES SARIAK(tamaina_maila), "
+            "FOREIGN KEY(abiadura_maila) REFERENCES SARIAK(abiadura_maila))")
 
         # "admin" erabiltzailea sortu eta taulan sartu:
         erabiltzaile_izena = "admin"
@@ -29,6 +47,7 @@ class DbConn(object):
             erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
             self.con.commit()
 
+    ############################ ERABILTZAILEAREN INFORMAZIOA ############################
     def erabiltzailearen_pasahitza_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT pasahitza FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         pasahitza = res.fetchone()
@@ -41,12 +60,14 @@ class DbConn(object):
         res = self.cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()
 
+    ############################ ERREGISTROA ############################
     def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida,
                                          musika, atzeko, botoiKol, paleta):
         self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                          (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
         self.con.commit()  # Datu basean insert-aren commit-a egiten da
 
+    ############################ PARTIDA GORDE/KARGATU ############################
     def partida_gorde(self, id_erabiltzaile, partida, puntuazioa):
         self.cur.execute("UPDATE JOKALARIAK SET partida=(?), puntuazioa=(?) WHERE erabiltzailea=(?)",
                          (partida, puntuazioa, id_erabiltzaile))
@@ -60,6 +81,7 @@ class DbConn(object):
         res = self.cur.execute("SELECT puntuazioa FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()[0]
 
+    ############################ ERABILTZAILEAK EZABATZEKO ############################
     def erabiltzaile_guztiak_lortu(self):
         return self.cur.execute("SELECT erabiltzailea FROM jokalariak").fetchall()
 
@@ -67,6 +89,7 @@ class DbConn(object):
         self.cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         self.con.commit()
 
+    ############################ PASAHITZA ALDATZEKO ############################
     def pasahitza_aldatu(self, id_erabiltzaile, pasahitza, galdera, erantzuna):
         self.cur.execute("UPDATE JOKALARIAK SET pasahitza=(?) WHERE erabiltzailea=(?)", (pasahitza, id_erabiltzaile,))
         self.cur.execute("UPDATE JOKALARIAK SET galdera=(?) WHERE erabiltzailea=(?)", (galdera, id_erabiltzaile,))
@@ -84,6 +107,16 @@ class DbConn(object):
             return True
         return False
 
+    ############################ RANKING-AK LORTZEKO ##############################
+    def ranking_espezifikoa(self, id_erabiltzaile, tamaina, abiadura):
+        #TODO
+        return "ESPECIFICO"
+
+    def ranking_general(self, id_erabiltzaile):
+        #TODO
+        return "GENERAL"
+
+    ############################ PERTSONALIZATU ############################
     def pertsonalizazioa_aldatu(self, atzeko, adreilu, botoi, musika, erabiltzaile):
         # EZ BADA EZER ALDATU NAHI PARAMETROREN BATEAN EZ DIRA UPDATE-AK EGIN BEHAR -> if X is not None
         if musika is not None:
@@ -125,5 +158,6 @@ class DbConn(object):
             return emaitza.fetchone()[0]
         return 1
 
+    ############################ ITXI ############################
     def konexioa_itxi(self):
         self.con.close()

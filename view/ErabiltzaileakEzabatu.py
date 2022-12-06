@@ -20,11 +20,13 @@ class ErabiltzaileakEzabatu(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.title("Erabiltzaileak Ezabatu")
         self.window.geometry('400x400')
-        self.window.resizable(False, False)
+
         global atzeko_kolor
         atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), "admin")
         global  botoi_kolor
         botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), "admin")
+        self.window['bg'] = atzeko_kolor
+        self.window.resizable(False, False)
 
 
         # 1 create a main frame
