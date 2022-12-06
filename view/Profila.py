@@ -9,6 +9,7 @@ from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 from view.Pertsonalizatu import Pertsonalizatu
 from controller.db_conn import DbConn
 from view.RankingErabakia import RankingErabakia
+from view.Sariak import Sariak
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -132,7 +133,7 @@ class Profila(object):
 
     def sariak(self):
         self.window.destroy()
-        #TODO
+        Sariak(self.erabiltzaile).__init__()
 
     def irten(self):
         self.window.destroy()
