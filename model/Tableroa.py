@@ -1,4 +1,6 @@
 from controller.Soinuak import Soinuak
+from controller.db_conn import DbConn
+
 
 class Tableroa:
 	def __init__(self, tamaina):
@@ -19,6 +21,8 @@ class Tableroa:
 				else:
 					self.tab[i][j] = unekoa
 
+	def puntuazioa_eguneratu_DBan(self, erabiltzaile, abiadura): #TODO ABIADURA ES GLOBAL, SE GUARDA BIEN?
+		DbConn.puntuazioa_eguneratu(DbConn(), erabiltzaile, self.tamaina[0], abiadura, self.puntuazioa)
 
 	def hasieratu_tableroa(self):
 		self.tab = [ [ None for y in range(self.tamaina[0])]for x in range(self.tamaina[1])]

@@ -61,7 +61,7 @@ class JokatuLehioa(object):
         puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg=botoi_kolor)
         puntuazioalabel.pack()
 
-        self.canvas = TableroaPanela(master=self.window, tamaina=(tamaina2, 30), puntuazioalabel=puntuazioa,
+        self.canvas = TableroaPanela(master=self.window, erab=self.erabiltzaile, tamaina=(tamaina2, 30), puntuazioalabel=puntuazioa,
                                      partida=partida)
         button.configure(command=self.canvas.jolastu)
         self.canvas.pack()
@@ -100,11 +100,12 @@ class JokatuLehioa(object):
 
 
 class TableroaPanela(tk.Frame):
-    def __init__(self, tamaina, gelazka_tamaina=20, puntuazioalabel=None, master=None, partida=None):
+    def __init__(self, erab, tamaina, gelazka_tamaina=20, puntuazioalabel=None, master=None, partida=None):
         tk.Frame.__init__(self, master)
         self.puntuazio_panela = puntuazioalabel
         self.tamaina = tamaina
         self.partida = partida
+        self.erabiltzaile=erab
         self.gelazka_tamaina = gelazka_tamaina
         global abiadura
 
@@ -156,6 +157,8 @@ class TableroaPanela(tk.Frame):
                 self.tab.sartu_pieza(random.choice(pieza_posibleak)())
             except Exception as e:
                 print("GAMEOVER")
+                if self.erabiltzaile is not None:
+                    self.tab.puntuazioa_eguneratu_DBan(self.erabiltzaile, abiadura)
                 self.tab.hasieratu_tableroa()
                 return
 
