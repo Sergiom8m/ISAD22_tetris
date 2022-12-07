@@ -55,25 +55,42 @@ class Ranking(object):
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
         if tamaina is None:
-            print("General")
-            emaitza = DbConn.ranking_general(DbConn(), self.erabiltzaile)
+            ranking = DbConn.ranking_lortu(DbConn(), 0, 0)
+            nire_pos = DbConn.nire_posizioa_rankingean(DbConn(), erabiltzaile, 0, 0)
         else:
-            print("Especifico")
-            emaitza = DbConn.ranking_espezifikoa(DbConn(), self.erabiltzaile, self.tamaina, self.abiadura)
+            ranking = DbConn.ranking_lortu(DbConn(), self.tamaina, self.abiadura)
+            nire_pos = DbConn.nire_posizioa_rankingean(DbConn(), erabiltzaile, self.tamaina, self.abiadura)
 
-        lerroKop = len(emaitza)
+        lerroKop = len(ranking)
 
         if lerroKop == 0:
             Label(self.marko, text="Ez da partidarik jolastu konfigurazio honekin", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
+            Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor,
+                   command=self.irten).grid(row=10, column=0, pady=10, padx=10)
         else:
             Label(self.marko, text="Posizioa", bg=atzeko_kolor).grid(row=1, column=0, pady=10, padx=10)
             Label(self.marko, text="Puntuazioa", bg=atzeko_kolor).grid(row=1, column=1, pady=10, padx=10)
             Label(self.marko, text="Erabiltzailea", bg=atzeko_kolor).grid(row=1, column=2, pady=10, padx=10)
-            for i in range(lerroKop-1):
-                Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+2, column=0, pady=10, padx=10)
-            Label(self.marko, text="...", bg=atzeko_kolor).grid(row=lerroKop+1, column=1, pady=10, padx=10)
-            Label(self.marko, text=emaitza[lerroKop-1][0], bg=atzeko_kolor).grid(row=lerroKop + 2, column=0, pady=10, padx=10)
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=2, pady=10, padx=10)
+            for i in range(3):
+                if lerroKop>i:
+                    Label(self.marko, text=ranking[i][2], bg=atzeko_kolor).grid(row=i + 2, column=0, pady=10, padx=10)
+                    Label(self.marko, text=ranking[i][1], bg=atzeko_kolor).grid(row=i + 2, column=1, pady=10, padx=10)
+                    Label(self.marko, text=ranking[i][0], bg=atzeko_kolor).grid(row=i + 2, column=2, pady=10, padx=10)
+                else:
+                    Label(self.marko, text=i+1, bg=atzeko_kolor).grid(row=i + 2, column=0, pady=10, padx=10)
+                    Label(self.marko, text='XXXXX', bg=atzeko_kolor).grid(row=i + 2, column=1, pady=10, padx=10)
+                    Label(self.marko, text='XXXXX', bg=atzeko_kolor).grid(row=i + 2, column=2, pady=10, padx=10)
+
+            Label(self.marko, text="...", bg=atzeko_kolor).grid(row=6, column=1, pady=10, padx=10)
+
+            if nire_pos is None:
+                Label(self.marko, text="Ez zaude ranking-ean", bg=atzeko_kolor).grid(row=7, column=0, pady=10, padx=10)
+            else:
+                Label(self.marko, text=nire_pos[0], bg=atzeko_kolor).grid(row=7, column=0, pady=10, padx=10)
+                Label(self.marko, text=nire_pos[1], bg=atzeko_kolor).grid(row=7, column=1, pady=10, padx=10)
+                Label(self.marko, text=erabiltzaile, bg=atzeko_kolor).grid(row=7, column=2, pady=10, padx=10)
+
+            Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=10, column=1, pady=10, padx=10)
         self.window.mainloop()
 
     def irten(self):
