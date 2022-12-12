@@ -59,11 +59,11 @@ class Sariak(object):
         if lerroKop == 0:
             Label(self.marko, text="Ez dago saririk", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
         else:
-            Label(self.marko, text="MAILA", bg=atzeko_kolor).grid(row=1, column=0, pady=10, padx=10)
+            Label(self.marko, text="MAILA", bg=atzeko_kolor).grid(row=1, column=0, pady=10, padx=15)
             Label(self.marko, text="BEHARREZKO P", bg=atzeko_kolor).grid(row=1, column=1, pady=10, padx=10)
-            Label(self.marko, text="1 SARIA", bg=atzeko_kolor).grid(row=1, column=3, pady=10, padx=10)
-            Label(self.marko, text="2 SARIA", bg=atzeko_kolor).grid(row=1, column=5, pady=10, padx=10)
-            Label(self.marko, text="3 SARIA", bg=atzeko_kolor).grid(row=1, column=7, pady=10, padx=10)
+            Label(self.marko, text="1 SARIA", bg=atzeko_kolor).grid(row=1, column=2, pady=10, padx=30, columnspan=2)
+            Label(self.marko, text="2 SARIA", bg=atzeko_kolor).grid(row=1, column=4, pady=10, padx=30, columnspan=2)
+            Label(self.marko, text="3 SARIA", bg=atzeko_kolor).grid(row=1, column=6, pady=10, padx=30, columnspan=2)
             lerro=0
             kont=2
             for i in range(lerroKop):
@@ -87,7 +87,7 @@ class Sariak(object):
                 if kont == 8:
                     kont = 2
                     lerro = lerro+1
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=0, pady=10, padx=10)
+        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=0, pady=10, padx=10, columnspan=8)
         self.window.mainloop()
 
     def irten(self):
