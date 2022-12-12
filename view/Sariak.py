@@ -60,26 +60,24 @@ class Sariak(object):
             Label(self.marko, text="Ez dago saririk", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
         else:
             Label(self.marko, text="MAILA", bg=atzeko_kolor).grid(row=1, column=0, pady=10, padx=10)
-            Label(self.marko, text="PR", bg=atzeko_kolor).grid(row=1, column=1, pady=10, padx=10)
-            Label(self.marko, text="1 SARIA", bg=atzeko_kolor).grid(row=1, column=2, pady=10, padx=10)
-            Label(self.marko, text="2 SARIA", bg=atzeko_kolor).grid(row=1, column=4, pady=10, padx=10)
-            Label(self.marko, text="3 SARIA", bg=atzeko_kolor).grid(row=1, column=6, pady=10, padx=10)
+            Label(self.marko, text="BEHARREZKO P", bg=atzeko_kolor).grid(row=1, column=1, pady=10, padx=10)
+            Label(self.marko, text="1 SARIA", bg=atzeko_kolor).grid(row=1, column=3, pady=10, padx=10)
+            Label(self.marko, text="2 SARIA", bg=atzeko_kolor).grid(row=1, column=5, pady=10, padx=10)
+            Label(self.marko, text="3 SARIA", bg=atzeko_kolor).grid(row=1, column=7, pady=10, padx=10)
             lerro=0
             kont=2
             for i in range(lerroKop):
                 tamaina=emaitza[i][0]
                 abiadura=emaitza[i][1]
                 izena= emaitza[i][2]
-                beharrezko_puntuazioa= emaitza[i][3]
-                if tamaina == 0:
-                    Label(self.marko, text="Orokorra", bg=atzeko_kolor).grid(row=lerro+2, column=0, pady=10, padx=10)
-                else:
-                    maila = str(tamaina)+'x'+str(abiadura)
-                    Label(self.marko, text=maila, bg=atzeko_kolor).grid(row=lerro + 2, column=0, pady=10, padx=10)
+                beharrezko_kop=emaitza[i][3]
+                beharrezko_puntuazioa = DbConn.beharrezko_puntuazioa_lortu(DbConn(), tamaina, abiadura)
+                maila = str(tamaina)+'x'+str(abiadura)
+
+                Label(self.marko, text=maila, bg=atzeko_kolor).grid(row=lerro + 2, column=0, pady=10, padx=10)
                 if kont == 2:
-                    pr = DbConn.puntuazio_record_lortu(DbConn(), self.erabiltzaile, tamaina, abiadura)
-                    Label(self.marko, text=pr, bg=atzeko_kolor).grid(row=lerro + 2, column=1, pady=10, padx=10)
-                Label(self.marko, text=beharrezko_puntuazioa, bg=atzeko_kolor).grid(row=lerro + 2, column=kont, pady=10, padx=10)
+                    Label(self.marko, text=beharrezko_puntuazioa, bg=atzeko_kolor).grid(row=lerro + 2, column=1, pady=10, padx=10)
+                Label(self.marko, text=beharrezko_kop, bg=atzeko_kolor).grid(row=lerro + 2, column=kont, pady=10, padx=10)
                 badu=DbConn.saria_du(DbConn(), self.erabiltzaile, izena, tamaina, abiadura)
                 if badu==True: #TODO IGUAL EL IZENA SOBRA
                     Label(self.marko, text="BAI", bg=atzeko_kolor).grid(row=lerro + 2, column=kont+1, pady=10,padx=10)
@@ -89,7 +87,7 @@ class Sariak(object):
                 if kont == 8:
                     kont = 2
                     lerro = lerro+1
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=2, pady=10, padx=10)
+        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+3, column=0, pady=10, padx=10)
         self.window.mainloop()
 
     def irten(self):

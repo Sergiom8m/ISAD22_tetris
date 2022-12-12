@@ -13,14 +13,14 @@ class DbConn(object):
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, botoiKol, paleta)")
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS MAILAK(tamaina, abiadura)")
+            "CREATE TABLE IF NOT EXISTS MAILAK(tamaina, abiadura, beharrezko_puntuazioa)")
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAREN_PR_MAILAKO(erabiltzailea, tamaina_maila, abiadura_maila, puntuazio_record, "
+            "CREATE TABLE IF NOT EXISTS JOKALARIAREN_PR_MAILAKO(erabiltzailea, tamaina_maila, abiadura_maila, puntuazio_record, lortutako_kopurua, "
             "FOREIGN KEY(erabiltzailea) REFERENCES JOKALARIAK(erabiltzailea),"
             "FOREIGN KEY(tamaina_maila) REFERENCES MAILAK(tamaina), "
             "FOREIGN KEY(abiadura_maila) REFERENCES MAILAK(abiadura))")
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS SARIAK( tamaina_maila, abiadura_maila, izena, beharrezko_puntuazioa, "
+            "CREATE TABLE IF NOT EXISTS SARIAK( tamaina_maila, abiadura_maila, izena, beharrezko_kopurua, "
             "FOREIGN KEY(tamaina_maila) REFERENCES MAILAK(tamaina), "
             "FOREIGN KEY(abiadura_maila) REFERENCES MAILAK(abiadura))")
         self.cur.execute(
@@ -112,33 +112,45 @@ class DbConn(object):
 
     ############################ RANKING-AK KUDEATZEKO ##############################
     def puntuazioa_eguneratu(self, id_erabiltzaile, tamaina, abiadura, puntuazioa):
+        if tamaina !=0:
+            beharrezko_puntuazioa=self.beharrezko_puntuazioa_lortu(tamaina, abiadura)[0]
+            baduPuntuazioa= False
+            if beharrezko_puntuazioa<=puntuazioa:
+                baduPuntuazioa=True
         #OROKORREAN
         puntu = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?) AND "
                                "tamaina_maila=(?) AND abiadura_maila=(?)", (id_erabiltzaile, 0, 0,)).fetchone()
         if puntu is None:
-            self.cur.execute("INSERT INTO JOKALARIAREN_PR_MAILAKO VALUES (?, ?, ?, ?)", (id_erabiltzaile, 0, 0, puntuazioa))
+            self.cur.execute("INSERT INTO JOKALARIAREN_PR_MAILAKO VALUES (?, ?, ?, ?, ?)", (id_erabiltzaile, 0, 0, puntuazioa, 0))
             self.con.commit()
-            self.saria_eguneratu(id_erabiltzaile, 0, 0, puntuazioa)
         else:
             puntu=puntu[0]+puntuazioa
             self.cur.execute("UPDATE JOKALARIAREN_PR_MAILAKO SET puntuazio_record=(?) WHERE erabiltzailea=(?) AND "
                                "tamaina_maila=(?) AND abiadura_maila=(?)", (puntu, id_erabiltzaile, 0, 0,))
             self.con.commit()
-            self.saria_eguneratu(id_erabiltzaile, 0, 0, puntu)
         #MAILETAN
-        puntu2 = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?) AND "
-                                 "tamaina_maila=(?) AND abiadura_maila=(?)", (id_erabiltzaile, tamaina, abiadura,)).fetchone()
+        puntu2 = self.cur.execute("SELECT puntuazio_record, lortutako_kopurua FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?) AND "
+                               "tamaina_maila=(?) AND abiadura_maila=(?)", (id_erabiltzaile, tamaina, abiadura,)).fetchone()
         if puntu2 is None:
-            self.cur.execute("INSERT INTO JOKALARIAREN_PR_MAILAKO VALUES (?, ?, ?, ?)",
-                             (id_erabiltzaile, tamaina, abiadura, puntuazioa))
+            if baduPuntuazioa:
+                self.cur.execute("INSERT INTO JOKALARIAREN_PR_MAILAKO VALUES (?, ?, ?, ?, ?)",
+                             (id_erabiltzaile, tamaina, abiadura, puntuazioa, 1))
+            else:
+                self.cur.execute("INSERT INTO JOKALARIAREN_PR_MAILAKO VALUES (?, ?, ?, ?, ?)",
+                                 (id_erabiltzaile, tamaina, abiadura, puntuazioa, 0))
             self.con.commit()
-            self.saria_eguneratu(id_erabiltzaile, tamaina, abiadura, puntuazioa)
         else:
             if puntu2[0]<puntuazioa:
                 self.cur.execute("UPDATE JOKALARIAREN_PR_MAILAKO SET puntuazio_record=(?) WHERE erabiltzailea=(?) AND "
                              "tamaina_maila=(?) AND abiadura_maila=(?)", (puntuazioa, id_erabiltzaile, tamaina, abiadura,))
                 self.con.commit()
-                self.saria_eguneratu(id_erabiltzaile, tamaina, abiadura, puntuazioa)
+            if baduPuntuazioa:
+                k= puntu2[1]+1
+                self.cur.execute("UPDATE JOKALARIAREN_PR_MAILAKO SET lortutako_kopurua=(?) WHERE erabiltzailea=(?) AND "
+                                 "tamaina_maila=(?) AND abiadura_maila=(?)",
+                                 (k, id_erabiltzaile, tamaina, abiadura,))
+                self.con.commit()
+                self.saria_eguneratu(id_erabiltzaile, tamaina, abiadura, k)
     ############################ RANKING-AK LORTZEKO ##############################
     def nire_posizioa_rankingean(self, erabiltzaile, tamaina, abiadura):
         ranking = self.ranking_lortu(tamaina, abiadura)
@@ -155,12 +167,13 @@ class DbConn(object):
 
 
     ########################### SARIAK LORTU ############################
-    def saria_eguneratu(self, erabiltzaile, tamaina, abiadura, puntuazioa):
-        maila_sariak = self.cur.execute("SELECT izena, beharrezko_puntuazioa FROM SARIAK WHERE tamaina_maila=(?) "
+    def saria_eguneratu(self, erabiltzaile, tamaina, abiadura, kopurua):
+        #self.cur.execute()
+        maila_sariak = self.cur.execute("SELECT izena, beharrezko_kopurua FROM SARIAK WHERE tamaina_maila=(?) "
                                         "AND abiadura_maila=(?)",(tamaina, abiadura,)).fetchall()
         lerroKop=len(maila_sariak)
         for i in range(lerroKop):
-            if maila_sariak[i][1]<puntuazioa:
+            if maila_sariak[i][1]<=kopurua:
                 re = self.cur.execute("SELECT * FROM JOKALARIAREN_SARIAK WHERE erabiltzailea=(?) AND "
                                  "izena=(?) AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile,maila_sariak[i][0], tamaina,abiadura,)).fetchone()
                 if re is None:
@@ -169,6 +182,8 @@ class DbConn(object):
                     self.con.commit()
     def sariak_lortu(self):
         return self.cur.execute("SELECT * FROM SARIAK").fetchall()
+    def beharrezko_puntuazioa_lortu(self, tamaina, abiadura):
+        return self.cur.execute("SELECT beharrezko_puntuazioa FROM MAILAK WHERE tamaina=(?) AND abiadura=(?)", (tamaina, abiadura, )).fetchone()
     def saria_du(self, erabiltzaile, izena, tamaina, abiadura):
         res = self.cur.execute("SELECT * FROM JOKALARIAREN_SARIAK WHERE erabiltzailea=(?) AND izena=(?)"
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, izena, tamaina, abiadura,))
@@ -229,31 +244,24 @@ class DbConn(object):
     def mailak_taula_bete(self):
         query = self.cur.execute("SELECT * FROM MAILAK")
         if query.fetchone() is None:
-            #Maila orokorra 0 bidez adieraziko dugu:
-            self.cur.execute("INSERT INTO MAILAK VALUES (?, ?)", (0, 0))
-            self.con.commit()
             #Beste maila guztiak
             tamaina= [10,20,30,40]
             abiadura=[800,400,200,100]
+            beharrezkoPuntuazio=[100, 50, 30, 10]
             for i in range(len(tamaina)):
                 for j in range(len(abiadura)):
-                    self.cur.execute("INSERT INTO MAILAK VALUES (?, ?)", (
-                        tamaina[i], abiadura[j]))
+                    self.cur.execute("INSERT INTO MAILAK VALUES (?, ?, ?)", (
+                        tamaina[i], abiadura[j], beharrezkoPuntuazio[j]))
                     self.con.commit()
 
     def sariak_taula_bete(self):
         query = self.cur.execute("SELECT * FROM SARIAK")
         if query.fetchone() is None:
             sariak = ["Basic", "Pro", "Super Pro"]
-            puntuazio_min=[1000, 10000, 100000]
-            # Maila orokorra 0 bidez adieraziko dugu:
-            for i in range(len(sariak)):
-                self.cur.execute("INSERT INTO SARIAK VALUES (?, ?, ?, ?)",
-                                 (0, 0, sariak[i], puntuazio_min[i]))
-                self.con.commit()
-            # Beste maila guztiak
+            puntuazio_min=[2, 4, 6]
             tamaina = [10, 20, 30, 40]
             abiadura = [800, 400, 200, 100]
+
             for i in range(len(tamaina)):
                 for j in range(len(abiadura)):
                     for x in range(len(sariak)):
