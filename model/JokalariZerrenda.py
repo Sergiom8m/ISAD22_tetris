@@ -17,7 +17,6 @@ class JokalariZerrenda(object):
 
     def get_erabiltzailea_idz(self, id):
         emaitza = DbConn().erabiltzailea_idz_lortu(id)
-        #TODO SI JUEGA SIN REGISTRARSE
         if emaitza is not None:
             jokalari = Jokalari(emaitza[0], emaitza[1], emaitza[2],
                             emaitza[3], emaitza[4], emaitza[5],
