@@ -60,7 +60,7 @@ class DbConn(object):
             return pasahitza[0]
 
     def erabiltzailea_idz_lortu(self, id_erabiltzaile):
-        res = self.cur.execute("SELECT erabiltzailea FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
+        res = self.cur.execute("SELECT * FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()
 
     ############################ ERREGISTROA ############################
@@ -98,10 +98,6 @@ class DbConn(object):
         self.cur.execute("UPDATE JOKALARIAK SET galdera=(?) WHERE erabiltzailea=(?)", (galdera, id_erabiltzaile,))
         self.cur.execute("UPDATE JOKALARIAK SET erantzuna=(?) WHERE erabiltzailea=(?)", (erantzuna, id_erabiltzaile,))
         self.con.commit()
-
-    def galdera_lortu(self, id_erabiltzaile):
-        res = self.cur.execute("SELECT galdera FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
-        return res.fetchone()[0]
 
     def erantzuna_ondo_dago(self, id_erabiltzaile, erantzuna):
         res = self.cur.execute("SELECT erantzuna FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
@@ -220,19 +216,6 @@ class DbConn(object):
             emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
             return emaitza.fetchone()[0]
         return "ez"
-
-    def get_jokalari_fondoa(self, erabiltzaile):
-        if erabiltzaile is not None:
-            fondo = self.cur.execute("SELECT atzeko FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            #botKol = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return fondo.fetchone()[0]
-        return "#7ec0ee"
-
-    def get_jokalari_botoi_kolor(self, erabiltzaile):
-        if erabiltzaile is not None:
-            botoi_kolor = self.cur.execute("SELECT botoiKol FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return botoi_kolor.fetchone()[0]
-        return "#ffffff"
 
     def paleta_lortu(self, erabiltzaile):
         if erabiltzaile is not None:

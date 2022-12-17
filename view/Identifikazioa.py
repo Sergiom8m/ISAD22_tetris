@@ -4,7 +4,7 @@ import tkinter as tk
 import view.HasierakoMenua
 from view.Profila import Profila
 from view.PasahitzaBerreskuratu import PasahitzaBerreskuratu
-from controller.db_conn import DbConn
+from model.JokalariZerrenda import JokalariZerrenda
 
 # Koloreak
 botoi_kolor = "#ffffff"
@@ -66,17 +66,17 @@ class Identifikazioa(object):
     # DATU BASEAREKIN KONEKTATZEKO:
     def identifik_erregis(self):
         id = self.erabiltzaile.get()
-        pasahitza = self.pasahitza.get()
+        sartutako_pasahitza = self.pasahitza.get()
 
-        if (len(id) != 0) & (len(pasahitza) != 0):
-            db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
-            if db_pasahitza is None:
+        if (len(id) != 0) & (len(sartutako_pasahitza) != 0):
+            jokalaria = JokalariZerrenda().get_erabiltzailea_idz(id)
+
+            if jokalaria.pasahitza is None:
                 error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                  text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
                 error.place(x=70, y=300)
             else:
-                db_pasahitza = DbConn.erabiltzailearen_pasahitza_lortu(DbConn(), id)
-                if pasahitza != db_pasahitza:
+                if sartutako_pasahitza != jokalaria.pasahitza:
                     error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                  text='Pasahitza ez du koinziditzen                ',
                                  font=("Times New Roman", 16))

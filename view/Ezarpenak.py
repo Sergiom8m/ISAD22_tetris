@@ -1,8 +1,8 @@
 import tkinter as tk
 import sys
 import view
-from controller.db_conn import DbConn
 from view.JokatuLehioa import JokatuLehioa
+from model.JokalariZerrenda import JokalariZerrenda
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -18,9 +18,9 @@ class Ezarpenak(object):
         self.window.geometry('400x400')
         self.window.title("Tetris Jokoa")
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
@@ -30,10 +30,16 @@ class Ezarpenak(object):
         titulo.pack()
         espacio.pack()
 
-        mensaje = tk.Label(self.window, bg=atzeko_kolor, text="Partidaren ezaugarriak aukera itzazu ", font=("Calibri"))
+        mensaje = tk.Label(self.window,
+                           bg=atzeko_kolor,
+                           text="Partidaren ezaugarriak aukera itzazu ",
+                           font=("Calibri"))
         mensaje.pack()
 
-        mensaje2 = tk.Label(self.window, bg=atzeko_kolor, text="(bana aukeratu arte ezingo da partida hasi) ", font=("Calibri"))
+        mensaje2 = tk.Label(self.window,
+                            bg=atzeko_kolor,
+                            text="(bana aukeratu arte ezingo da partida hasi) ",
+                            font=("Calibri"))
         mensaje2.pack()
 
         espacio.pack()
@@ -44,10 +50,30 @@ class Ezarpenak(object):
         self.opcion = tk.IntVar()
         self.opcion.set(value=1)
 
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Erraza", variable=self.opcion, value=1).place(x=20, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Ertaina", variable=self.opcion, value=2).place(x=115, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Zaila", variable=self.opcion, value=3).place(x=210, y=150)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Oso zaila", variable=self.opcion, value=4).place(x=290, y=150)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Erraza",
+                       variable=self.opcion,
+                       value=1).place(x=20, y=150)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Ertaina",
+                       variable=self.opcion,
+                       value=2).place(x=115, y=150)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Zaila",
+                       variable=self.opcion,
+                       value=3).place(x=210, y=150)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Oso zaila",
+                       variable=self.opcion,
+                       value=4).place(x=290, y=150)
 
         titulo_tamaina = tk.Label(self.window, bg=atzeko_kolor, text="Tamaina:", font=("Calibri", 14))
         titulo_tamaina.place(x=60, y=190)
@@ -55,27 +81,57 @@ class Ezarpenak(object):
         self.opcion2 = tk.IntVar()
         self.opcion2.set(value=1)
 
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Txikia", variable=self.opcion2, value=1).place(x=20, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Ertaina", variable=self.opcion2, value=2).place(x=100, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor,text="Ertain-handia", variable=self.opcion2, value=3).place(x=185, y=230)
-        tk.Radiobutton(self.window, cursor="hand2", bg=atzeko_kolor, text="Handia", variable=self.opcion2, value=4).place(x=310, y=230)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Txikia",
+                       variable=self.opcion2,
+                       value=1).place(x=20, y=230)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Ertaina",
+                       variable=self.opcion2,
+                       value=2).place(x=100, y=230)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Ertain-handia",
+                       variable=self.opcion2,
+                       value=3).place(x=185, y=230)
+        tk.Radiobutton(self.window,
+                       cursor="hand2",
+                       bg=atzeko_kolor,
+                       text="Handia",
+                       variable=self.opcion2,
+                       value=4).place(x=310, y=230)
 
-        buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
+        buttonirten = tk.Button(self.window,
+                                cursor="hand2",
+                                bg=botoi_kolor,
+                                text="Irten",
+                                width=8,
+                                font="Calibri",
+                                command=self.irten)
         buttonirten.place(x=60, y=300)
-        buttonj = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Jolastu", width=8, font=("Calibri"), command=self.jolastenHasi)
+        buttonj = tk.Button(self.window,
+                            cursor="hand2",
+                            bg=botoi_kolor,
+                            text="Jolastu",
+                            width=8,
+                            font="Calibri",
+                            command=self.jolastenHasi)
         buttonj.place(x=220, y=300)
-
 
         self.window.mainloop()
 
     # PANTAILETAN MUGITZEKO
     def irten(self):
         self.window.destroy()
-        if(self.erabiltzaile is None):
+        if self.erabiltzaile is None:
             view.HasierakoMenua.HasierakoMenua().__init__()
         else:
             view.Profila.Profila(self.erabiltzaile).__init__()
-
 
     def jolastenHasi(self):
         self.window.destroy()

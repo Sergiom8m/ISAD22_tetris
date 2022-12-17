@@ -1,8 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
-import sqlite3
 import sys
 import view
+from model.JokalariZerrenda import JokalariZerrenda
 from controller.db_conn import DbConn
 
 botoi_kolor = "#ffffff"
@@ -24,8 +23,9 @@ class GalderaErantzun(object):
         izenburu1.pack()
         izenburu2 = tk.Label(self.window, bg=atzeko_kolor, text='ERANTZUN', font=("Times New Roman", 25))
         izenburu2.pack()
-        self.id=id
-        g = DbConn.galdera_lortu(DbConn(), id)
+        self.id = id
+
+        g = JokalariZerrenda().get_erabiltzailea_idz(id).galdera
 
         mezu = tk.Label(self.window, bg=atzeko_kolor, text='Erantzun ezazu galdera... ',
                         font=("Times New Roman", 16))
@@ -58,6 +58,7 @@ class GalderaErantzun(object):
         view.Identifikazioa.Identifikazioa().__init__()
 
     def konprobatu(self):
+
         ondo = DbConn.erantzuna_ondo_dago(DbConn(), self.id, self.erantzuna.get())
         if(ondo):
             self.window.destroy()

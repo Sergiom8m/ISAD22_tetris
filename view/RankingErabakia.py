@@ -1,8 +1,8 @@
 import tkinter as tk
 import sys
 import view
-from controller.db_conn import DbConn
 from view.Ranking import Ranking
+from model.JokalariZerrenda import JokalariZerrenda
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -18,9 +18,9 @@ class RankingErabakia(object):
         self.window.geometry('400x400')
         self.window.title("Ranking Erabakia")
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

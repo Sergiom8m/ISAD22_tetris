@@ -59,7 +59,7 @@ class HasierakoMenua(object):
 
         self.window.mainloop()
 
-    # PANTAILAZ ALDATZEKO  METODOAK:
+    # PANTAILAZ ALDATZEKO METODOAK:
     def pantailaPartidaBerria(self):
         self.window.destroy()
         Ezarpenak.Ezarpenak(None).__init__(None)

@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import sys
 from view import Profila
+from model.JokalariZerrenda import JokalariZerrenda
 from controller.db_conn import DbConn
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
@@ -25,9 +26,9 @@ class Ranking(object):
         self.abiadura=abiadura
         self.erabiltzaile=erabiltzaile
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
-        global  botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        global botoi_kolor
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

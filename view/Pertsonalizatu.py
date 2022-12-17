@@ -2,7 +2,9 @@ import tkinter as tk
 import sys
 from tkinter import ttk
 import view
+from model.JokalariZerrenda import JokalariZerrenda
 from controller.db_conn import DbConn
+
 
 # Defektuzko koloreak
 botoi_kolor = "#ffffff"
@@ -19,9 +21,9 @@ class Pertsonalizatu(object):
         self.window.geometry('400x450')
         self.window.title("Pertsonalizazio Menua")
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
-        global  botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        global botoi_kolor
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

@@ -5,14 +5,14 @@ import view
 from model.Tableroa import Tableroa
 from model.Piezak import *
 import sys
-import Irudiak
 import model.Piezak as piezak
 from tkinter import *
-from decimal import *
-from controller.db_conn import DbConn
 from controller.Soinuak import Soinuak
+from model.JokalariZerrenda import JokalariZerrenda
+from controller.db_conn import DbConn
 
 abiadura = 1
+tamaina2 = 2
 tamaina2 = 2
 erabiltzailea= None
 botoi_kolor = "#ffffff"
@@ -33,7 +33,7 @@ class JokatuLehioa(object):
         erabiltzailea=self.erabiltzaile
         piezak.erabiltzailea = erabiltzailea
 
-        Soinuak.play_music(Soinuak(), DbConn.get_jokalari_musika(DbConn(), self.erabiltzaile))
+        Soinuak.play_music(Soinuak(), JokalariZerrenda().get_erabiltzailea_idz(self.erabiltzaile))
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
@@ -42,9 +42,9 @@ class JokatuLehioa(object):
         self.window.title("Tetris Jokoa")
 
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
 
         global abiadura

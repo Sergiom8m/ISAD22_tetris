@@ -1,9 +1,8 @@
 import tkinter as tk
 import sys
-import sqlite3
 
 import view
-from controller.db_conn import DbConn
+from model.JokalariZerrenda import JokalariZerrenda
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -20,9 +19,9 @@ class PasahitzaAldatu(object):
         self.window.title("Pasahitza Aldatu")
         self.window.geometry('420x420')
         global atzeko_kolor
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor= DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg']=atzeko_kolor
         self.window.resizable(False, False)
         izenburua = tk.Label(self.window, bg=atzeko_kolor, text='PASAHITZA ALDATU', font=("Times New Roman", 25))
@@ -75,23 +74,23 @@ class PasahitzaAldatu(object):
 
     def aldatuta(self):
         id = self.erabiltzaile
-        p1 = self.pasahitz.get()
-        p2 = self.pasahitz2.get()
-        g = self.galdera.get()
-        e = self.erantzuna.get()
-        if ((len(p1) != 0) & (len(p2) != 0)):
-            erab = DbConn.erabiltzailea_idz_lortu(DbConn(), id)
-            if (erab is None):
+        pasahitza1 = self.pasahitz.get()
+        pasahitza2 = self.pasahitz2.get()
+        galdera = self.galdera.get()
+        erantzuna = self.erantzuna.get()
+        if ((len(pasahitza1) != 0) & (len(pasahitza2) != 0)):
+            erab = JokalariZerrenda().get_erabiltzailea_idz(id)
+            if erab is None:
                 mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Erabiltzailea ez da existitzen          ',
                                 font=("Calibri"))
                 mezu.place(x=60, y=350)
             else:
-                if(p1==p2):
+                if pasahitza1 == pasahitza2:
                     mezu = tk.Label(self.window, bg=atzeko_kolor, fg="green",
                                     text='Ondo aldatu da      ',
                                     font=("Calibri"))
                     mezu.place(x=60, y=350)
-                    DbConn.pasahitza_aldatu(DbConn(), id, p1, g, e)
+                    JokalariZerrenda().erabiltzailearen_pasahitza_aldatu(id, pasahitza1, galdera, erantzuna)
                 else:
                     mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Pasahitzak ez dira berdinak        ',
                                     font=("Calibri"))

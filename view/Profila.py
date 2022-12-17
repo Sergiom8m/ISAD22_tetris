@@ -7,9 +7,10 @@ from view.PasahitzaAldatu import PasahitzaAldatu
 from view.Ezarpenak import Ezarpenak
 from view.ErabiltzaileakEzabatu import ErabiltzaileakEzabatu
 from view.Pertsonalizatu import Pertsonalizatu
-from controller.db_conn import DbConn
 from view.RankingErabakia import RankingErabakia
 from view.Sariak import Sariak
+
+from model.JokalariZerrenda import JokalariZerrenda
 
 #Koloreak
 botoi_kolor = "#ffffff"
@@ -24,11 +25,10 @@ class Profila(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x550')
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
-        global botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+
         self.window['bg']=atzeko_kolor
         self.window.title("Jokalariaren Profila")
         self.window.resizable(False, False)
@@ -59,7 +59,7 @@ class Profila(object):
 
         separador.pack()
 
-        self.erantzuna = DbConn.partida_kargatuta(DbConn(), self.erabiltzaile)
+        self.erantzuna = JokalariZerrenda().get_jokalari_gordetako_partida(self.erabiltzaile)
 
         if self.erantzuna == "#":
             button = tk.Button(self.window,bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, state="disabled")

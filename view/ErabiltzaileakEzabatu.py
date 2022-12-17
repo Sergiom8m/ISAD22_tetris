@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import sys
 from view import Profila
-from controller.db_conn import DbConn
+from model.JokalariZerrenda import JokalariZerrenda
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
 
@@ -22,9 +22,9 @@ class ErabiltzaileakEzabatu(object):
         self.window.geometry('400x400')
 
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), "admin")
-        global  botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), "admin")
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        global botoi_kolor
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
@@ -51,22 +51,51 @@ class ErabiltzaileakEzabatu(object):
         # 6 add that new frame to a window in the canvas
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
-        emaitza = DbConn.erabiltzaile_guztiak_lortu(DbConn())
-        lerroKop = len(emaitza)
+        emaitza = JokalariZerrenda().get_erabiltzaile_guztiak()
+        lerro_kop = len(emaitza)
 
-        Label(self.marko, text="Datu baseko erabiltzaileak:", font="Helvetica 12 bold", bg=atzeko_kolor).grid(row=0, column=0, pady=10, padx=10)
+        Label(self.marko, text="Datu baseko erabiltzaileak:", font="Helvetica 12 bold", bg=atzeko_kolor).grid(row=0,
+                                                                                                              column=0,
+                                                                                                              pady=10,
+                                                                                                              padx=10)
         for i in range(len(emaitza)):
             if emaitza[i][0] != "admin":  # "admin" ezin denez ezabatu, ezin da inprimatuko
-                Label(self.marko, text=emaitza[i][0], bg=atzeko_kolor).grid(row=i+1, column=0, pady=10, padx=10)
-                Button(self.marko, text="Ezabatu", cursor="hand2", bg=botoi_kolor, command=lambda lerro=i: self.erabiltzailea_ezabatu(emaitza[lerro][0])).grid(row=i+1, column=1, pady=10, padx=10)
-        if lerroKop == 1:  # beti egongo da erabiltzaile bat, "admin"
-            Label(self.marko, text="Ez dago erabiltzailerik", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
-        Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=lerroKop+2, column=1, pady=10, padx=10)
+                Label(self.marko,
+                      text=emaitza[i][0],
+                      bg=atzeko_kolor).grid(row=i+1,
+                                            column=0,
+                                            pady=10,
+                                            padx=10)
+                Button(self.marko,
+                       text="Ezabatu",
+                       cursor="hand2",
+                       bg=botoi_kolor,
+                       command=lambda lerro=i: self.erabiltzailea_ezabatu(emaitza[lerro][0])).grid(row=i+1,
+                                                                                                   column=1,
+                                                                                                   pady=10,
+                                                                                                   padx=10)
+        if lerro_kop == 1:  # beti egongo da erabiltzaile bat, "admin"
+            Label(self.marko,
+                  text="Ez dago erabiltzailerik",
+                  font="Helvetica",
+                  bg=atzeko_kolor).grid(row=lerro_kop,
+                                        column=0,
+                                        pady=10,
+                                        padx=10)
+        Button(self.marko,
+               text="Irten",
+               cursor="hand2",
+               width=8,
+               font=("Times New Roman", 16),
+               bg=botoi_kolor,
+               command=self.irten).grid(row=lerro_kop+2,
+                                        column=1,
+                                        pady=10,
+                                        padx=10)
         self.window.mainloop()
 
     def erabiltzailea_ezabatu(self, erabiltzaile):
-        print(erabiltzaile)
-        DbConn.erabiltzaile_ezabatu(DbConn(), erabiltzaile)
+        JokalariZerrenda().erabiltzailea_ezabatu(erabiltzaile)
         self.window.destroy()
         ErabiltzaileakEzabatu().__init__()
 

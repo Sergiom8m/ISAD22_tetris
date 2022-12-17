@@ -4,6 +4,8 @@ from tkinter import ttk
 import sys
 from view import Profila
 from controller.db_conn import DbConn
+from model.JokalariZerrenda import JokalariZerrenda
+from model.SarienZerrenda import SarienZerrenda
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
 
@@ -23,9 +25,9 @@ class Sariak(object):
 
         self.erabiltzaile=erabiltzaile
         global atzeko_kolor
-        atzeko_kolor = DbConn.get_jokalari_fondoa(DbConn(), self.erabiltzaile)
-        global  botoi_kolor
-        botoi_kolor = DbConn.get_jokalari_botoi_kolor(DbConn(), self.erabiltzaile)
+        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        global botoi_kolor
+        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
@@ -52,8 +54,7 @@ class Sariak(object):
         # 6 add that new frame to a window in the canvas
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
-
-        emaitza = DbConn.sariak_lortu(DbConn())
+        emaitza = SarienZerrenda().get_sari_guztiak()
         lerroKop = len(emaitza)
         #TODO
         if lerroKop == 0:
