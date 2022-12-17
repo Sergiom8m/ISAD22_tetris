@@ -31,6 +31,10 @@ class Sariak(object):
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 
+        imagen2 = PhotoImage(file='Irudiak/2.png')
+        imagen4 = PhotoImage(file='Irudiak/4.png')
+        imagen6 = PhotoImage(file='Irudiak/6.png')
+
 
         # 1 create a main frame
         nagusia = Frame(self.window, bg=atzeko_kolor)
@@ -56,7 +60,6 @@ class Sariak(object):
 
         emaitza = SarienZerrenda().get_sari_guztiak()
         lerroKop = len(emaitza)
-        #TODO
         if lerroKop == 0:
             Label(self.marko, text="Ez dago saririk", font="Helvetica", bg=atzeko_kolor).grid(row=lerroKop, column=0, pady=10, padx=10)
         else:
@@ -80,10 +83,15 @@ class Sariak(object):
                     Label(self.marko, text=beharrezko_puntuazioa, bg=atzeko_kolor).grid(row=lerro + 2, column=1, pady=10, padx=10)
                 Label(self.marko, text=beharrezko_kop, bg=atzeko_kolor).grid(row=lerro + 2, column=kont, pady=10, padx=10)
                 badu=DbConn.saria_du(DbConn(), self.erabiltzaile, izena, tamaina, abiadura)
-                if badu==True: #TODO IGUAL EL IZENA SOBRA
-                    Label(self.marko, text="BAI", bg=atzeko_kolor).grid(row=lerro + 2, column=kont+1, pady=10,padx=10)
+                if badu==True:
+                    if kont==2:
+                        Label(self.marko, image=imagen2).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
+                    elif kont==4:
+                        Label(self.marko, image=imagen4).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
+                    elif kont==6:
+                        Label(self.marko, image=imagen6).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
                 else:
-                    Label(self.marko, text="EZ", bg=atzeko_kolor).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
+                    Label(self.marko, text="X", bg=atzeko_kolor).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
                 kont = kont+2
                 if kont == 8:
                     kont = 2

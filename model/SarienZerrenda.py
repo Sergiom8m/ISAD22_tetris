@@ -9,4 +9,4 @@ class SarienZerrenda(object):
         return SarienZerrenda.__instance
 
     def get_sari_guztiak(self):
-        DbConn().sariak_lortu()
+        return DbConn().sariak_lortu()

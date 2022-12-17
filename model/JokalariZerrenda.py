@@ -17,10 +17,13 @@ class JokalariZerrenda(object):
 
     def get_erabiltzailea_idz(self, id):
         emaitza = DbConn().erabiltzailea_idz_lortu(id)
-        jokalari = Jokalari(emaitza[0], emaitza[1], emaitza[2],
+        #TODO SI JUEGA SIN REGISTRARSE
+        if emaitza is not None:
+            jokalari = Jokalari(emaitza[0], emaitza[1], emaitza[2],
                             emaitza[3], emaitza[4], emaitza[5],
                             emaitza[6], emaitza[7], emaitza[8], emaitza[9])
-        return jokalari
+            return jokalari
+        return None
 
     def erabiltzailea_gehitu(self, jokalari):
         DbConn().erabiltzaile_berria_erregistratu(
@@ -37,10 +40,10 @@ class JokalariZerrenda(object):
         )
 
     def erabiltzailea_ezabatu(self, erabiltzaile):
-        DbConn.erabiltzaile_ezabatu(erabiltzaile)
+        DbConn().erabiltzaile_ezabatu(erabiltzaile)
 
     def erabiltzailearen_pasahitza_aldatu(self, id, pasahitza, galdera, erantzuna):
         DbConn().pasahitza_aldatu(id, pasahitza, galdera, erantzuna)
 
     def get_jokalari_gordetako_partida(self, erabiltzaile):
-        DbConn().partida_kargatuta(erabiltzaile)
+        return DbConn().partida_kargatuta(erabiltzaile)

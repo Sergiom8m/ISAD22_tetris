@@ -125,7 +125,7 @@ class Profila(object):
         ErabiltzaileakEzabatu().__init__()
     def partidaHasi(self):
         self.window.destroy()
-        Ezarpenak(self.erabiltzaile).__init__()
+        Ezarpenak(self.erabiltzaile).__init__(self.erabiltzaile)
 
     def ranking(self):
         self.window.destroy()

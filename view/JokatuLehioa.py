@@ -33,7 +33,8 @@ class JokatuLehioa(object):
         erabiltzailea=self.erabiltzaile
         piezak.erabiltzailea = erabiltzailea
 
-        Soinuak.play_music(Soinuak(), JokalariZerrenda().get_erabiltzailea_idz(self.erabiltzaile))
+        if self.erabiltzaile is not None:
+            Soinuak.play_music(Soinuak(), JokalariZerrenda().get_erabiltzailea_idz(self.erabiltzaile).soinua)
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)

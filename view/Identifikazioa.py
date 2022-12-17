@@ -71,7 +71,7 @@ class Identifikazioa(object):
         if (len(id) != 0) & (len(sartutako_pasahitza) != 0):
             jokalaria = JokalariZerrenda().get_erabiltzailea_idz(id)
 
-            if jokalaria.pasahitza is None:
+            if jokalaria is None:
                 error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                  text='Ez dago erabiltzaile hori                  ', font=("Times New Roman", 16))
                 error.place(x=70, y=300)
