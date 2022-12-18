@@ -161,13 +161,7 @@ class DbConn(object):
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, izena, tamaina, abiadura,))
         return res.fetchone()
 
-    def puntuazio_record_lortu(self, erabiltzaile, tamaina, abiadura):
-        res = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?)"
-                               "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, tamaina, abiadura,))
-        emaitza = res.fetchone()
-        if emaitza is None:
-            return "XXXXX"
-        return emaitza[0] #TODO IGUAL DA ERROR
+
 
     ############################ PERTSONALIZATU ############################
     def get_jokalari_musika(self, erabiltzaile):

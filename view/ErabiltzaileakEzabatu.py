@@ -21,6 +21,8 @@ class ErabiltzaileakEzabatu(object):
         self.window.title("Erabiltzaileak Ezabatu")
         self.window.geometry('400x400')
 
+        self.erabiltzailea= erabiltzailea
+
         global atzeko_kolor
         atzeko_kolor = erabiltzailea.atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
@@ -97,8 +99,8 @@ class ErabiltzaileakEzabatu(object):
     def erabiltzailea_ezabatu(self, erabiltzaile):
         JokalariZerrenda().erabiltzailea_ezabatu(erabiltzaile)
         self.window.destroy()
-        ErabiltzaileakEzabatu().__init__()
+        ErabiltzaileakEzabatu(self.erabiltzailea).__init__()
 
     def irten(self):
         self.window.destroy()
-        Profila.Profila("admin").__init__()
+        Profila.Profila(self.erabiltzailea).__init__()

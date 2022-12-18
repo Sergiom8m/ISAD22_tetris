@@ -22,7 +22,7 @@ class Tableroa:
 					self.tab[i][j] = unekoa
 
 	def puntuazioa_eguneratu_DBan(self, erabiltzaile, abiadura): #TODO ABIADURA ES GLOBAL, SE GUARDA BIEN?
-		DbConn.puntuazioa_eguneratu(DbConn(), erabiltzaile, self.tamaina[0], abiadura, self.puntuazioa)
+		DbConn.puntuazioa_eguneratu(DbConn(), erabiltzaile.erabiltzaile_id, self.tamaina[0], abiadura, self.puntuazioa)
 
 	def hasieratu_tableroa(self):
 		self.tab = [ [ None for y in range(self.tamaina[0])]for x in range(self.tamaina[1])]

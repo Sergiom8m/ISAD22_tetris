@@ -89,7 +89,7 @@ class Ranking(object):
             else:
                 Label(self.marko, text=nire_pos[0], bg=atzeko_kolor).grid(row=7, column=0, pady=10, padx=10)
                 Label(self.marko, text=nire_pos[1], bg=atzeko_kolor).grid(row=7, column=1, pady=10, padx=10)
-                Label(self.marko, text=erabiltzaile, bg=atzeko_kolor).grid(row=7, column=2, pady=10, padx=10)
+                Label(self.marko, text=erabiltzaile.erabiltzaile_id, bg=atzeko_kolor).grid(row=7, column=2, pady=10, padx=10)
 
             Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor,
                    command=self.irten).grid(row=10, column=1, pady=10, padx=10)

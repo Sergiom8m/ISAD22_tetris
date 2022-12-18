@@ -134,7 +134,7 @@ class Profila(object):
         Pertsonalizatu(self.erabiltzaile).__init__()
     def erabiltzaileakEzabatu(self):
         self.window.destroy()
-        ErabiltzaileakEzabatu(self.erabiltzaile).__init__()
+        ErabiltzaileakEzabatu(self.erabiltzaile).__init__(self.erabiltzaile)
     def partidaHasi(self):
         self.window.destroy()
         Ezarpenak(self.erabiltzaile).__init__(self.erabiltzaile)
