@@ -11,7 +11,7 @@ class DbConn(object):
         #https://www.sqlitetutorial.net/sqlite-foreign-key/
         # Taulak sortu:
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, puntuazioa, partida, soinua, atzeko, botoiKol, paleta)")
+            "CREATE TABLE IF NOT EXISTS JOKALARIAK(erabiltzailea, galdera, erantzuna, pasahitza, partida, soinua, atzeko, botoiKol, paleta)")
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS MAILAK(tamaina, abiadura, beharrezko_puntuazioa)")
         self.cur.execute(
@@ -37,14 +37,13 @@ class DbConn(object):
             galdera = "XXX"
             erantzuna = "XXX"
             pasahitza = "123"
-            puntuazioa = "0"
             partida = "#"
             musika = "original"
             atzeko = "#7ec0ee"
             botoiKol = "#ffffff"
             paleta = 1
-            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (
-            erabiltzaile_izena, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
+            self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (
+            erabiltzaile_izena, galdera, erantzuna, pasahitza, partida, musika, atzeko, botoiKol, paleta))
             self.con.commit()
         #Sariak eta mailak taulak bete:
         self.mailak_taula_bete()
@@ -64,16 +63,16 @@ class DbConn(object):
         return res.fetchone()
 
     ############################ ERREGISTROA ############################
-    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida,
+    def erabiltzaile_berria_erregistratu(self, id_erabiltzaile, galdera, erantzuna, pasahitza, partida,
                                          musika, atzeko, botoiKol, paleta):
-        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                         (id_erabiltzaile, galdera, erantzuna, pasahitza, puntuazioa, partida, musika, atzeko, botoiKol, paleta))
+        self.cur.execute("INSERT INTO JOKALARIAK VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         (id_erabiltzaile, galdera, erantzuna, pasahitza, partida, musika, atzeko, botoiKol, paleta))
         self.con.commit()  # Datu basean insert-aren commit-a egiten da
 
     ############################ PARTIDA GORDE/KARGATU ############################
-    def partida_gorde(self, id_erabiltzaile, partida, puntuazioa):
-        self.cur.execute("UPDATE JOKALARIAK SET partida=(?), puntuazioa=(?) WHERE erabiltzailea=(?)",
-                         (partida, puntuazioa, id_erabiltzaile))
+    def partida_gorde(self, id_erabiltzaile, partida):
+        self.cur.execute("UPDATE JOKALARIAK SET partida=(?) WHERE erabiltzailea=(?)",
+                         (partida, id_erabiltzaile))
         self.con.commit()
 
     ############################ ERABILTZAILEAK EZABATZEKO ############################
@@ -203,12 +202,12 @@ class DbConn(object):
     def erabiltzailea_eguneratu(self, erabiltzailea):
         self.cur.execute("UPDATE JOKALARIAK "
                          "SET galdera=(?), erantzuna=(?), pasahitza=(?), "
-                         "puntuazioa=(?), partida=(?),soinua=(?), "
+                         " partida=(?),soinua=(?), "
                          "atzeko=(?), botoiKol=(?), paleta=(?)"
                          "WHERE erabiltzailea=(?)",
                          (
                              erabiltzailea.galdera, erabiltzailea.erantzuna, erabiltzailea.pasahitza,
-                             erabiltzailea.puntuazioa, erabiltzailea.partida, erabiltzailea.soinua,
+                              erabiltzailea.partida, erabiltzailea.soinua,
                              erabiltzailea.atzeko_kolore, erabiltzailea.botoi_kolore, erabiltzailea.paleta,
                              erabiltzailea.erabiltzaile_id
                          ))

@@ -7,7 +7,6 @@ class Jokalari(object):
 
     # Init with default values
     def __init__(self, id, galdera, erantzuna, pasahitza,
-                 puntuazioa=0,
                  partida="#",
                  soinua="original",
                  atzeko_kol="#7ec0ee",
@@ -17,7 +16,6 @@ class Jokalari(object):
         self.galdera = galdera
         self.erantzuna = erantzuna
         self.pasahitza = pasahitza
-        self.puntuazioa = puntuazioa
         self.partida = partida
         self.soinua = soinua
         self.atzeko_kolore = atzeko_kol
@@ -39,13 +37,12 @@ class Jokalari(object):
             self.botoi_kolore = botoi_kol
         if adreilu_kol is not None:
             self.paleta = adreilu_kol
-        DbConn().erabiltzailea_eguneratu(self)  #TODO igual se puede hacer solo cuando cierre sesión y no aquí
+        DbConn().erabiltzailea_eguneratu(self)
 
 
-    def partida_gorde(self, partida, puntuazioa):
+    def partida_gorde(self, partida):
         self.partida = partida
-        self.puntuazioa = puntuazioa
-        DbConn().erabiltzailea_eguneratu(self)  #TODO igual se puede hacer solo cuando cierre sesión y no aquí
+        DbConn().erabiltzailea_eguneratu(self)
 
     def saria_du(self, tamaina, abiadura, izena):
         emaitza = DbConn().saria_du(self.erabiltzaile_id, izena, tamaina, abiadura)

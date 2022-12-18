@@ -95,7 +95,7 @@ class JokatuLehioa(object):
                     gorde = gorde + "None#"
                 else:
                     gorde = gorde + matrizea.tab[i][j] + "#"
-        self.erabiltzaile.partida_gorde(gorde, self.canvas.tab.puntuazioa) # TODO la puntacion ya se guarda en "gorde"
+        self.erabiltzaile.partida_gorde(gorde)
         self.irten()
 
 

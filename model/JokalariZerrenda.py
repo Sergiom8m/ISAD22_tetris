@@ -21,7 +21,7 @@ class JokalariZerrenda(object):
         if emaitza is not None:
             jokalari = Jokalari(emaitza[0], emaitza[1], emaitza[2],
                                 emaitza[3], emaitza[4], emaitza[5],
-                                emaitza[6], emaitza[7], emaitza[8], emaitza[9])
+                                emaitza[6], emaitza[7], emaitza[8])
             return jokalari
         return None
 
@@ -31,7 +31,6 @@ class JokalariZerrenda(object):
             jokalari.galdera,
             jokalari.erantzuna,
             jokalari.pasahitza,
-            jokalari.puntuazioa,
             jokalari.partida,
             jokalari.soinua,
             jokalari.atzeko_kolore,
