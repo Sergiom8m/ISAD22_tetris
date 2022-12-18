@@ -19,9 +19,9 @@ class Pertsonalizatu(object):
         self.window.geometry('400x450')
         self.window.title("Pertsonalizazio Menua")
         global atzeko_kolor
-        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        atzeko_kolor = erabiltzaile.atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+        botoi_kolor = erabiltzaile.botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

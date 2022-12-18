@@ -14,7 +14,7 @@ atzeko_kolor = "#7ec0ee"
 
 class ErabiltzaileakEzabatu(object):
 
-    def __init__(self):
+    def __init__(self, erabiltzailea):
         super(ErabiltzaileakEzabatu, self).__init__()
         self.window = tk.Tk()
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
@@ -22,9 +22,9 @@ class ErabiltzaileakEzabatu(object):
         self.window.geometry('400x400')
 
         global atzeko_kolor
-        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        atzeko_kolor = erabiltzailea.atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+        botoi_kolor = erabiltzailea.botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

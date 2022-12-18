@@ -2,11 +2,7 @@ import tkinter as tk
 import sys
 import view
 from view.Ranking import Ranking
-from model.JokalariZerrenda import JokalariZerrenda
 
-#Koloreak
-botoi_kolor = "#ffffff"
-atzeko_kolor = "#7ec0ee"
 
 class RankingErabakia(object):
 
@@ -17,10 +13,8 @@ class RankingErabakia(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x400')
         self.window.title("Ranking Erabakia")
-        global atzeko_kolor
-        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
-        global botoi_kolor
-        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+        atzeko_kolor = erabiltzaile.atzeko_kolore if not None else "#7ec0ee"
+        botoi_kolor = erabiltzaile.botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

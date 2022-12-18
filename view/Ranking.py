@@ -26,9 +26,9 @@ class Ranking(object):
         self.abiadura=abiadura
         self.erabiltzaile=erabiltzaile
         global atzeko_kolor
-        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        atzeko_kolor = self.erabiltzaile.atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+        botoi_kolor = self.erabiltzaile.botoi_kolore if not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
         self.window.resizable(False, False)
 

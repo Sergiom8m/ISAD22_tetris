@@ -26,9 +26,9 @@ class Profila(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)  # "X" botoia erabiltzean programa gelditzea ahalbidetzen du
         self.window.geometry('400x550')
         global atzeko_kolor
-        atzeko_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").atzeko_kolore if not None else "#7ec0ee"
+        atzeko_kolor = erabiltzaile.atzeko_kolore if not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = JokalariZerrenda().get_erabiltzailea_idz("admin").botoi_kolore if not None else "#ffffff"
+        botoi_kolor = erabiltzaile.botoi_kolore if not None else "#ffffff"
 
         self.window['bg']=atzeko_kolor
         self.window.title("Jokalariaren Profila")
@@ -134,7 +134,7 @@ class Profila(object):
         Pertsonalizatu(self.erabiltzaile).__init__()
     def erabiltzaileakEzabatu(self):
         self.window.destroy()
-        ErabiltzaileakEzabatu().__init__()
+        ErabiltzaileakEzabatu(self.erabiltzaile).__init__()
     def partidaHasi(self):
         self.window.destroy()
         Ezarpenak(self.erabiltzaile).__init__(self.erabiltzaile)
