@@ -7,6 +7,7 @@ from model.JokalariZerrenda import JokalariZerrenda
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
 
+
 class PasahitzaBerreskuratu(object):
 
 

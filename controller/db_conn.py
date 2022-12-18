@@ -203,7 +203,6 @@ class DbConn(object):
                     for x in range(len(sariak)):
                         self.cur.execute("INSERT INTO SARIAK VALUES (?, ?, ?, ?)", (
                             tamaina[i], abiadura[j], sariak[x], puntuazio_min[x]))
-                        print(str(tamaina[i]) +', ' + str(abiadura[j]) +', ' + sariak[x] +', ' + str(puntuazio_min[x]))
                         self.con.commit()
 
     ############################## ERABILTZAILE EGUNERATZEKO #########################
