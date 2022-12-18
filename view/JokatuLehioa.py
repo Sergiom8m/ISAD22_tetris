@@ -42,9 +42,9 @@ class JokatuLehioa(object):
         self.window.title("Tetris Jokoa")
 
         global atzeko_kolor
-        atzeko_kolor = self.erabiltzaile.atzeko_kolore if not None else "#7ec0ee"
+        atzeko_kolor = self.erabiltzaile.atzeko_kolore if self.erabiltzaile is not None else "#7ec0ee"
         global botoi_kolor
-        botoi_kolor = self.erabiltzaile.botoi_kolore if not None else "#ffffff"
+        botoi_kolor = self.erabiltzaile.botoi_kolore if self.erabiltzaile is not None else "#ffffff"
         self.window['bg'] = atzeko_kolor
 
         global abiadura
