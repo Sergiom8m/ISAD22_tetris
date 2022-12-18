@@ -1,8 +1,6 @@
 import tkinter as tk
 import sys
 import view
-from model.JokalariZerrenda import JokalariZerrenda
-from controller.db_conn import DbConn
 
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
@@ -10,7 +8,7 @@ atzeko_kolor = "#7ec0ee"
 
 class GalderaErantzun(object):
 
-    def __init__(self, id):
+    def __init__(self, erabiltzaile):
         super(GalderaErantzun, self).__init__()
 
         self.window = tk.Tk()
@@ -23,9 +21,9 @@ class GalderaErantzun(object):
         izenburu1.pack()
         izenburu2 = tk.Label(self.window, bg=atzeko_kolor, text='ERANTZUN', font=("Times New Roman", 25))
         izenburu2.pack()
-        self.id = id
+        self.erabiltzaile = erabiltzaile
 
-        g = JokalariZerrenda().get_erabiltzailea_idz(id).galdera
+        g = erabiltzaile.galdera
 
         mezu = tk.Label(self.window, bg=atzeko_kolor, text='Erantzun ezazu galdera... ',
                         font=("Times New Roman", 16))
@@ -63,11 +61,10 @@ class GalderaErantzun(object):
         view.Identifikazioa.Identifikazioa().__init__()
 
     def konprobatu(self):
-
-        ondo = DbConn.erantzuna_ondo_dago(DbConn(), self.id, self.erantzuna.get())
+        ondo = self.erabiltzaile.erantzuna_ondo_dago(self.erantzuna.get())
         if ondo:
             self.window.destroy()
-            view.PasahitzaAldatu.PasahitzaAldatu(self.id).__init__()
+            view.PasahitzaAldatu.PasahitzaAldatu(self.erabiltzaile).__init__()
         else:
             mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Erantzuna ez da egokia', font=("Calibri"))
             mezu.place(x=60, y=250)

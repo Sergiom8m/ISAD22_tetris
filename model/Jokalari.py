@@ -54,3 +54,6 @@ class Jokalari(object):
             if ranking[i][0].__eq__(self.erabiltzaile_id):
                 return [i + 1, ranking[i][1]]
         return None
+
+    def erantzuna_ondo_dago(self, idatzitako_erantzuna):
+        return self.erantzuna.__eq__(idatzitako_erantzuna)

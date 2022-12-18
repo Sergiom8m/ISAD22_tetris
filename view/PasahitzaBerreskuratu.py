@@ -86,7 +86,7 @@ class PasahitzaBerreskuratu(object):
                 mezu2.place(x=60, y=240)
             else:
                 self.window.destroy()
-                GalderaErantzun(id).__init__()
+                GalderaErantzun(erabiltzaile).__init__(erabiltzaile)
         else:
             mezu = tk.Label(self.window,  bg=atzeko_kolor,fg="red", text='Sartu erabiltzaile bat              ',font=("Calibri"))
             mezu.place(x=60, y=240)

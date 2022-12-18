@@ -45,7 +45,7 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "yellow"
 		elif paleta == 2:
@@ -60,7 +60,7 @@ class Laukia(Pieza):
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "cyan"
 		elif paleta == 2:
@@ -75,7 +75,7 @@ class Zutabea(Pieza):
 class Lforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "blue"
 		elif paleta == 2:
@@ -90,7 +90,7 @@ class Lforma(Pieza):
 class LformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "orange"
 		elif paleta == 2:
@@ -106,7 +106,7 @@ class LformaAlderantzizko(Pieza):
 class Zforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "green"
 		elif paleta == 2:
@@ -122,7 +122,7 @@ class Zforma(Pieza):
 class ZformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "red"
 		elif paleta == 2:
@@ -137,7 +137,7 @@ class ZformaAlderantzizko(Pieza):
 class Tforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = erabiltzailea.paleta if not None else 1
+		paleta = erabiltzailea.paleta if erabiltzailea is not None else 1
 		if paleta == 1:
 			kolorea = "purple"
 		elif paleta == 2:
@@ -147,4 +147,4 @@ class Tforma(Pieza):
 		else:
 			kolorea = "forest green"
 
-		super(Tforma, self).__init__([[-1,0],[0,0],[1,0],[0,1]], kolorea)
+		super(Tforma, self).__init__([[-1, 0], [0, 0], [1, 0], [0, 1]], kolorea)

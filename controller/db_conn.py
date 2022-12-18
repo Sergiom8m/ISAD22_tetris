@@ -88,14 +88,6 @@ class DbConn(object):
         self.cur.execute("DELETE FROM jokalariak WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         self.con.commit()
 
-    ############################ PASAHITZA ALDATZEKO ############################
-    def erantzuna_ondo_dago(self, id_erabiltzaile, erantzuna):
-        res = self.cur.execute("SELECT erantzuna FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
-        erantzun_zuzen = res.fetchone()[0]
-        if (erantzun_zuzen.__eq__(erantzuna)):
-            return True
-        return False
-
     ############################ RANKING-AK KUDEATZEKO ##############################
     def puntuazioa_eguneratu(self, id_erabiltzaile, tamaina, abiadura, puntuazioa):
         if tamaina !=0:
