@@ -31,10 +31,14 @@ class Jokalari(object):
         DbConn().erabiltzailea_eguneratu(self)  #TODO igual se puede hacer solo cuando cierre sesión y no aquí
 
     def set_pertsonalizazio_berria(self, soinua, atzeko_kol, botoi_kol, adreilu_kol):
-        self.soinua = soinua
-        self.atzeko_kolore = atzeko_kol
-        self.botoi_kolore = botoi_kol
-        self.paleta = adreilu_kol
+        if soinua is not None:
+            self.soinua = soinua
+        if atzeko_kol is not None:
+            self.atzeko_kolore = atzeko_kol
+        if botoi_kol is not None:
+            self.botoi_kolore = botoi_kol
+        if adreilu_kol is not None:
+            self.paleta = adreilu_kol
         DbConn().erabiltzailea_eguneratu(self)  #TODO igual se puede hacer solo cuando cierre sesión y no aquí
 
 
