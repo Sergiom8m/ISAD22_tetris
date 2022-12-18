@@ -6,8 +6,6 @@ from view.Profila import Profila
 from model.JokalariZerrenda import JokalariZerrenda
 from model.Jokalari import Jokalari
 
-# from controller.db_conn import DbConn
-
 # Koloreak
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
@@ -155,7 +153,7 @@ class Erregistroa(object):
                     JokalariZerrenda().erabiltzailea_gehitu(new_jokalari)
                     # PROFIL PANTAILARA ALDATZEKO:
                     self.window.destroy()
-                    Profila(id).__init__()
+                    Profila(new_jokalari).__init__()
                 else:
                     error = tk.Label(self.window, bg=atzeko_kolor, fg="red",
                                      text='Pasahitza ez du koinziditzen               ',

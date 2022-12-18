@@ -7,8 +7,8 @@ from controller.db_conn import DbConn
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
 
-class GalderaErantzun(object):
 
+class GalderaErantzun(object):
 
     def __init__(self, id):
         super(GalderaErantzun, self).__init__()
@@ -38,8 +38,13 @@ class GalderaErantzun(object):
                              font=("Times New Roman", 16))
         self.erantzuna.place(x=60, y=200)
 
-
-        buttonirten = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Calibri"), command=self.irten)
+        buttonirten = tk.Button(self.window,
+                                cursor="hand2",
+                                bg=botoi_kolor,
+                                text="Irten",
+                                width=8,
+                                font="Calibri",
+                                command=self.irten)
         buttonirten.place(x=70, y=350)
         self.berresk = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Berreskuratu", width=8,
                                  font=("Calibri"),
@@ -49,10 +54,10 @@ class GalderaErantzun(object):
 
         self.window.mainloop()
 
-    #DATU BASEAREKIN KONEKTATZEKO METODOA:
+    # DATU BASEAREKIN KONEKTATZEKO METODOA:
 
 
-    #BESTE PANTAILETARA JOTZEKO METODAK:
+    # BESTE PANTAILETARA JOTZEKO METODAK:
     def irten(self):
         self.window.destroy()
         view.Identifikazioa.Identifikazioa().__init__()
@@ -60,7 +65,7 @@ class GalderaErantzun(object):
     def konprobatu(self):
 
         ondo = DbConn.erantzuna_ondo_dago(DbConn(), self.id, self.erantzuna.get())
-        if(ondo):
+        if ondo:
             self.window.destroy()
             view.PasahitzaAldatu.PasahitzaAldatu(self.id).__init__()
         else:

@@ -1,6 +1,7 @@
 from controller.db_conn import DbConn
 from model.Jokalari import Jokalari
 
+
 class JokalariZerrenda(object):
     __instance = None
 
@@ -19,8 +20,8 @@ class JokalariZerrenda(object):
         emaitza = DbConn().erabiltzailea_idz_lortu(id)
         if emaitza is not None:
             jokalari = Jokalari(emaitza[0], emaitza[1], emaitza[2],
-                            emaitza[3], emaitza[4], emaitza[5],
-                            emaitza[6], emaitza[7], emaitza[8], emaitza[9])
+                                emaitza[3], emaitza[4], emaitza[5],
+                                emaitza[6], emaitza[7], emaitza[8], emaitza[9])
             return jokalari
         return None
 

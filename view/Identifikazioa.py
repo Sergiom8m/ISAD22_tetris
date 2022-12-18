@@ -54,8 +54,13 @@ class Identifikazioa(object):
                             command=self.identifik_berresk).place(x=90, y=250)
 
         # "Irten" botoia
-        tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", width=8, font=("Times New Roman", 16),
-                                command=self.irten).place(x=70, y=350)
+        tk.Button(self.window,
+                  cursor="hand2",
+                  bg=botoi_kolor,
+                  text="Irten",
+                  width=8,
+                  font=("Times New Roman", 16),
+                  command=self.irten).place(x=70, y=350)
 
         buttonerr = tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Sartu", width=8, font=("Times New Roman", 16),
                               command=self.identifik_erregis)
@@ -84,7 +89,7 @@ class Identifikazioa(object):
                 else:
                     # PROFIL PANTAILARA JOTZEKO
                     self.window.destroy()
-                    Profila(id).__init__(id)
+                    Profila(jokalaria).__init__(jokalaria)
         else:
             error = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar itzazu datu guztiak                  ',
                              font=("Times New Roman", 16))

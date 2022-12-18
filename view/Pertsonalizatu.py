@@ -3,8 +3,6 @@ import sys
 from tkinter import ttk
 import view
 from model.JokalariZerrenda import JokalariZerrenda
-from controller.db_conn import DbConn
-
 
 # Defektuzko koloreak
 botoi_kolor = "#ffffff"
@@ -104,7 +102,6 @@ class Pertsonalizatu(object):
         self.window.destroy()
         view.Profila.Profila(self.erabiltzaile).__init__()
 
-
     def aldaketak(self):
 
         atzeko_kolor = None
@@ -130,7 +127,7 @@ class Pertsonalizatu(object):
 
         self.window['bg'] = atzeko_kolor
 
-        #Piezen kolorea:
+        # Piezen kolorea:
         adreilu_kolor = None
         if self.adreilu_com_box.get() == "(Default)":
             adreilu_kolor = 1
@@ -141,7 +138,7 @@ class Pertsonalizatu(object):
         elif self.adreilu_com_box.get() == "Berdeak":
             adreilu_kolor = 4
 
-        #Musika:
+        # Musika:
         musika = None
         if self.musika_com_box.get() == "(Musikarik gabe)":
             musika = "ez"
@@ -154,6 +151,5 @@ class Pertsonalizatu(object):
         elif self.musika_com_box.get() == "Piano Theme":
             musika = "piano"
 
-        DbConn.pertsonalizazioa_aldatu(DbConn(), atzeko_kolor, adreilu_kolor, botoi_kolor, musika, self.erabiltzaile)
+        self.erabiltzaile.set_pertsonalizazio_berria(musika, atzeko_kolor, botoi_kolor, adreilu_kolor)
         self.irten()
-        #JokatuLehioa(atzeko_kolor, atzeko_kolor, self.erabiltzaile).__init__()

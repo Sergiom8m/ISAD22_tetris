@@ -1,5 +1,4 @@
 from controller.Soinuak import Soinuak
-from controller.db_conn import DbConn
 erabiltzailea= None
 
 class Pieza:
@@ -46,8 +45,7 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
-
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "yellow"
 		elif paleta == 2:
@@ -62,7 +60,7 @@ class Laukia(Pieza):
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "cyan"
 		elif paleta == 2:
@@ -77,7 +75,7 @@ class Zutabea(Pieza):
 class Lforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "blue"
 		elif paleta == 2:
@@ -92,7 +90,7 @@ class Lforma(Pieza):
 class LformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "orange"
 		elif paleta == 2:
@@ -108,7 +106,7 @@ class LformaAlderantzizko(Pieza):
 class Zforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "green"
 		elif paleta == 2:
@@ -124,7 +122,7 @@ class Zforma(Pieza):
 class ZformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta
 		if paleta == 1:
 			kolorea = "red"
 		elif paleta == 2:
@@ -139,7 +137,7 @@ class ZformaAlderantzizko(Pieza):
 class Tforma(Pieza):
 	def __init__(self, kolorea=None):
 
-		paleta = DbConn.paleta_lortu(DbConn(), erabiltzailea)
+		paleta = erabiltzailea.paleta if not None else 1
 		if paleta == 1:
 			kolorea = "purple"
 		elif paleta == 2:

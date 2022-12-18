@@ -76,10 +76,6 @@ class DbConn(object):
                          (partida, puntuazioa, id_erabiltzaile))
         self.con.commit()
 
-    def partida_kargatuta(self, id_erabiltzaile):
-        res = self.cur.execute("SELECT partida FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
-        return res.fetchone()[0]
-
     def puntuazioa_lortu(self, id_erabiltzaile):
         res = self.cur.execute("SELECT puntuazioa FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         return res.fetchone()[0]
@@ -93,12 +89,6 @@ class DbConn(object):
         self.con.commit()
 
     ############################ PASAHITZA ALDATZEKO ############################
-    def pasahitza_aldatu(self, id_erabiltzaile, pasahitza, galdera, erantzuna):
-        self.cur.execute("UPDATE JOKALARIAK SET pasahitza=(?) WHERE erabiltzailea=(?)", (pasahitza, id_erabiltzaile,))
-        self.cur.execute("UPDATE JOKALARIAK SET galdera=(?) WHERE erabiltzailea=(?)", (galdera, id_erabiltzaile,))
-        self.cur.execute("UPDATE JOKALARIAK SET erantzuna=(?) WHERE erabiltzailea=(?)", (erantzuna, id_erabiltzaile,))
-        self.con.commit()
-
     def erantzuna_ondo_dago(self, id_erabiltzaile, erantzuna):
         res = self.cur.execute("SELECT erantzuna FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
         erantzun_zuzen = res.fetchone()[0]
@@ -195,33 +185,11 @@ class DbConn(object):
         return emaitza[0] #TODO IGUAL DA ERROR
 
     ############################ PERTSONALIZATU ############################
-    def pertsonalizazioa_aldatu(self, atzeko, adreilu, botoi, musika, erabiltzaile):
-        # EZ BADA EZER ALDATU NAHI PARAMETROREN BATEAN EZ DIRA UPDATE-AK EGIN BEHAR -> if X is not None
-        if musika is not None:
-            self.cur.execute("UPDATE JOKALARIAK SET soinua=(?) WHERE erabiltzailea=(?)", (musika, erabiltzaile,))
-
-        if atzeko is not None:
-            self.cur.execute("UPDATE JOKALARIAK SET atzeko=(?) WHERE erabiltzailea=(?)", (atzeko, erabiltzaile,))
-
-        if botoi is not None:
-            self.cur.execute("UPDATE JOKALARIAK SET botoiKol=(?) WHERE erabiltzailea=(?)", (botoi, erabiltzaile,))
-
-        if adreilu is not None:
-            self.cur.execute("UPDATE JOKALARIAK SET paleta=(?) WHERE erabiltzailea=(?)", (adreilu, erabiltzaile,))
-
-        self.con.commit()
-
     def get_jokalari_musika(self, erabiltzaile):
         if erabiltzaile is not None:
             emaitza = self.cur.execute("SELECT soinua FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
             return emaitza.fetchone()[0]
         return "ez"
-
-    def paleta_lortu(self, erabiltzaile):
-        if erabiltzaile is not None:
-            emaitza = self.cur.execute("SELECT paleta FROM JOKALARIAK WHERE erabiltzailea=(?)", (erabiltzaile,))
-            return emaitza.fetchone()[0]
-        return 1
 
     ############################# TAULAK BETE ############################
     def mailak_taula_bete(self):
@@ -252,6 +220,21 @@ class DbConn(object):
                             tamaina[i], abiadura[j], sariak[x], puntuazio_min[x]))
                         print(str(tamaina[i]) +', ' + str(abiadura[j]) +', ' + sariak[x] +', ' + str(puntuazio_min[x]))
                         self.con.commit()
+
+    ############################## ERABILTZAILE EGUNERATZEKO #########################
+    def erabiltzailea_eguneratu(self, erabiltzailea):
+        self.cur.execute("UPDATE JOKALARIAK "
+                         "SET galdera=(?), erantzuna=(?), pasahitza=(?), "
+                         "puntuazioa=(?), partida=(?),soinua=(?), "
+                         "atzeko=(?), botoiKol=(?), paleta=(?)"
+                         "WHERE erabiltzailea=(?)",
+                         (
+                             erabiltzailea.galdera, erabiltzailea.erantzuna, erabiltzailea.pasahitza,
+                             erabiltzailea.puntuazioa, erabiltzailea.partida, erabiltzailea.soinua,
+                             erabiltzailea.atzeko_kolore, erabiltzailea.botoi_kolore, erabiltzailea.paleta,
+                             erabiltzailea.erabiltzaile_id
+                         ))
+        self.con.commit()
 
     ############################ ITXI ############################
     def konexioa_itxi(self):

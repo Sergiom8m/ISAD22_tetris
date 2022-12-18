@@ -16,6 +16,7 @@ from model.JokalariZerrenda import JokalariZerrenda
 botoi_kolor = "#ffffff"
 atzeko_kolor = "#7ec0ee"
 
+
 class Profila(object):
 
     def __init__(self, erabiltzaile):
@@ -52,14 +53,19 @@ class Profila(object):
 
         separador.pack()
 
-        button = tk.Button(self.window,bg=botoi_kolor, text="Zure pasahitza aldatu", cursor="hand2", width=30, command=self.pasahitzaAldatu)
+        button = tk.Button(self.window,
+                           bg=botoi_kolor,
+                           text="Zure pasahitza aldatu",
+                           cursor="hand2",
+                           width=30,
+                           command=self.pasahitzaAldatu)
         button.pack(ipadx=10, ipady=8)
 
         separador = tk.Label(self.window,  bg=atzeko_kolor, text='       ', font=("Calibri", 2))
 
         separador.pack()
 
-        self.erantzuna = JokalariZerrenda().get_jokalari_gordetako_partida(self.erabiltzaile)
+        self.erantzuna = self.erabiltzaile.partida
 
         if self.erantzuna == "#":
             button = tk.Button(self.window,bg=botoi_kolor, text="Gordetako partida kargatu", cursor="hand2", width=30, state="disabled")
@@ -82,15 +88,22 @@ class Profila(object):
 
         separador.pack()
 
-        if self.erabiltzaile == "admin":
-            buttonBerezi = tk.Button(self.window, bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, command=self.erabiltzaileakEzabatu)
+        if self.erabiltzaile.erabiltzaile_id == "admin":
+            buttonBerezi = tk.Button(self.window,
+                                     bg=botoi_kolor,
+                                     text="Erabiltzaileak ezabatu",
+                                     cursor="hand2",
+                                     width=30,
+                                     command=self.erabiltzaileakEzabatu)
             buttonBerezi.pack(ipadx=10, ipady=8)
         else:
             buttonBerezi = tk.Button(self.window,bg=botoi_kolor, text="Erabiltzaileak ezabatu", cursor="hand2", width=30, state="disabled")
             buttonBerezi.pack(ipadx=10, ipady=8)
 
-
-        separador = tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 6))
+        separador = tk.Label(self.window,
+                             bg=atzeko_kolor,
+                             text='       ',
+                             font=("Calibri", 6))
         separador.pack()
 
         buttonRanking = tk.Button(self.window, bg=botoi_kolor, text="Ranking-ak ikusi", cursor="hand2", width=30, command=self.ranking)
@@ -113,9 +126,8 @@ class Profila(object):
 
     #BESTE PANTAILETARA JOTZEKO METODOAK
     def pasahitzaAldatu(self):
-        i=self.erabiltzaile
         self.window.destroy()
-        PasahitzaAldatu(i).__init__()
+        PasahitzaAldatu(self.erabiltzaile).__init__()
 
     def pertsonalizazioa(self):
         self.window.destroy()

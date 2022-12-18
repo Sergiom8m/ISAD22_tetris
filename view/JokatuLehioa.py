@@ -34,7 +34,7 @@ class JokatuLehioa(object):
         piezak.erabiltzailea = erabiltzailea
 
         if self.erabiltzaile is not None:
-            Soinuak.play_music(Soinuak(), JokalariZerrenda().get_erabiltzailea_idz(self.erabiltzaile).soinua)
+            Soinuak.play_music(Soinuak(), self.erabiltzaile.soinua)
         self.window = tk.Tk()
 
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
@@ -96,7 +96,7 @@ class JokatuLehioa(object):
                     gorde = gorde + "None#"
                 else:
                     gorde = gorde + matrizea.tab[i][j] + "#"
-        DbConn.partida_gorde(DbConn(), self.erabiltzaile, gorde, self.canvas.tab.puntuazioa)
+        self.erabiltzaile.partida_gorde(gorde, self.canvas.tab.puntuazioa) # TODO la puntacion ya se guarda en "gorde"
         self.irten()
 
 
@@ -106,7 +106,7 @@ class TableroaPanela(tk.Frame):
         self.puntuazio_panela = puntuazioalabel
         self.tamaina = tamaina
         self.partida = partida
-        self.erabiltzaile=erab
+        self.erabiltzaile = erab
         self.gelazka_tamaina = gelazka_tamaina
         global abiadura
 

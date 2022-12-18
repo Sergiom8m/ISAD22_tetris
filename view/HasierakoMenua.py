@@ -55,7 +55,11 @@ class HasierakoMenua(object):
         tk.Label(self.window, bg=atzeko_kolor, text='       ', font=("Calibri", 20)).pack()
 
         # "Irten" botoia
-        tk.Button(self.window, cursor="hand2", bg=botoi_kolor, text="Irten", command=self.jokoaAmaitu).pack(ipadx=10, ipady=10)
+        tk.Button(self.window,
+                  cursor="hand2",
+                  bg=botoi_kolor,
+                  text="Irten",
+                  command=self.jokoaAmaitu).pack(ipadx=10, ipady=10)
 
         self.window.mainloop()
 

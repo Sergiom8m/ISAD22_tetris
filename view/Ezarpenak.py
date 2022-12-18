@@ -144,7 +144,7 @@ class Ezarpenak(object):
 
         tamaina = 1
         if self.opcion2.get() == 1: tamaina = 10
-        elif self.opcion2.get() == 2: tamaina =20
+        elif self.opcion2.get() == 2: tamaina = 20
         elif self.opcion2.get() == 3: tamaina = 30
         elif self.opcion2.get() == 4: tamaina = 40
 

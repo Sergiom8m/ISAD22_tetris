@@ -57,11 +57,16 @@ class PasahitzaAldatu(object):
         self.erantzuna.place(x=70, y=310)
 
 
-        buttonirten = tk.Button(self.window,bg=botoi_kolor, text="Irten", cursor="hand2", width=8, font=("Calibri"), command=self.irten)
+        buttonirten = tk.Button(self.window,
+                                bg=botoi_kolor,
+                                text="Irten",
+                                cursor="hand2",
+                                width=8,
+                                font="Calibri",
+                                command=self.irten)
         buttonirten.place(x=70, y=375)
         buttonados = tk.Button(self.window, bg=botoi_kolor, text="Ados", cursor="hand2", width=8, font=("Calibri"), command=self.aldatuta)
         buttonados.place(x=220, y=375)
-
 
         self.window.mainloop()
 
@@ -73,29 +78,22 @@ class PasahitzaAldatu(object):
     #DATU BASEAREKIN KONEKTATZEKO METODOA:
 
     def aldatuta(self):
-        id = self.erabiltzaile
         pasahitza1 = self.pasahitz.get()
         pasahitza2 = self.pasahitz2.get()
         galdera = self.galdera.get()
         erantzuna = self.erantzuna.get()
-        if ((len(pasahitza1) != 0) & (len(pasahitza2) != 0)):
-            erab = JokalariZerrenda().get_erabiltzailea_idz(id)
-            if erab is None:
-                mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Erabiltzailea ez da existitzen          ',
-                                font=("Calibri"))
+        if (len(pasahitza1) != 0) & (len(pasahitza2) != 0):
+            if pasahitza1 == pasahitza2:
+                mezu = tk.Label(self.window, bg=atzeko_kolor, fg="green",
+                                text='Ondo aldatu da      ',
+                                font="Calibri")
                 mezu.place(x=60, y=350)
+                self.erabiltzaile.set_pasahitza_berria(pasahitza1, galdera, erantzuna)
             else:
-                if pasahitza1 == pasahitza2:
-                    mezu = tk.Label(self.window, bg=atzeko_kolor, fg="green",
-                                    text='Ondo aldatu da      ',
-                                    font=("Calibri"))
-                    mezu.place(x=60, y=350)
-                    JokalariZerrenda().erabiltzailearen_pasahitza_aldatu(id, pasahitza1, galdera, erantzuna)
-                else:
-                    mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Pasahitzak ez dira berdinak        ',
-                                    font=("Calibri"))
-                    mezu.place(x=60, y=350)
+                mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Pasahitzak ez dira berdinak        ',
+                                font="Calibri")
+                mezu.place(x=60, y=350)
         else:
             mezu = tk.Label(self.window, bg=atzeko_kolor, fg="red", text='Sar ezazu pasahitz berria                 ',
-                            font=("Calibri"))
+                            font="Calibri")
             mezu.place(x=60, y=350)
