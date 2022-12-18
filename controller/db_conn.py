@@ -138,13 +138,7 @@ class DbConn(object):
                 self.con.commit()
                 self.saria_eguneratu(id_erabiltzaile, tamaina, abiadura, k)
     ############################ RANKING-AK LORTZEKO ##############################
-    def nire_posizioa_rankingean(self, erabiltzaile, tamaina, abiadura):
-        ranking = self.ranking_lortu(tamaina, abiadura)
-        lerroKop = len(ranking)
-        for i in range(lerroKop):
-            if ranking[i][0].__eq__(erabiltzaile):
-                return [i+1,ranking[i][1]]
-        return None
+
     def ranking_lortu(self, tamaina, abiadura):
         return self.cur.execute("SELECT erabiltzailea, puntuazio_record, RANK() OVER( "
                                 "ORDER BY puntuazio_record DESC) posizio "
@@ -173,9 +167,7 @@ class DbConn(object):
     def saria_du(self, erabiltzaile, izena, tamaina, abiadura):
         res = self.cur.execute("SELECT * FROM JOKALARIAREN_SARIAK WHERE erabiltzailea=(?) AND izena=(?)"
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, izena, tamaina, abiadura,))
-        if (res.fetchone() is not None):
-            return True
-        return False
+        return res.fetchone()
     def puntuazio_record_lortu(self, erabiltzaile, tamaina, abiadura):
         res = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?)"
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, tamaina, abiadura,))

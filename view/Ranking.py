@@ -4,7 +4,7 @@ from tkinter import ttk
 import sys
 from view import Profila
 from model.JokalariZerrenda import JokalariZerrenda
-from controller.db_conn import DbConn
+from model.Ranking import Ranking as modRanking
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
 
@@ -56,11 +56,11 @@ class Ranking(object):
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
         if tamaina is None:
-            ranking = DbConn.ranking_lortu(DbConn(), 0, 0)
-            nire_pos = DbConn.nire_posizioa_rankingean(DbConn(), erabiltzaile, 0, 0)
+            ranking = modRanking().get_maila_ranking(0, 0)
+            nire_pos = erabiltzaile.nire_posizioa_rankingean(0, 0)
         else:
-            ranking = DbConn.ranking_lortu(DbConn(), self.tamaina, self.abiadura)
-            nire_pos = DbConn.nire_posizioa_rankingean(DbConn(), erabiltzaile, self.tamaina, self.abiadura)
+            ranking = modRanking().get_maila_ranking(self.tamaina, self.abiadura)
+            nire_pos = erabiltzaile.nire_posizioa_rankingean(self.tamaina, self.abiadura)
 
         lerroKop = len(ranking)
 
@@ -73,7 +73,7 @@ class Ranking(object):
             Label(self.marko, text="Puntuazioa", bg=atzeko_kolor).grid(row=1, column=1, pady=10, padx=10)
             Label(self.marko, text="Erabiltzailea", bg=atzeko_kolor).grid(row=1, column=2, pady=10, padx=10)
             for i in range(3):
-                if lerroKop>i:
+                if lerroKop > i:
                     Label(self.marko, text=ranking[i][2], bg=atzeko_kolor).grid(row=i + 2, column=0, pady=10, padx=10)
                     Label(self.marko, text=ranking[i][1], bg=atzeko_kolor).grid(row=i + 2, column=1, pady=10, padx=10)
                     Label(self.marko, text=ranking[i][0], bg=atzeko_kolor).grid(row=i + 2, column=2, pady=10, padx=10)

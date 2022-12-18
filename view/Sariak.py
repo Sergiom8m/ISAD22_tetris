@@ -3,9 +3,9 @@ from tkinter import *
 from tkinter import ttk
 import sys
 from view import Profila
-from controller.db_conn import DbConn
 from model.JokalariZerrenda import JokalariZerrenda
 from model.SarienZerrenda import SarienZerrenda
+from model.MailenZerrenda import MailenZerrenda
 
 # https://www.youtube.com/watch?v=0WafQCaok6g scrollbar
 
@@ -71,24 +71,24 @@ class Sariak(object):
             lerro=0
             kont=2
             for i in range(lerroKop):
-                tamaina=emaitza[i][0]
-                abiadura=emaitza[i][1]
-                izena= emaitza[i][2]
-                beharrezko_kop=emaitza[i][3]
-                beharrezko_puntuazioa = DbConn.beharrezko_puntuazioa_lortu(DbConn(), tamaina, abiadura)
+                tamaina = emaitza[i][0]
+                abiadura = emaitza[i][1]
+                izena = emaitza[i][2]
+                beharrezko_kop = emaitza[i][3]
+                beharrezko_puntuazioa = MailenZerrenda().get_maila_beharrezko_puntuazioa(tamaina, abiadura)
                 maila = str(tamaina)+'x'+str(abiadura)
 
                 Label(self.marko, text=maila, bg=atzeko_kolor).grid(row=lerro + 2, column=0, pady=10, padx=10)
                 if kont == 2:
                     Label(self.marko, text=beharrezko_puntuazioa, bg=atzeko_kolor).grid(row=lerro + 2, column=1, pady=10, padx=10)
                 Label(self.marko, text=beharrezko_kop, bg=atzeko_kolor).grid(row=lerro + 2, column=kont, pady=10, padx=10)
-                badu=DbConn.saria_du(DbConn(), self.erabiltzaile, izena, tamaina, abiadura)
-                if badu==True:
-                    if kont==2:
+                badu = self.erabiltzaile.saria_du(tamaina, abiadura, izena)
+                if badu:
+                    if kont == 2:
                         Label(self.marko, image=imagen2).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
-                    elif kont==4:
+                    elif kont == 4:
                         Label(self.marko, image=imagen4).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
-                    elif kont==6:
+                    elif kont == 6:
                         Label(self.marko, image=imagen6).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)
                 else:
                     Label(self.marko, text="X", bg=atzeko_kolor).grid(row=lerro + 2, column=kont + 1, pady=10, padx=10)

@@ -9,7 +9,6 @@ import model.Piezak as piezak
 from tkinter import *
 from controller.Soinuak import Soinuak
 from model.JokalariZerrenda import JokalariZerrenda
-from controller.db_conn import DbConn
 
 abiadura = 1
 tamaina2 = 2
