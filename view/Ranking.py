@@ -56,10 +56,10 @@ class Ranking(object):
         nire_canvas.create_window((0, 0), window=self.marko, anchor="nw")
 
         if tamaina is None:
-            ranking = modRanking().get_maila_ranking(0, 0)
+            ranking = modRanking().get_ranking(0, 0)
             nire_pos = erabiltzaile.nire_posizioa_rankingean(0, 0)
         else:
-            ranking = modRanking().get_maila_ranking(self.tamaina, self.abiadura)
+            ranking = modRanking().get_ranking(self.tamaina, self.abiadura)
             nire_pos = erabiltzaile.nire_posizioa_rankingean(self.tamaina, self.abiadura)
 
         lerroKop = len(ranking)
@@ -91,7 +91,8 @@ class Ranking(object):
                 Label(self.marko, text=nire_pos[1], bg=atzeko_kolor).grid(row=7, column=1, pady=10, padx=10)
                 Label(self.marko, text=erabiltzaile, bg=atzeko_kolor).grid(row=7, column=2, pady=10, padx=10)
 
-            Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor, command=self.irten).grid(row=10, column=1, pady=10, padx=10)
+            Button(self.marko, text="Irten", cursor="hand2", width=8, font=("Times New Roman", 16), bg=botoi_kolor,
+                   command=self.irten).grid(row=10, column=1, pady=10, padx=10)
         self.window.mainloop()
 
     def irten(self):

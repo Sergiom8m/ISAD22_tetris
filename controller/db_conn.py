@@ -76,10 +76,6 @@ class DbConn(object):
                          (partida, puntuazioa, id_erabiltzaile))
         self.con.commit()
 
-    def puntuazioa_lortu(self, id_erabiltzaile):
-        res = self.cur.execute("SELECT puntuazioa FROM JOKALARIAK WHERE erabiltzailea=(?)", (id_erabiltzaile,))
-        return res.fetchone()[0]
-
     ############################ ERABILTZAILEAK EZABATZEKO ############################
     def erabiltzaile_guztiak_lortu(self):
         return self.cur.execute("SELECT erabiltzailea FROM jokalariak").fetchall()
@@ -90,11 +86,11 @@ class DbConn(object):
 
     ############################ RANKING-AK KUDEATZEKO ##############################
     def puntuazioa_eguneratu(self, id_erabiltzaile, tamaina, abiadura, puntuazioa):
-        if tamaina !=0:
-            beharrezko_puntuazioa=self.beharrezko_puntuazioa_lortu(tamaina, abiadura)[0]
-            baduPuntuazioa= False
-            if beharrezko_puntuazioa<=puntuazioa:
-                baduPuntuazioa=True
+        if tamaina != 0:
+            beharrezko_puntuazioa = self.beharrezko_puntuazioa_lortu(tamaina, abiadura)[0]
+            baduPuntuazioa = False
+            if beharrezko_puntuazioa <= puntuazioa:
+                baduPuntuazioa = True
         #OROKORREAN
         puntu = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?) AND "
                                "tamaina_maila=(?) AND abiadura_maila=(?)", (id_erabiltzaile, 0, 0,)).fetchone()
@@ -129,6 +125,7 @@ class DbConn(object):
                                  (k, id_erabiltzaile, tamaina, abiadura,))
                 self.con.commit()
                 self.saria_eguneratu(id_erabiltzaile, tamaina, abiadura, k)
+
     ############################ RANKING-AK LORTZEKO ##############################
 
     def ranking_lortu(self, tamaina, abiadura):
@@ -152,14 +149,18 @@ class DbConn(object):
                     self.cur.execute("INSERT INTO JOKALARIAREN_SARIAK VALUES (?, ?, ?, ?)",
                                      (erabiltzaile, maila_sariak[i][0],tamaina, abiadura))
                     self.con.commit()
+
     def sariak_lortu(self):
         return self.cur.execute("SELECT * FROM SARIAK").fetchall()
+
     def beharrezko_puntuazioa_lortu(self, tamaina, abiadura):
         return self.cur.execute("SELECT beharrezko_puntuazioa FROM MAILAK WHERE tamaina=(?) AND abiadura=(?)", (tamaina, abiadura, )).fetchone()
+
     def saria_du(self, erabiltzaile, izena, tamaina, abiadura):
         res = self.cur.execute("SELECT * FROM JOKALARIAREN_SARIAK WHERE erabiltzailea=(?) AND izena=(?)"
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, izena, tamaina, abiadura,))
         return res.fetchone()
+
     def puntuazio_record_lortu(self, erabiltzaile, tamaina, abiadura):
         res = self.cur.execute("SELECT puntuazio_record FROM JOKALARIAREN_PR_MAILAKO WHERE erabiltzailea=(?)"
                                "AND tamaina_maila=(?) AND abiadura_maila=(?)", (erabiltzaile, tamaina, abiadura,))
